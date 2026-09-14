@@ -2,8 +2,7 @@
    THE WEDDING OF ANNISA & NAWAWI - LUXURY SEMI-3D WEDDING INVITATION STYLES
    ========================================================================== */
 
-:root,
-html[data-theme="default"] {
+:root {
   --bg-primary: #070913;
   --bg-secondary: #0d1224;
   --bg-card: rgba(255, 255, 255, 0.05);
@@ -23,123 +22,6 @@ html[data-theme="default"] {
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Montserrat", sans-serif;
   --font-script: "Alex Brush", cursive;
-  
-  --theme-glow-1: #e5989b;
-  --theme-glow-2: #8b7cff;
-  --theme-glow-3: #d4af37;
-  --btn-gradient: linear-gradient(135deg, #d4af37 0%, #f3d489 50%, #d4af37 100%);
-  --btn-text: #070913;
-  --seal-color: radial-gradient(circle at 35% 35%, #ffe6a4, #b98132);
-  --badge-bg: rgba(212, 175, 55, 0.12);
-  --badge-border: rgba(212, 175, 55, 0.35);
-}
-
-html[data-theme="pink"] {
-  --bg-primary: #150912;
-  --bg-secondary: #261120;
-  --bg-card: rgba(255, 235, 242, 0.06);
-  --bg-card-hover: rgba(255, 235, 242, 0.11);
-  --border-gold: rgba(244, 166, 185, 0.42);
-  --border-light: rgba(255, 235, 242, 0.15);
-  --gold-primary: #ffb7c5;
-  --gold-secondary: #e57c9a;
-  --gold-light: #ffe5ec;
-  --rose-primary: #f2849e;
-  --rose-light: #ffcad4;
-  --text-main: #fff0f5;
-  --text-muted: rgba(255, 240, 245, 0.75);
-  --text-gold: #ffccd5;
-  --shadow-3d: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 30px rgba(229, 124, 154, 0.18);
-  
-  --theme-glow-1: #ff758f;
-  --theme-glow-2: #d94f70;
-  --theme-glow-3: #ffb3c6;
-  --btn-gradient: linear-gradient(135deg, #d85a7f 0%, #fca5ba 50%, #d85a7f 100%);
-  --btn-text: #1a050f;
-  --seal-color: radial-gradient(circle at 35% 35%, #ffccd5, #c44569);
-  --badge-bg: rgba(242, 132, 158, 0.18);
-  --badge-border: rgba(244, 166, 185, 0.45);
-}
-
-html[data-theme="biru"] {
-  --bg-primary: #050d1a;
-  --bg-secondary: #0c1c38;
-  --bg-card: rgba(210, 235, 255, 0.05);
-  --bg-card-hover: rgba(210, 235, 255, 0.10);
-  --border-gold: rgba(96, 165, 250, 0.42);
-  --border-light: rgba(210, 235, 255, 0.14);
-  --gold-primary: #93c5fd;
-  --gold-secondary: #3b82f6;
-  --gold-light: #e0f2fe;
-  --rose-primary: #60a5fa;
-  --rose-light: #bfdbfe;
-  --text-main: #f0f8ff;
-  --text-muted: rgba(240, 248, 255, 0.74);
-  --text-gold: #bae6fd;
-  --shadow-3d: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 30px rgba(59, 130, 246, 0.18);
-  
-  --theme-glow-1: #3b82f6;
-  --theme-glow-2: #1d4ed8;
-  --theme-glow-3: #60a5fa;
-  --btn-gradient: linear-gradient(135deg, #2563eb 0%, #7dd3fc 50%, #1d4ed8 100%);
-  --btn-text: #050d1a;
-  --seal-color: radial-gradient(circle at 35% 35%, #bfdbfe, #1e40af);
-  --badge-bg: rgba(59, 130, 246, 0.18);
-  --badge-border: rgba(96, 165, 250, 0.45);
-}
-
-html[data-theme="coklat"] {
-  --bg-primary: #150d09;
-  --bg-secondary: #271710;
-  --bg-card: rgba(255, 242, 235, 0.05);
-  --bg-card-hover: rgba(255, 242, 235, 0.10);
-  --border-gold: rgba(217, 142, 90, 0.42);
-  --border-light: rgba(255, 242, 235, 0.14);
-  --gold-primary: #e0a97a;
-  --gold-secondary: #c87d46;
-  --gold-light: #fae1cf;
-  --rose-primary: #cf7e52;
-  --rose-light: #ecc4ae;
-  --text-main: #faf5f0;
-  --text-muted: rgba(250, 245, 240, 0.74);
-  --text-gold: #f3cbb1;
-  --shadow-3d: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 30px rgba(200, 125, 70, 0.18);
-  
-  --theme-glow-1: #c86a3b;
-  --theme-glow-2: #8c431b;
-  --theme-glow-3: #d99b6c;
-  --btn-gradient: linear-gradient(135deg, #b86b35 0%, #e8ba92 50%, #9e5320 100%);
-  --btn-text: #150d09;
-  --seal-color: radial-gradient(circle at 35% 35%, #ecc4ae, #8c431b);
-  --badge-bg: rgba(200, 125, 70, 0.18);
-  --badge-border: rgba(217, 142, 90, 0.45);
-}
-
-html[data-theme="kuning"] {
-  --bg-primary: #151104;
-  --bg-secondary: #282008;
-  --bg-card: rgba(255, 250, 220, 0.06);
-  --bg-card-hover: rgba(255, 250, 220, 0.11);
-  --border-gold: rgba(250, 204, 21, 0.45);
-  --border-light: rgba(255, 250, 220, 0.15);
-  --gold-primary: #fde047;
-  --gold-secondary: #eab308;
-  --gold-light: #fef9c3;
-  --rose-primary: #f59e0b;
-  --rose-light: #fef08a;
-  --text-main: #fffef0;
-  --text-muted: rgba(255, 254, 240, 0.74);
-  --text-gold: #fef08a;
-  --shadow-3d: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 30px rgba(234, 179, 8, 0.18);
-  
-  --theme-glow-1: #eab308;
-  --theme-glow-2: #f59e0b;
-  --theme-glow-3: #facc15;
-  --btn-gradient: linear-gradient(135deg, #ca8a04 0%, #fde047 50%, #b45309 100%);
-  --btn-text: #151104;
-  --seal-color: radial-gradient(circle at 35% 35%, #fef08a, #b45309);
-  --badge-bg: rgba(234, 179, 8, 0.18);
-  --badge-border: rgba(250, 204, 21, 0.45);
 }
 
 * {
@@ -155,8 +37,6 @@ html {
 
 body {
   background-color: var(--bg-primary);
-  background-image: radial-gradient(circle at 50% 35%, var(--bg-secondary) 0%, var(--bg-primary) 92%);
-  background-attachment: fixed;
   color: var(--text-main);
   font-family: var(--font-sans);
   overflow: hidden;
@@ -164,7 +44,6 @@ body {
   height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body.invitation-open {
@@ -191,11 +70,10 @@ body.invitation-open {
   height: 55vw;
   max-width: 600px;
   max-height: 600px;
-  background: radial-gradient(circle, var(--theme-glow-1, #e5989b) 0%, rgba(229, 152, 155, 0) 70%);
+  background: radial-gradient(circle, #e5989b 0%, rgba(229, 152, 155, 0) 70%);
   top: -10vw;
   right: -10vw;
   animation: floatAmbient 22s ease-in-out infinite alternate;
-  transition: background 0.6s ease;
 }
 
 .glow-2 {
@@ -203,11 +81,10 @@ body.invitation-open {
   height: 65vw;
   max-width: 700px;
   max-height: 700px;
-  background: radial-gradient(circle, var(--theme-glow-2, #8b7cff) 0%, rgba(139, 124, 255, 0) 70%);
+  background: radial-gradient(circle, #8b7cff 0%, rgba(139, 124, 255, 0) 70%);
   bottom: 10vh;
   left: -15vw;
   animation: floatAmbient 26s ease-in-out infinite alternate-reverse;
-  transition: background 0.6s ease;
 }
 
 .glow-3 {
@@ -215,12 +92,11 @@ body.invitation-open {
   height: 45vw;
   max-width: 500px;
   max-height: 500px;
-  background: radial-gradient(circle, var(--theme-glow-3, #d4af37) 0%, rgba(212, 175, 55, 0) 70%);
+  background: radial-gradient(circle, #d4af37 0%, rgba(212, 175, 55, 0) 70%);
   top: 45vh;
   right: 15vw;
   opacity: 0.22;
   animation: floatAmbient 18s ease-in-out infinite alternate;
-  transition: background 0.6s ease;
 }
 
 @keyframes floatAmbient {
@@ -229,7 +105,7 @@ body.invitation-open {
   }
 
   50% {
-    transform: translate(40px, 30px) scale(1.08);
+    transform: translate(30px, 40px) scale(1.1);
   }
 
   100% {
@@ -237,23 +113,21 @@ body.invitation-open {
   }
 }
 
-/* Falling Flowers / Petals (Behind elements and text) */
+/* Falling Flowers */
 #flowers {
   position: fixed;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 2; /* Layered behind cards and text */
+  z-index: 1;
 }
 
 .flower {
   position: absolute;
-  font-size: 19px;
+  font-size: 22px;
   animation: fall linear forwards;
-  opacity: 0.6; /* 50% gentler appearance to prevent obstruction */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
-  pointer-events: none;
-  user-select: none;
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes fall {
@@ -286,7 +160,7 @@ body.invitation-open {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1050;
+  z-index: 999;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -353,7 +227,7 @@ body.invitation-open .music-btn {
   align-items: center;
   gap: 4px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.15);
-  z-index: 1050;
+  z-index: 990;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
   max-width: calc(100vw - 32px);
   overflow-x: auto;
@@ -409,251 +283,22 @@ body.invitation-open .floating-nav {
   padding: 24px 16px;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 100;
-  background: transparent;
+  z-index: 1000;
+  background: radial-gradient(circle at center, rgba(17, 24, 46, 0.96) 0%, rgba(7, 9, 19, 0.98) 100%);
 }
 
 .card {
   width: min(420px, 100%);
-  padding: 30px 22px;
+  padding: 34px 26px;
   border-radius: 28px;
-  background: rgba(12, 16, 32, 0.82);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1.5px solid var(--border-gold);
   text-align: center;
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65), 0 0 40px rgba(212, 175, 55, 0.12);
   position: relative;
-  z-index: 10;
   perspective: 1200px;
-}
-
-/* ==========================================================================
-   COVER THEME PICKER (PILIHAN WARNA UNDANGAN)
-   ========================================================================== */
-.theme-picker-card {
-  margin: 14px 0 16px;
-  padding: 10px 12px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-light);
-  backdrop-filter: blur(10px);
-}
-
-.theme-picker-title {
-  display: block;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold-primary);
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.theme-picker-chips {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.theme-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.theme-chip:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-color: var(--gold-secondary);
-  transform: translateY(-1px);
-}
-
-.theme-chip.active {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
-  border-color: var(--gold-secondary);
-  box-shadow: 0 0 10px var(--border-gold);
-  transform: translateY(-1px);
-  font-weight: 600;
-}
-
-.theme-color-badge {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.badge-default {
-  background: linear-gradient(135deg, #0d1224, #d4af37);
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.6);
-}
-
-.badge-pink {
-  background: linear-gradient(135deg, #f2849e, #ffcad4);
-  box-shadow: 0 0 5px rgba(242, 132, 158, 0.6);
-}
-
-.badge-biru {
-  background: linear-gradient(135deg, #2563eb, #93c5fd);
-  box-shadow: 0 0 5px rgba(59, 130, 246, 0.6);
-}
-
-.badge-coklat {
-  background: linear-gradient(135deg, #8c431b, #e0a97a);
-  box-shadow: 0 0 5px rgba(200, 125, 70, 0.6);
-}
-
-.badge-kuning {
-  background: linear-gradient(135deg, #eab308, #fef08a);
-  box-shadow: 0 0 5px rgba(234, 179, 8, 0.6);
-}
-
-/* ==========================================================================
-   FLOATING THEME SWITCHER BUTTON & PALETTE DROPDOWN
-   ========================================================================== */
-.theme-floating-btn {
-  position: fixed;
-  top: 24px;
-  left: 24px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(13, 18, 36, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid var(--gold-secondary);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.25);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1050;
-  font-size: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-body.invitation-open .theme-floating-btn {
-  display: flex;
-}
-
-.theme-floating-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.4);
-}
-
-.theme-palette-dropdown {
-  position: fixed;
-  top: 78px;
-  left: 24px;
-  width: 230px;
-  background: rgba(10, 14, 28, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid var(--border-gold);
-  border-radius: 18px;
-  padding: 12px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.2);
-  z-index: 2000;
-  display: none;
-  animation: fadeInDown 0.25s ease forwards;
-}
-
-.theme-palette-dropdown.is-open {
-  display: block;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.palette-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.palette-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold-primary);
-}
-
-.palette-close-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 13px;
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.palette-close-btn:hover {
-  color: #fff;
-}
-
-.palette-options {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.palette-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-muted);
-  font-size: 12px;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-}
-
-.palette-option:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: var(--text-main);
-  border-color: var(--gold-secondary);
-}
-
-.palette-option.active {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
-  border-color: var(--gold-secondary);
-  font-weight: 600;
 }
 
 .card-ornament {
@@ -978,26 +623,7 @@ body.invitation-open .invitation {
   max-width: 960px;
   margin: 0 auto;
   position: relative;
-  z-index: 10;
-}
-
-/* Ensure all content cards & text elements sit cleanly in front of falling petals */
-.hero-container,
-.section-container,
-.quote-card,
-.profile-card,
-.timeline-card,
-.event-box,
-.dresscode-card,
-.gallery-card,
-.bank-card,
-.physical-gift-card,
-.rsvp-form-card,
-.wishes-feed-card,
-.closing-card,
-.countdown-card {
-  position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
 /* Section Header Typography */
@@ -1114,7 +740,7 @@ body.invitation-open .invitation {
 
 .hero-container {
   position: relative;
-  z-index: 10;
+  z-index: 2;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -1307,7 +933,7 @@ body.invitation-open .invitation {
    2. QUOTE / AYAT SUCI
    ========================================================================== */
 .quote-section {
-  background: transparent;
+  background: linear-gradient(180deg, #080a14 0%, #0d1224 100%);
 }
 
 .quote-card {
@@ -1372,7 +998,7 @@ body.invitation-open .invitation {
    3. MEMPELAI (COUPLE PROFILE 3D CARDS)
    ========================================================================== */
 .couple-section {
-  background: transparent;
+  background: radial-gradient(circle at center, #10162e 0%, #070913 85%);
 }
 
 .couple-cards-grid {
@@ -1510,7 +1136,7 @@ body.invitation-open .invitation {
    4. OUR LOVE STORY (3D SCROLL TIMELINE)
    ========================================================================== */
 .story-section {
-  background: transparent;
+  background: linear-gradient(180deg, #070913 0%, #0d1224 100%);
 }
 
 .timeline-container {
@@ -1610,7 +1236,7 @@ body.invitation-open .invitation {
    5. WEDDING EVENTS (AKAD & RESEPSI)
    ========================================================================== */
 .event-section {
-  background: transparent;
+  background: radial-gradient(circle at center, #131936 0%, #080a14 85%);
 }
 
 .events-grid {
@@ -1769,7 +1395,7 @@ body.invitation-open .invitation {
    6. DRESS CODE & GUIDELINES
    ========================================================================== */
 .dresscode-section {
-  background: transparent;
+  background: linear-gradient(180deg, #080a14 0%, #0d1224 100%);
 }
 
 .dresscode-card {
@@ -1837,7 +1463,7 @@ body.invitation-open .invitation {
    7. 3D GALLERY PRE-WEDDING
    ========================================================================== */
 .gallery-section {
-  background: transparent;
+  background: radial-gradient(circle at center, #10162e 0%, #070913 85%);
 }
 
 .gallery-grid {
@@ -1973,7 +1599,7 @@ body.invitation-open .invitation {
    8. WEDDING GIFT & AMPLOP DIGITAL
    ========================================================================== */
 .gift-section {
-  background: transparent;
+  background: linear-gradient(180deg, #070913 0%, #0d1224 100%);
 }
 
 .gift-cards-grid {
@@ -2125,7 +1751,7 @@ body.invitation-open .invitation {
    9. RSVP & WISHES (BUKU TAMU INTERAKTIF)
    ========================================================================== */
 .rsvp-section {
-  background: transparent;
+  background: radial-gradient(circle at center, #10162e 0%, #070913 85%);
 }
 
 .rsvp-layout {
@@ -2346,7 +1972,7 @@ textarea {
    10. CLOSING & APPRECIATION
    ========================================================================== */
 .closing-section {
-  background: transparent;
+  background: linear-gradient(180deg, #070913 0%, #04050a 100%);
   padding-bottom: 120px;
 }
 

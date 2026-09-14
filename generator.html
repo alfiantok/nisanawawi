@@ -491,23 +491,15 @@
       <!-- VIEW 1: SINGLE GENERATOR -->
       <div id="viewSingle">
         <div class="form-group">
-          <label for="guestName">Nama Tamu Undangan <span class="label-desc">(contoh: Alfian, Bpk. Budi &amp; Istri, Dika Pratama)</span></label>
-          <input type="text" id="guestName" class="form-input" placeholder="Ketik nama tamu di sini..." autofocus autocomplete="off" />
-        </div>
-
-        <div class="form-group">
-          <label for="themeSelect">Nuansa Warna Undangan <span class="label-desc">(Opsional)</span></label>
-          <select id="themeSelect" class="form-input" onchange="updateSinglePreview()">
-            <option value="default">Default (Royal Navy &amp; Gold)</option>
-            <option value="pink">Pink (Romantic Sakura Rose)</option>
-            <option value="biru">Biru (Sapphire Ocean Blue)</option>
-            <option value="coklat">Coklat (Warm Mocha Bronze)</option>
-            <option value="kuning">Kuning (Amber Sunflower Gold)</option>
-          </select>
+          <label for="guestName">Nama Tamu Undangan <span class="label-desc">(contoh: Alfian, Bpk. Budi &amp; Istri,
+              Dika Pratama)</span></label>
+          <input type="text" id="guestName" class="form-input" placeholder="Ketik nama tamu di sini..." autofocus
+            autocomplete="off" />
         </div>
 
         <div class="result-section">
-          <label style="font-size: 11px; text-transform: uppercase; color: var(--gold-light); font-weight: 600; display: block; margin-bottom: 8px;">
+          <label
+            style="font-size: 11px; text-transform: uppercase; color: var(--gold-light); font-weight: 600; display: block; margin-bottom: 8px;">
             🔗 Link Khusus Tamu:
           </label>
           <div class="result-box" id="resultLink">-</div>
@@ -554,7 +546,8 @@ Rian &amp; Pasangan"></textarea>
 
         <div id="batchContainer" style="display: none;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 12px; font-weight: 600; color: var(--gold-light);" id="batchCountText">0 Link Dihasilkan</span>
+            <span style="font-size: 12px; font-weight: 600; color: var(--gold-light);" id="batchCountText">0 Link
+              Dihasilkan</span>
             <button class="btn btn-secondary btn-sm" onclick="copyAllBatchLinks()">
               <span>📋 Salin Semua Link</span>
             </button>
@@ -640,17 +633,9 @@ Rian &amp; Pasangan"></textarea>
     function getGeneratedUrl(name) {
       let base = baseUrlInput.value.trim() || defaultBaseUrl;
       const cleanName = formatCapitalizeName((name || "").trim());
-      const themeVal = document.getElementById("themeSelect")?.value || "default";
-      let url = base;
-      if (cleanName) {
-        const sep = url.includes("?") ? "&" : "?";
-        url += `${sep}nama=${encodeURIComponent(cleanName)}`;
-      }
-      if (themeVal && themeVal !== "default") {
-        const sep = url.includes("?") ? "&" : "?";
-        url += `${sep}theme=${encodeURIComponent(themeVal)}`;
-      }
-      return url;
+      if (!cleanName) return base;
+      const sep = base.includes("?") ? "&" : "?";
+      return `${base}${sep}nama=${encodeURIComponent(cleanName)}`;
     }
 
     function getWhatsAppMessage(name, url) {

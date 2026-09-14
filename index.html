@@ -40,39 +40,6 @@
     <span class="music-icon" id="musicIcon">♪</span>
   </button>
 
-  <!-- Floating Theme Switcher Button (accessible after opening) -->
-  <button id="themeFloatingBtn" class="theme-floating-btn" aria-label="Ganti Nuansa Warna Undangan" title="Ganti Nuansa Warna">
-    <span class="theme-float-icon">🎨</span>
-  </button>
-  <div id="themePaletteModal" class="theme-palette-dropdown" aria-hidden="true">
-    <div class="palette-header">
-      <span class="palette-title">Ganti Nuansa Warna</span>
-      <button type="button" id="closePaletteBtn" class="palette-close-btn" aria-label="Tutup">✕</button>
-    </div>
-    <div class="palette-options">
-      <button type="button" class="palette-option active" data-theme="default">
-        <span class="theme-color-badge badge-default"></span>
-        <span>Default (Navy Gold)</span>
-      </button>
-      <button type="button" class="palette-option" data-theme="pink">
-        <span class="theme-color-badge badge-pink"></span>
-        <span>Pink (Sakura Rose)</span>
-      </button>
-      <button type="button" class="palette-option" data-theme="biru">
-        <span class="theme-color-badge badge-biru"></span>
-        <span>Biru (Sapphire Ocean)</span>
-      </button>
-      <button type="button" class="palette-option" data-theme="coklat">
-        <span class="theme-color-badge badge-coklat"></span>
-        <span>Coklat (Mocha Bronze)</span>
-      </button>
-      <button type="button" class="palette-option" data-theme="kuning">
-        <span class="theme-color-badge badge-kuning"></span>
-        <span>Kuning (Amber Gold)</span>
-      </button>
-    </div>
-  </div>
-
   <!-- Floating Navigation Dock (visible once opened) -->
   <nav class="floating-nav" id="floatingNav" aria-label="Navigasi Cepat">
     <a href="#couple" class="nav-item" data-target="couple" title="Mempelai">
@@ -151,33 +118,6 @@
       <div class="guest-badge" id="guestNameDisplay">Tamu Undangan Terhormat</div>
 
       <p class="date">Minggu, 20 Desember 2026</p>
-
-      <!-- Theme Style Selector (Pilihan Warna Undangan) -->
-      <div class="theme-picker-card">
-        <span class="theme-picker-title">Pilih Nuansa Warna:</span>
-        <div class="theme-picker-chips" role="radiogroup" aria-label="Pilih Nuansa Warna Undangan">
-          <button type="button" class="theme-chip active" data-theme="default" title="Royal Navy & Gold" aria-label="Tema Default">
-            <span class="theme-color-badge badge-default"></span>
-            <span>Default</span>
-          </button>
-          <button type="button" class="theme-chip" data-theme="pink" title="Romantic Sakura Pink" aria-label="Tema Pink">
-            <span class="theme-color-badge badge-pink"></span>
-            <span>Pink</span>
-          </button>
-          <button type="button" class="theme-chip" data-theme="biru" title="Sapphire Ocean Blue" aria-label="Tema Biru">
-            <span class="theme-color-badge badge-biru"></span>
-            <span>Biru</span>
-          </button>
-          <button type="button" class="theme-chip" data-theme="coklat" title="Warm Mocha Bronze" aria-label="Tema Coklat">
-            <span class="theme-color-badge badge-coklat"></span>
-            <span>Coklat</span>
-          </button>
-          <button type="button" class="theme-chip" data-theme="kuning" title="Amber Sunflower Gold" aria-label="Tema Kuning">
-            <span class="theme-color-badge badge-kuning"></span>
-            <span>Kuning</span>
-          </button>
-        </div>
-      </div>
 
       <button id="open">
         <span class="btn-icon">💌</span>
