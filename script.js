@@ -25,25 +25,49 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "back.out(1.4)",
   });
 
-  // Falling Petals / Flowers Generator
-  const icons = ["🌸", "🌺", "🌼", "💮", "✨", "🍃"];
+  // Falling Petals / Garden Blooms Generator (Refined, visible, gentle flow)
+  const icons = ["🌸", "🌼", "🌺", "✨", "🍃", "🌿", "🧡", "💐"];
   const flowers = document.getElementById("flowers");
   let flowerInterval = null;
 
-  function createFlower() {
+  function createFlower(initialY = null) {
     if (!flowers) return;
+    // Keep total petals around 6 - 10 at any time for elegant, consistent visibility
+    if (flowers.children.length >= 10) return;
+
     const flower = document.createElement("div");
     flower.className = "flower";
     flower.textContent = icons[Math.floor(Math.random() * icons.length)];
-    flower.style.left = `${Math.random() * 100}vw`;
-    flower.style.animationDuration = `${5 + Math.random() * 5}s`;
-    flower.style.fontSize = `${16 + Math.random() * 16}px`;
+    flower.style.left = `${Math.random() * 92 + 4}vw`;
+    
+    // Clear visible size (24px - 36px)
+    flower.style.fontSize = `${24 + Math.random() * 12}px`;
+    
+    const duration = 7 + Math.random() * 5; // 7s - 12s float
+    flower.style.animationDuration = `${duration}s`;
+    
+    const drift = (Math.random() - 0.5) * 140;
+    const rot = (Math.random() - 0.5) * 720;
+    flower.style.setProperty("--drift", `${drift}px`);
+    flower.style.setProperty("--rot", `${rot}deg`);
+
+    if (initialY !== null) {
+      flower.style.top = `${initialY}%`;
+    }
+
     flowers.appendChild(flower);
 
-    window.setTimeout(() => flower.remove(), 10000);
+    window.setTimeout(() => flower.remove(), duration * 1000);
   }
 
-  flowerInterval = window.setInterval(createFlower, 300);
+  // Spawn initial 4 scattered petals across the screen immediately
+  createFlower(10);
+  createFlower(30);
+  createFlower(55);
+  createFlower(80);
+
+  // Gentle interval: 1.1s per petal spawn
+  flowerInterval = window.setInterval(() => createFlower(), 1100);
 
   // Background Stars Generator for Hero Scene
   const starsContainer = document.querySelector(".stars");
@@ -183,9 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function openDirectlyWithoutEnvelope() {
     if (hasOpened) return;
     hasOpened = true;
-    if (flowerInterval) window.clearInterval(flowerInterval);
-    const flowersEl = document.getElementById("flowers");
-    if (flowersEl) flowersEl.style.display = "none";
 
     const overlay = document.querySelector(".overlay");
     if (overlay) overlay.style.display = "none";
@@ -246,9 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, "+=0.3")
       .set(".overlay", { display: "none" })
       .call(() => {
-        if (flowerInterval) window.clearInterval(flowerInterval);
-        const flowersEl = document.getElementById("flowers");
-        if (flowersEl) flowersEl.style.display = "none";
         revealHeroAndInvitation(true);
       });
   }

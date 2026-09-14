@@ -9,21 +9,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 
   <style>
     :root {
-      --bg-dark: #070913;
-      --bg-card: rgba(13, 18, 36, 0.75);
-      --border-gold: rgba(212, 175, 55, 0.35);
-      --gold-primary: #d4af37;
-      --gold-light: #f3d489;
-      --rose-primary: #e5989b;
-      --text-main: #f0f2f8;
-      --text-muted: rgba(240, 242, 248, 0.65);
+      --coral-blush: #DE6B5B;
+      --coral-deep: #C45142;
+      --apricot: #EB8E5D;
+      --apricot-light: #FCE6DA;
+      --butter-yellow: #EAC46E;
+      --butter-soft: #FDF4DF;
+      --blush-pink: #F2C4CE;
+      --cream: #FAF6EF;
+      --cream-paper: #FDFBF7;
+      --cream-card: #FFFFFF;
+      --sage-green: #7E8F73;
+      --sage-light: #EEF3EC;
+      --sage-deep: #54644B;
+      --warm-charcoal: #3A322B;
+      --warm-earth: #4F433A;
+      --text-main: #3A322B;
+      --text-muted: #73675E;
+      --border-gold: rgba(220, 168, 66, 0.35);
+      --border-sage: rgba(126, 143, 115, 0.28);
+      --border-coral: rgba(222, 107, 91, 0.3);
+      --border-light: rgba(115, 103, 94, 0.14);
       --font-serif: "Cormorant Garamond", Georgia, serif;
-      --font-sans: "Montserrat", sans-serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, sans-serif;
     }
 
     * {
@@ -33,7 +46,11 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--cream);
+      background-image: 
+        radial-gradient(circle at 10% 12%, rgba(235, 142, 93, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 25%, rgba(234, 196, 110, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 85%, rgba(222, 107, 91, 0.06) 0%, transparent 50%);
       color: var(--text-main);
       font-family: var(--font-sans);
       min-height: 100vh;
@@ -59,7 +76,7 @@
       left: 10%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(234, 196, 110, 0.2), transparent 70%);
     }
 
     .glow-2 {
@@ -67,7 +84,7 @@
       right: 10%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(229, 152, 155, 0.1), transparent 70%);
+      background: radial-gradient(circle, rgba(222, 107, 91, 0.15), transparent 70%);
     }
 
     .container {
@@ -85,26 +102,35 @@
 
     .header-tag {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--gold-primary);
+      color: var(--coral-blush);
       margin-bottom: 8px;
       display: inline-block;
     }
 
     .header h1 {
       font-family: var(--font-serif);
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(34px, 5vw, 48px);
       font-weight: 600;
-      color: #ffffff;
+      color: var(--warm-charcoal);
       margin-bottom: 6px;
     }
 
     .header p {
       font-size: 14px;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    .header p code {
+      background: var(--butter-soft);
+      color: var(--warm-charcoal);
+      padding: 2px 6px;
+      border-radius: 2px;
+      border: 1px solid var(--border-gold);
+      font-size: 12.5px;
     }
 
     .back-btn {
@@ -113,31 +139,31 @@
       gap: 8px;
       margin-bottom: 24px;
       padding: 8px 18px;
-      border-radius: 100px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      color: var(--gold-light);
+      border-radius: 3px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-gold);
+      color: var(--warm-charcoal);
       text-decoration: none;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(90, 70, 55, 0.06);
       transition: all 0.3s ease;
     }
 
     .back-btn:hover {
-      background: rgba(212, 175, 55, 0.15);
-      border-color: var(--gold-primary);
+      background: var(--apricot-light);
+      border-color: var(--coral-blush);
+      color: var(--coral-deep);
       transform: translateX(-3px);
     }
 
     /* Main Card */
     .card {
-      background: var(--bg-card);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: #FFFFFF;
       border: 1.5px solid var(--border-gold);
-      border-radius: 24px;
-      padding: 32px 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.08);
+      border-radius: 4px;
+      padding: 34px 30px;
+      box-shadow: 0 16px 40px rgba(90, 70, 55, 0.08), 0 0 25px rgba(234, 196, 110, 0.1);
       margin-bottom: 30px;
     }
 
@@ -146,7 +172,7 @@
       display: flex;
       gap: 10px;
       margin-bottom: 25px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--border-light);
       padding-bottom: 12px;
     }
 
@@ -157,16 +183,17 @@
       font-size: 13px;
       font-weight: 600;
       padding: 8px 16px;
-      border-radius: 8px;
+      border-radius: 2px;
       cursor: pointer;
       font-family: inherit;
       transition: all 0.25s ease;
     }
 
     .tab-btn.active {
-      background: rgba(212, 175, 55, 0.15);
-      color: var(--gold-light);
+      background: var(--butter-soft);
+      color: var(--warm-charcoal);
       border: 1px solid var(--border-gold);
+      font-weight: 700;
     }
 
     /* Form Fields */
@@ -177,10 +204,10 @@
     .form-group label {
       display: block;
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      color: var(--gold-light);
+      color: var(--warm-charcoal);
       margin-bottom: 8px;
     }
 
@@ -199,22 +226,22 @@
     .form-input,
     .form-textarea {
       width: 100%;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      color: #ffffff;
+      padding: 13px 16px;
+      background: #FAF6EF;
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      color: var(--warm-charcoal);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
       transition: all 0.3s ease;
     }
 
     .form-input:focus,
     .form-textarea:focus {
-      border-color: var(--gold-primary);
-      background: rgba(255, 255, 255, 0.07);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      border-color: var(--coral-blush);
+      background: #FFFFFF;
+      box-shadow: 0 0 14px rgba(222, 107, 91, 0.2);
     }
 
     .form-textarea {
@@ -227,18 +254,19 @@
     .result-section {
       margin-top: 25px;
       padding-top: 25px;
-      border-top: 1px dashed rgba(212, 175, 55, 0.25);
+      border-top: 1px dashed var(--border-gold);
     }
 
     .result-box {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 14px;
-      padding: 16px 18px;
+      background: #FAF6EF;
+      border: 1px solid var(--border-coral);
+      border-radius: 3px;
+      padding: 15px 18px;
       word-break: break-all;
       font-family: monospace;
       font-size: 13px;
-      color: var(--gold-light);
+      color: var(--coral-deep);
+      font-weight: 600;
       line-height: 1.5;
       user-select: all;
       margin-bottom: 16px;
@@ -257,10 +285,10 @@
       justify-content: center;
       gap: 8px;
       padding: 12px 22px;
-      border-radius: 100px;
+      border-radius: 3px;
       font-family: inherit;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       border: none;
       transition: all 0.3s ease;
@@ -268,52 +296,52 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #d4af37 0%, #f3d489 50%, #d4af37 100%);
-      color: #121008;
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, #DE6B5B 0%, #EB8E5D 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(222, 107, 91, 0.3);
     }
 
     .btn-primary:hover {
+      background: linear-gradient(135deg, #EB8E5D 0%, #EAC46E 100%);
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 8px 22px rgba(222, 107, 91, 0.45);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      color: var(--text-main);
+      background: var(--sage-light);
+      border: 1px solid var(--border-sage);
+      color: var(--sage-deep);
     }
 
     .btn-secondary:hover {
-      background: rgba(212, 175, 55, 0.15);
-      border-color: var(--gold-primary);
-      color: var(--gold-light);
+      background: var(--sage-deep);
+      color: #FFFFFF;
       transform: translateY(-2px);
     }
 
     .btn-wa {
       background: #25d366;
-      color: #0b2b16;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
     }
 
     .btn-wa:hover {
-      background: #22bf5b;
+      background: #1fae53;
       transform: translateY(-2px);
     }
 
     /* WhatsApp Template Preview */
     .wa-preview-wrap {
       margin-top: 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+      background: #FAF6EF;
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
       padding: 16px;
     }
 
     .wa-preview-title {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--text-muted);
@@ -326,11 +354,12 @@
     .wa-text {
       white-space: pre-wrap;
       font-size: 13px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
-      background: rgba(0, 0, 0, 0.25);
+      line-height: 1.7;
+      color: var(--warm-charcoal);
+      background: #FFFFFF;
       padding: 14px;
-      border-radius: 10px;
+      border-radius: 2px;
+      border: 1px solid var(--border-light);
       border-left: 3px solid #25d366;
     }
 
@@ -339,8 +368,9 @@
       margin-top: 20px;
       max-height: 420px;
       overflow-y: auto;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      border-radius: 12px;
+      border: 1px solid var(--border-gold);
+      border-radius: 3px;
+      background: #FFFFFF;
     }
 
     .batch-item {
@@ -349,9 +379,12 @@
       justify-content: space-between;
       gap: 12px;
       padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border-light);
       font-size: 13px;
+    }
+
+    .batch-item:nth-child(even) {
+      background: #FCF9F4;
     }
 
     .batch-item:last-child {
@@ -363,8 +396,8 @@
     }
 
     .batch-name {
-      font-weight: 600;
-      color: var(--gold-light);
+      font-weight: 700;
+      color: var(--warm-charcoal);
       margin-bottom: 2px;
     }
 
@@ -385,20 +418,21 @@
     .btn-sm {
       padding: 6px 12px;
       font-size: 11px;
-      border-radius: 6px;
+      border-radius: 2px;
     }
 
     /* Base Domain Collapse */
     .domain-settings {
       margin-top: 14px;
       padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      background: #FAF6EF;
+      border: 1px solid var(--border-gold);
+      border-radius: 3px;
     }
 
     .domain-toggle {
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 700;
       background: transparent;
       border: none;
       cursor: pointer;
@@ -406,7 +440,7 @@
       align-items: center;
       gap: 6px;
       font-family: inherit;
-      color: var(--gold-primary);
+      color: var(--coral-blush);
     }
 
     /* Toast Notification */
@@ -415,17 +449,18 @@
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%) translateY(40px);
-      background: rgba(13, 18, 36, 0.95);
-      border: 1px solid var(--gold-primary);
-      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--coral-blush);
+      border-radius: 4px;
       padding: 12px 26px;
       display: flex;
       align-items: center;
       gap: 10px;
-      color: var(--gold-light);
+      color: var(--warm-charcoal);
       font-size: 13px;
-      font-weight: 500;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(90, 70, 55, 0.2);
       opacity: 0;
       pointer-events: none;
       z-index: 9999;
@@ -499,7 +534,7 @@
 
         <div class="result-section">
           <label
-            style="font-size: 11px; text-transform: uppercase; color: var(--gold-light); font-weight: 600; display: block; margin-bottom: 8px;">
+            style="font-size: 11px; text-transform: uppercase; color: var(--warm-charcoal); font-weight: 700; display: block; margin-bottom: 8px;">
             🔗 Link Khusus Tamu:
           </label>
           <div class="result-box" id="resultLink">-</div>
@@ -546,7 +581,7 @@ Rian &amp; Pasangan"></textarea>
 
         <div id="batchContainer" style="display: none;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <span style="font-size: 12px; font-weight: 600; color: var(--gold-light);" id="batchCountText">0 Link
+            <span style="font-size: 12px; font-weight: 700; color: var(--warm-charcoal);" id="batchCountText">0 Link
               Dihasilkan</span>
             <button class="btn btn-secondary btn-sm" onclick="copyAllBatchLinks()">
               <span>📋 Salin Semua Link</span>
