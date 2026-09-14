@@ -25,8 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "back.out(1.4)",
   });
 
-  // Falling Petals / Flowers Generator
-  const icons = ["🌸", "🌺", "🌼", "💮", "✨", "🍃"];
+  // Falling Petals / Emoticons Generator (Customizable by Theme, 50% Gentler Intensity)
+  const themeIcons = {
+    default: ["🌸", "🌺", "🌼", "💮", "✨", "🍃"],
+    pink: ["🌸", "🌷", "🌺", "💮", "✨", "💖"],
+    biru: ["💠", "❄️", "✨", "💎", "💙", "🌊"],
+    coklat: ["🍂", "🍁", "✨", "🌾", "🤎", "🍃"],
+    kuning: ["🌻", "🌼", "✨", "💛", "⭐", "🍯"]
+  };
+  let currentTheme = localStorage.getItem("wedding_theme") || "default";
+  let icons = themeIcons[currentTheme] || themeIcons.default;
   const flowers = document.getElementById("flowers");
   let flowerInterval = null;
 
@@ -36,14 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     flower.className = "flower";
     flower.textContent = icons[Math.floor(Math.random() * icons.length)];
     flower.style.left = `${Math.random() * 100}vw`;
-    flower.style.animationDuration = `${5 + Math.random() * 5}s`;
-    flower.style.fontSize = `${16 + Math.random() * 16}px`;
+    flower.style.animationDuration = `${6 + Math.random() * 6}s`;
+    flower.style.fontSize = `${15 + Math.random() * 12}px`;
     flowers.appendChild(flower);
 
-    window.setTimeout(() => flower.remove(), 10000);
+    window.setTimeout(() => flower.remove(), 12000);
   }
 
-  flowerInterval = window.setInterval(createFlower, 300);
+  // 50% gentler intensity: 650ms instead of 300ms
+  flowerInterval = window.setInterval(createFlower, 650);
 
   // Background Stars Generator for Hero Scene
   const starsContainer = document.querySelector(".stars");
@@ -85,6 +94,91 @@ document.addEventListener("DOMContentLoaded", () => {
     if (guestNameInput) guestNameInput.value = formattedGuest;
   } else {
     if (guestDisplay) guestDisplay.textContent = "Tamu Undangan Terhormat";
+  }
+
+  // 2B. Theme Style Selection System (Default, Pink, Biru, Coklat, Kuning)
+  function applyTheme(themeName) {
+    const validThemes = ["default", "pink", "biru", "coklat", "kuning"];
+    if (!themeName || !validThemes.includes(themeName.toLowerCase())) {
+      themeName = "default";
+    } else {
+      themeName = themeName.toLowerCase();
+    }
+
+    currentTheme = themeName;
+    icons = themeIcons[themeName] || themeIcons.default;
+    document.documentElement.setAttribute("data-theme", themeName);
+    try {
+      localStorage.setItem("wedding_theme", themeName);
+    } catch (e) {
+      console.warn("Storage access restricted:", e);
+    }
+
+    // Update active state in cover chips
+    document.querySelectorAll(".theme-chip").forEach((chip) => {
+      const isMatch = chip.getAttribute("data-theme") === themeName;
+      chip.classList.toggle("active", isMatch);
+    });
+
+    // Update active state in floating dropdown options
+    document.querySelectorAll(".palette-option").forEach((opt) => {
+      const isMatch = opt.getAttribute("data-theme") === themeName;
+      opt.classList.toggle("active", isMatch);
+    });
+  }
+
+  // Bind Cover Theme Chips
+  document.querySelectorAll(".theme-chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const theme = chip.getAttribute("data-theme");
+      applyTheme(theme);
+    });
+  });
+
+  // Bind Floating Theme Switcher & Dropdown Modal
+  const themeFloatingBtn = document.getElementById("themeFloatingBtn");
+  const themePaletteModal = document.getElementById("themePaletteModal");
+  const closePaletteBtn = document.getElementById("closePaletteBtn");
+
+  if (themeFloatingBtn && themePaletteModal) {
+    themeFloatingBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      themePaletteModal.classList.toggle("is-open");
+    });
+
+    if (closePaletteBtn) {
+      closePaletteBtn.addEventListener("click", () => {
+        themePaletteModal.classList.remove("is-open");
+      });
+    }
+
+    document.querySelectorAll(".palette-option").forEach((opt) => {
+      opt.addEventListener("click", () => {
+        const theme = opt.getAttribute("data-theme");
+        applyTheme(theme);
+        themePaletteModal.classList.remove("is-open");
+        showToast(`Nuansa warna: ${theme.toUpperCase()}`);
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!themePaletteModal.contains(e.target) && e.target !== themeFloatingBtn) {
+        themePaletteModal.classList.remove("is-open");
+      }
+    });
+  }
+
+  // Check URL parameter for theme override (?theme=pink/biru/coklat/kuning/default)
+  const urlTheme = urlParams.get("theme");
+  if (urlTheme && ["default", "pink", "biru", "coklat", "kuning"].includes(urlTheme.toLowerCase())) {
+    applyTheme(urlTheme);
+  } else {
+    try {
+      const savedTheme = localStorage.getItem("wedding_theme");
+      if (savedTheme) applyTheme(savedTheme);
+    } catch (e) {
+      applyTheme("default");
+    }
   }
 
   // 3. Audio & Music Player System
@@ -183,9 +277,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function openDirectlyWithoutEnvelope() {
     if (hasOpened) return;
     hasOpened = true;
-    if (flowerInterval) window.clearInterval(flowerInterval);
-    const flowersEl = document.getElementById("flowers");
-    if (flowersEl) flowersEl.style.display = "none";
 
     const overlay = document.querySelector(".overlay");
     if (overlay) overlay.style.display = "none";
@@ -246,9 +337,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, "+=0.3")
       .set(".overlay", { display: "none" })
       .call(() => {
-        if (flowerInterval) window.clearInterval(flowerInterval);
-        const flowersEl = document.getElementById("flowers");
-        if (flowersEl) flowersEl.style.display = "none";
         revealHeroAndInvitation(true);
       });
   }
