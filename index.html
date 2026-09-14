@@ -66,10 +66,10 @@
       <span class="nav-icon">✉</span>
       <span class="nav-text">RSVP</span>
     </a>
-    <a href="game.html" class="nav-item" title="Mini Game Catch Love">
+    <button type="button" class="nav-item" id="navGameBtn" title="Pilih Game Pernikahan" aria-haspopup="dialog">
       <span class="nav-icon">🎮</span>
       <span class="nav-text">Game</span>
-    </a>
+    </button>
   </nav>
 
   <!-- Initial Opening Card & 3D Envelope Overlay -->
@@ -724,11 +724,11 @@
             <span class="couple-signature">Annisa &amp; Nawawi</span>
           </p>
 
-          <div style="margin-top: 32px;">
-            <a href="game.html" class="explore-btn"
-              style="margin-top: 0; background: linear-gradient(135deg, rgba(255, 117, 151, 0.25), rgba(212, 175, 55, 0.25)); border-color: rgba(255, 117, 151, 0.45);">
-              <span>🎮 Mainkan Mini-Game: Catch The Love!</span>
-            </a>
+          <div style="margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+            <button type="button" class="explore-btn open-game-modal"
+              style="margin-top: 0; background: linear-gradient(135deg, #DE6B5B, #EB8E5D); color: #FFFFFF; border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(222, 107, 91, 0.3);">
+              <span>🎮 Pilih &amp; Mainkan Mini Game ❤️</span>
+            </button>
           </div>
         </div>
 
@@ -741,6 +741,54 @@
       </div>
     </section>
   </main>
+
+  <!-- Wedding Mini Game Selection Modal -->
+  <div class="game-modal" id="gameSelectModal" aria-hidden="true" role="dialog" aria-labelledby="gameModalTitle">
+    <div class="game-modal-backdrop" id="gameModalBackdrop"></div>
+    <div class="game-modal-card">
+      <button type="button" class="game-modal-close" id="gameModalClose" aria-label="Tutup Pilihan Game">&times;</button>
+      
+      <div class="game-modal-header">
+        <span class="game-modal-badge">❀ WEDDING MINI GAMES ❀</span>
+        <h2 class="game-modal-title" id="gameModalTitle">Pilih Mini Game Romantis ❤️</h2>
+        <p class="game-modal-sub">
+          Rayakan momen bahagia kami dengan memainkan mini game spesial pernikahan Annisa &amp; Nawawi:
+        </p>
+      </div>
+
+      <div class="game-options-grid">
+        <!-- Option 1: Catch The Love -->
+        <div class="game-option-card">
+          <span class="game-option-tag">🎯 Casual Reflex</span>
+          <div class="game-option-avatar">
+            <img src="assets/cartoon-bride.png" alt="Catch The Love" />
+          </div>
+          <h3 class="game-option-name">Catch The Love</h3>
+          <p class="game-option-desc">
+            Bantu pengantin menangkap bunga, cincin permata, dan hati cinta yang berjatuhan sebelum waktu habis!
+          </p>
+          <a href="game.html" class="game-option-btn game-btn-catch">
+            <span>Mainkan Catch The Love 🌸</span>
+          </a>
+        </div>
+
+        <!-- Option 2: Run to Love (Platformer) -->
+        <div class="game-option-card">
+          <span class="game-option-tag platformer-tag">🎮 2D Platformer</span>
+          <div class="game-option-avatar">
+            <img src="assets/cartoon-groom.png" alt="Run to Love" />
+          </div>
+          <h3 class="game-option-name">Run to Love ❤️</h3>
+          <p class="game-option-desc">
+            Petualangan lari satu tangan melompati jurang &amp; rintangan untuk bersatu di pelaminan bunga impian!
+          </p>
+          <a href="platformer.html" class="game-option-btn game-btn-run">
+            <span>Mainkan Run to Love 🎮</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Lightbox Modal for Gallery Photos -->
   <div class="lightbox-modal" id="lightboxModal" aria-hidden="true">

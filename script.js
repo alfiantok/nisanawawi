@@ -668,4 +668,38 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, { passive: true });
+
+  // 12. Game Selection Modal Controller
+  const gameSelectModal = document.getElementById("gameSelectModal");
+  const gameModalClose = document.getElementById("gameModalClose");
+  const gameModalBackdrop = document.getElementById("gameModalBackdrop");
+  const openGameModalTriggers = document.querySelectorAll("#navGameBtn, .open-game-modal");
+
+  function openGameModal(e) {
+    if (e) e.preventDefault();
+    if (gameSelectModal) {
+      gameSelectModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeGameModal() {
+    if (gameSelectModal) {
+      gameSelectModal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  openGameModalTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", openGameModal);
+  });
+
+  if (gameModalClose) gameModalClose.addEventListener("click", closeGameModal);
+  if (gameModalBackdrop) gameModalBackdrop.addEventListener("click", closeGameModal);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && gameSelectModal && gameSelectModal.classList.contains("active")) {
+      closeGameModal();
+    }
+  });
 });
