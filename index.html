@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description"
+    content="The Wedding of Annisa & Nawawi - Minggu, 20 Desember 2026. Undangan Pernikahan Digital Eksklusif." />
+
+  <title>The Wedding of Annisa & Nawawi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <!-- Background Elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+  <div id="flowers"></div>
+
+  <!-- Background Music Audio -->
+  <audio id="bgMusic" src="assets/music.mp3" loop preload="auto"></audio>
+
+  <!-- Floating Audio Control Button -->
+  <button id="musicToggle" class="music-btn" aria-label="Toggle Musik Latar" title="Putar / Hentikan Musik">
+    <div class="vinyl-disc">
+      <div class="vinyl-center"></div>
+    </div>
+    <span class="music-icon" id="musicIcon">♪</span>
+  </button>
+
+  <!-- Floating Navigation Dock (visible once opened) -->
+  <nav class="floating-nav" id="floatingNav" aria-label="Navigasi Cepat">
+    <a href="#hero" class="nav-item active" data-target="hero" title="Beranda">
+      <span class="nav-icon">✧</span>
+      <span class="nav-text">Utama</span>
+    </a>
+    <a href="#couple" class="nav-item" data-target="couple" title="Mempelai">
+      <span class="nav-icon">♡</span>
+      <span class="nav-text">Mempelai</span>
+    </a>
+    <a href="#story" class="nav-item" data-target="story" title="Kisah Kami">
+      <span class="nav-icon">❦</span>
+      <span class="nav-text">Cerita</span>
+    </a>
+    <a href="#event" class="nav-item" data-target="event" title="Acara">
+      <span class="nav-icon">✦</span>
+      <span class="nav-text">Acara</span>
+    </a>
+    <a href="#gallery" class="nav-item" data-target="gallery" title="Galeri">
+      <span class="nav-icon">❖</span>
+      <span class="nav-text">Galeri</span>
+    </a>
+    <a href="#gift" class="nav-item" data-target="gift" title="Kado">
+      <span class="nav-icon">🎁</span>
+      <span class="nav-text">Kado</span>
+    </a>
+    <a href="#rsvp" class="nav-item" data-target="rsvp" title="RSVP & Doa">
+      <span class="nav-icon">✉</span>
+      <span class="nav-text">RSVP</span>
+    </a>
+    <a href="game.html" class="nav-item" title="Mini Game Catch Love">
+      <span class="nav-icon">🎮</span>
+      <span class="nav-text">Game</span>
+    </a>
+  </nav>
+
+  <!-- Initial Opening Card & 3D Envelope Overlay -->
+  <div class="overlay">
+    <div class="card">
+      <div class="card-ornament top-ornament">❀ ✧ ❀</div>
+      <div class="envelope-wrapper">
+        <div class="shadow"></div>
+
+        <div class="envelope">
+          <div class="back"></div>
+
+          <div class="letter">
+            <span class="monogram">A & N</span>
+            <h2>Annisa</h2>
+            <span class="amp">&</span>
+            <h2>Nawawi</h2>
+            <p class="letter-date">20 . 12 . 2026</p>
+          </div>
+
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="bottom"></div>
+
+          <div class="flap">
+            <div class="seal">
+              <span class="seal-icon">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="invite">The Wedding Celebration Of</p>
+
+      <h1>
+        Annisa
+        <span>&</span>
+        Nawawi
+      </h1>
+
+      <div class="divider-gold">
+        <span>♦</span>
+      </div>
+
+      <p class="guest-salutation">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+      <div class="guest-badge" id="guestNameDisplay">Tamu Undangan Terhormat</div>
+
+      <p class="date">Minggu, 20 Desember 2026</p>
+
+      <button id="open">
+        <span class="btn-icon">💌</span>
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Invitation Content -->
+  <main class="invitation" aria-hidden="true">
+    <!-- 1. HERO COVER SECTION -->
+    <section class="hero scene" id="hero">
+      <div class="stars"></div>
+      <div class="hero-bg"></div>
+
+      <div class="hero-container">
+        <div class="hero-header">
+          <span class="royal-tag">THE WEDDING CELEBRATION</span>
+          <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        </div>
+
+        <div class="hero-names-wrap">
+          <h1 class="hero-couple-title">
+            <span class="name-bride">Annisa</span>
+            <span class="name-and">&</span>
+            <span class="name-groom">Nawawi</span>
+          </h1>
+        </div>
+
+        <div class="hero-date-pill">
+          <span class="calendar-icon">📅</span>
+          <span>Minggu, 20 Desember 2026</span>
+          <span class="dot-sep">•</span>
+          <span>Jakarta, Indonesia</span>
+        </div>
+
+        <!-- Live Countdown Timer -->
+        <div class="countdown-card" id="countdownCard">
+          <div class="countdown-heading">Menghitung Hari Bahagia</div>
+          <div class="countdown-grid">
+            <div class="timer-box">
+              <span class="timer-num" id="cdDays">00</span>
+              <span class="timer-label">Hari</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdHours">00</span>
+              <span class="timer-label">Jam</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdMinutes">00</span>
+              <span class="timer-label">Menit</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdSeconds">00</span>
+              <span class="timer-label">Detik</span>
+            </div>
+          </div>
+        </div>
+
+        <a class="explore-btn" href="#quote">
+          <span>Mulai Jelajahi Cerita</span>
+          <span class="arrow-down">↓</span>
+        </a>
+      </div>
+
+      <a class="scroll-hint" href="#quote">
+        <span>Gulir untuk melanjutkan</span>
+        <b aria-hidden="true">↓</b>
+      </a>
+    </section>
+
+    <!-- 2. QUOTE / AYAT SUCI SECTION -->
+    <section class="quote-section scene" id="quote">
+      <div class="section-container">
+        <div class="quote-card tilt-card reveal-3d">
+          <div class="quote-decor top-left">❧</div>
+          <div class="quote-decor bottom-right">❧</div>
+
+          <div class="arabic-script">
+            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ
+            مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+          </div>
+
+          <div class="gold-line"></div>
+
+          <p class="quote-translation">
+            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu
+            sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan
+            sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."
+          </p>
+
+          <span class="quote-source">QS. Ar-Rum : 21</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MEMPELAI (BRIDE & GROOM PROFILE) -->
+    <section class="couple-section scene" id="couple">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">PASANGAN MEMPELAI</span>
+          <h2 class="section-title">Kedua Mempelai</h2>
+          <p class="section-subtitle">
+            Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami mengundang Anda untuk merayakan kebahagiaan
+            persatuan kami.
+          </p>
+        </div>
+
+        <div class="couple-cards-grid">
+          <!-- GROOM CARD -->
+          <div class="profile-card tilt-card reveal-3d" data-tilt>
+            <div class="profile-image-container">
+              <div class="image-inner">
+                <img src="assets/groom.jpg" alt="Foto Nawawi" class="profile-img" />
+              </div>
+              <div class="badge-role">The Groom</div>
+            </div>
+
+            <div class="profile-info">
+              <h3 class="profile-name">Nawawi</h3>
+              <p class="profile-parents">
+                Putra Pertama dari<br />
+                <strong>Bpk.... </strong> &amp;<br />
+                <strong>Ibu...</strong>
+              </p>
+              <div class="profile-social">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-chip">
+                  <span class="ig-icon">📸</span>
+                  <span>@nawawi</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MONOGRAM CONNECTOR -->
+          <div class="couple-connector reveal-3d">
+            <div class="vertical-gold-line"></div>
+            <div class="center-heart">
+              <span>&amp;</span>
+            </div>
+            <div class="vertical-gold-line"></div>
+          </div>
+
+          <!-- BRIDE CARD -->
+          <div class="profile-card tilt-card reveal-3d" data-tilt>
+            <div class="profile-image-container">
+              <div class="image-inner">
+                <img src="assets/bride.jpg" alt="Foto Annisa" class="profile-img" />
+              </div>
+              <div class="badge-role">The Bride</div>
+            </div>
+
+            <div class="profile-info">
+              <h3 class="profile-name">Annisa Marola</h3>
+              <p class="profile-parents">
+                Putri Kedua dari<br />
+                <strong>Bpk. Rahmad Marola</strong> &amp;<br />
+                <strong>Ibu Sumiarsih</strong>
+              </p>
+              <div class="profile-social">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-chip">
+                  <span class="ig-icon">📸</span>
+                  <span>@annisamarola</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. OUR LOVE STORY (3D SCROLL TIMELINE) -->
+    <section class="story-section scene" id="story">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">OUR JOURNEY</span>
+          <h2 class="section-title">Kisah Cinta Kami</h2>
+          <p class="section-subtitle">
+            Setiap kisah cinta itu indah, namun kisah kami adalah yang paling kami syukuri.
+          </p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+
+          <!-- Story Item 1 -->
+          <div class="timeline-item reveal-3d left-item">
+            <div class="timeline-dot">
+              <span>✦</span>
+            </div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">Tahun 2020</span>
+              <h3 class="timeline-title">Pertemuan Pertama</h3>
+              <p class="timeline-text">
+                Berawal dari pertemuan tak sengaja dalam sebuah seminar kreatif di Jakarta Selatan. Percakapan singkat
+                tentang impian dan secangkir kopi hangat ternyata menjadi awal mula jalan takdir kami.
+              </p>
+            </div>
+          </div>
+
+          <!-- Story Item 2 -->
+          <div class="timeline-item reveal-3d right-item">
+            <div class="timeline-dot">
+              <span>♥</span>
+            </div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">Tahun 2022</span>
+              <h3 class="timeline-title">Menjalin Cerita &amp; Komitmen</h3>
+              <p class="timeline-text">
+                Setelah melewati berbagai momen tawa, suka, dan duka bersama, kami menyadari bahwa kami saling
+                melengkapi. Kami berkomitmen untuk saling mendukung dan melangkah menuju masa depan yang sama.
+              </p>
+            </div>
+          </div>
+
+          <!-- Story Item 3 -->
+          <div class="timeline-item reveal-3d left-item">
+            <div class="timeline-dot">
+              <span>💍</span>
+            </div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">Tahun 2025</span>
+              <h3 class="timeline-title">Momen Pertunangan</h3>
+              <p class="timeline-text">
+                Dengan penuh ketulusan di hadapan kedua keluarga besar yang kami hormati, kami melangkah ke babak yang
+                lebih dalam. Janji suci pertunangan diikrarkan sebagai restu menuju hari pernikahan.
+              </p>
+            </div>
+          </div>
+
+          <!-- Story Item 4 -->
+          <div class="timeline-item reveal-3d right-item">
+            <div class="timeline-dot">
+              <span>🕊</span>
+            </div>
+            <div class="timeline-card tilt-card highlight-card">
+              <span class="timeline-year">20 Desember 2026</span>
+              <h3 class="timeline-title">Menuju Keabadian (The Big Day)</h3>
+              <p class="timeline-text">
+                Kini, dengan restu orang tua dan doa dari Anda sekalian, kami bersiap mengucap janji suci pernikahan
+                untuk menyatukan dua hati dan dua keluarga dalam naungan cinta selamanya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WEDDING EVENTS (AKAD & RESEPSI) -->
+    <section class="event-section scene" id="event">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">SAVE THE DATE</span>
+          <h2 class="section-title">Rangkaian Acara</h2>
+          <p class="section-subtitle">
+            Insya Allah rangkaian acara pernikahan kami akan diselenggarakan pada:
+          </p>
+        </div>
+
+        <div class="events-grid">
+          <!-- AKAD NIKAH -->
+          <div class="event-box tilt-card reveal-3d" data-tilt>
+            <div class="event-badge">AKAD NIKAH</div>
+            <div class="event-icon-circle">💍</div>
+            <h3 class="event-name">Akad Nikah</h3>
+            <div class="event-divider"></div>
+
+            <div class="event-detail-item">
+              <span class="detail-icon">🗓</span>
+              <span>Minggu, 20 Desember 2026</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">⏰</span>
+              <span>08.00 - 10.00 WIB</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">📍</span>
+              <span><strong>Glass House, Plataran Hutan Kota</strong><br />Jl. Jend. Sudirman Kav. 54-55, Senayan,
+                Jakarta Pusat</span>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Akad+Nikah+Annisa+%26+Nawawi&dates=20261220T010000Z/20261220T030000Z&details=Pernikahan+Annisa+%26+Nawawi+di+Plataran+Hutan+Kota+Senayan+Jakarta&location=Plataran+Hutan+Kota+Senayan+Jakarta"
+                target="_blank" rel="noopener noreferrer" class="action-btn calendar-btn">
+                <span>📅 Simpan di Kalender</span>
+              </a>
+              <a href="https://maps.google.com/?q=Plataran+Hutan+Kota+Senayan+Jakarta" target="_blank"
+                rel="noopener noreferrer" class="action-btn map-btn">
+                <span>🗺 Petunjuk Lokasi (Maps)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- RESEPSI PERNIKAHAN -->
+          <div class="event-box tilt-card reveal-3d highlight-event" data-tilt>
+            <div class="event-badge highlight">RESEPSI PERNIKAHAN</div>
+            <div class="event-icon-circle">🥂</div>
+            <h3 class="event-name">Resepsi Pernikahan</h3>
+            <div class="event-divider"></div>
+
+            <div class="event-detail-item">
+              <span class="detail-icon">🗓</span>
+              <span>Minggu, 20 Desember 2026</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">⏰</span>
+              <span>11.00 - 14.00 WIB</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">📍</span>
+              <span><strong>Grand Ballroom, Plataran Hutan Kota</strong><br />Jl. Jend. Sudirman Kav. 54-55, Senayan,
+                Jakarta Pusat</span>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Resepsi+Pernikahan+Annisa+%26+Nawawi&dates=20261220T040000Z/20261220T070000Z&details=Resepsi+Pernikahan+Annisa+%26+Nawawi+di+Grand+Ballroom+Plataran+Hutan+Kota+Senayan&location=Plataran+Hutan+Kota+Senayan+Jakarta"
+                target="_blank" rel="noopener noreferrer" class="action-btn calendar-btn">
+                <span>📅 Simpan di Kalender</span>
+              </a>
+              <a href="https://maps.google.com/?q=Plataran+Hutan+Kota+Senayan+Jakarta" target="_blank"
+                rel="noopener noreferrer" class="action-btn map-btn">
+                <span>🗺 Petunjuk Lokasi (Maps)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maps Embed Card -->
+        <div class="maps-card reveal-3d">
+          <div class="maps-card-header">
+            <span class="maps-title">Lokasi Acara : Plataran Hutan Kota Senayan</span>
+          </div>
+          <div class="maps-frame-wrapper">
+            <iframe title="Peta Lokasi Pernikahan Annisa & Nawawi"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3054176465495!2d106.80410407584143!3d-6.223393593764724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1503831bca7%3A0x6bfe3b754876bbf7!2sHutan%20Kota%20by%20Plataran!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+              width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. DRESS CODE & GUIDELINES -->
+    <section class="dresscode-section scene" id="dresscode">
+      <div class="section-container">
+        <div class="dresscode-card tilt-card reveal-3d">
+          <span class="section-eyebrow">PANDUAN BUSANA</span>
+          <h2 class="section-title">Dress Code Acara</h2>
+          <p class="dresscode-desc">
+            Kami akan sangat berbahagia apabila Bapak/Ibu/Saudara/i mengenakan pakaian bernuansa palet warna berikut
+            demi keselarasan visual momen bahagia ini:
+          </p>
+
+          <div class="swatches-grid">
+            <div class="swatch-item">
+              <div class="swatch-circle" style="background: #e8d8c8;"></div>
+              <span class="swatch-name">Champagne</span>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-circle" style="background: #9ab49d;"></div>
+              <span class="swatch-name">Sage Green</span>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-circle" style="background: #e5b3be;"></div>
+              <span class="swatch-name">Dusty Rose</span>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-circle" style="background: #fdfbf7;"></div>
+              <span class="swatch-name">Ivory Cream</span>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-circle" style="background: #1b2838;"></div>
+              <span class="swatch-name">Navy Slate</span>
+            </div>
+          </div>
+
+          <div class="dresscode-note">
+            <span>💡 Formal Attire / Batik Modern / Gaun Elegan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 3D GALLERY PRE-WEDDING -->
+    <section class="gallery-section scene" id="gallery">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">MOMEN TERINDAH</span>
+          <h2 class="section-title">Galeri Pre-Wedding</h2>
+          <p class="section-subtitle">
+            Setiap bingkai foto mengabadikan sekelumit kebahagiaan kami dalam perjalanan menuju pelaminan.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/couple.jpg"
+            data-caption="Cinta di Rumah Kaca yang Penuh Cahaya">
+            <img src="assets/couple.jpg" alt="Prewedding Moment 1" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/gallery-walk.jpg"
+            data-caption="Melangkah Beriringan Menatap Masa Depan">
+            <img src="assets/gallery-walk.jpg" alt="Prewedding Moment 2" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/gallery-venue.jpg"
+            data-caption="Keindahan Ruang Perayaan Hari Istimewa">
+            <img src="assets/gallery-venue.jpg" alt="Prewedding Moment 3" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/gallery-rings.jpg"
+            data-caption="Simbol Janji Suci dan Ikatan Abadi">
+            <img src="assets/gallery-rings.jpg" alt="Prewedding Moment 4" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/groom.jpg"
+            data-caption="Sang Mempelai Pria - Nawawi">
+            <img src="assets/groom.jpg" alt="Prewedding Moment 5" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/bride.jpg"
+            data-caption="Sang Mempelai Wanita - Annisa">
+            <img src="assets/bride.jpg" alt="Prewedding Moment 6" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Momen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WEDDING GIFT & AMPLOP DIGITAL -->
+    <section class="gift-section scene" id="gift">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">TANDA KASIH</span>
+          <h2 class="section-title">Amplop Digital &amp; Kado</h2>
+          <p class="section-subtitle">
+            Doa restu Anda merupakan karunia terindah bagi kami. Namun apabila Anda berkenan memberikan tanda kasih
+            secara digital, Anda dapat melalui:
+          </p>
+        </div>
+
+        <div class="gift-cards-grid">
+          <!-- BANK BCA -->
+          <div class="bank-card tilt-card reveal-3d" data-tilt>
+            <div class="bank-card-header">
+              <div class="chip-graphic"></div>
+              <div class="bank-brand">BCA</div>
+            </div>
+            <div class="account-details">
+              <span class="acc-label">Nomor Rekening:</span>
+              <span class="acc-number" id="bcaNumber">8271 9028 4410</span>
+              <span class="acc-holder">a.n. Nawawi</span>
+            </div>
+            <button class="copy-btn" data-copy="827190284410" data-label="No. Rekening BCA">
+              <span class="copy-icon">📋</span>
+              <span>Salin Nomor Rekening</span>
+            </button>
+          </div>
+
+          <!-- BANK MANDIRI -->
+          <div class="bank-card tilt-card reveal-3d" data-tilt>
+            <div class="bank-card-header">
+              <div class="chip-graphic"></div>
+              <div class="bank-brand">MANDIRI</div>
+            </div>
+            <div class="account-details">
+              <span class="acc-label">Nomor Rekening:</span>
+              <span class="acc-number" id="mandiriNumber">1370 0192 8472 1</span>
+              <span class="acc-holder">a.n. Annisa Laksmi</span>
+            </div>
+            <button class="copy-btn" data-copy="1370019284721" data-label="No. Rekening Mandiri">
+              <span class="copy-icon">📋</span>
+              <span>Salin Nomor Rekening</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PHYSICAL GIFT ADDRESS -->
+        <div class="physical-gift-card tilt-card reveal-3d">
+          <div class="gift-icon-badge">📦</div>
+          <h3>Kirim Kado Fisik</h3>
+          <p class="gift-address" id="giftAddress">
+            <strong>Kediaman Mempelai:</strong><br />
+            Jl. Senopati No. 45, RT 06 / RW 03, Senayan, Kebayoran Baru, Jakarta Selatan 12190<br />
+            (Penerima: Nawawi / Annisa - Telp: 0812-8899-7722)
+          </p>
+          <button class="copy-btn secondary"
+            data-copy="Jl. Senopati No. 45, Senayan, Kebayoran Baru, Jakarta Selatan 12190 (Penerima: Nawawi / Annisa - Telp: 0812-8899-7722)"
+            data-label="Alamat Pengiriman">
+            <span class="copy-icon">📋</span>
+            <span>Salin Alamat Pengiriman</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. RSVP & WISHES (BUKU TAMU INTERAKTIF) -->
+    <section class="rsvp-section scene" id="rsvp">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">BUKU TAMU &amp; UCAPAN</span>
+          <h2 class="section-title">Konfirmasi &amp; Doa Restu</h2>
+          <p class="section-subtitle">
+            Mohon konfirmasikan kehadiran Anda serta sampaikan doa dan harapan terbaik untuk kami berdua.
+          </p>
+        </div>
+
+        <div class="rsvp-layout">
+          <!-- Form Container -->
+          <div class="rsvp-form-card tilt-card reveal-3d">
+            <form id="rsvpForm" novalidate>
+              <div class="form-group">
+                <label for="guestNameInput">Nama Lengkap</label>
+                <input type="text" id="guestNameInput" name="name" placeholder="Masukkan nama lengkap Anda" required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="guestCountSelect">Jumlah Tamu</label>
+                  <select id="guestCountSelect" name="guestCount">
+                    <option value="1 Orang">1 Orang</option>
+                    <option value="2 Orang">2 Orang</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="attendanceStatus">Konfirmasi Kehadiran</label>
+                  <select id="attendanceStatus" name="status" required>
+                    <option value="Hadir">✓ Ya, Saya Akan Hadir</option>
+                    <option value="Tidak Hadir">✕ Maaf, Belum Bisa Hadir</option>
+                    <option value="Masih Ragu">? Masih Ragu / Belum Pasti</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="wishesInput">Ucapan &amp; Doa Restu</label>
+                <textarea id="wishesInput" name="message" rows="4"
+                  placeholder="Tuliskan doa restu hangat dan ucapan selamat untuk Annisa & Nawawi..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="submit-rsvp-btn" id="submitRsvpBtn">
+                <span>Kirim Ucapan &amp; Konfirmasi</span>
+                <span class="btn-arrow">➤</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Guestbook Feed -->
+          <div class="wishes-feed-card reveal-3d">
+            <div class="feed-header">
+              <h3>Doa &amp; Ucapan Tamu</h3>
+              <span class="feed-counter" id="feedCounter">4 Ucapan</span>
+            </div>
+
+            <div class="feed-list" id="wishesList">
+              <!-- Wishes will be populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CLOSING & APPRECIATION -->
+    <section class="closing-section scene" id="closing">
+      <div class="section-container">
+        <div class="closing-card tilt-card reveal-3d">
+          <div class="closing-monogram">A &amp; N</div>
+          <h2 class="closing-title">Terima Kasih</h2>
+          <p class="closing-text">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk
+            memberikan doa restu kepada kami.
+          </p>
+          <p class="closing-arabic">جَزَاكُمُ اللهُ خَيْرًا كَثِيْرًا</p>
+          <p class="closing-family">
+            Kami yang berbahagia,<br />
+            <strong>Keluarga Besar Bpk. Ramhad Marola &amp; Ibu Sumiarsih</strong><br />
+            <strong>Keluarga Besar Bpk. ... &amp; Ibu ...</strong><br /><br />
+            <span class="couple-signature">Annisa &amp; Nawawi</span>
+          </p>
+
+          <div style="margin-top: 32px;">
+            <a href="game.html" class="explore-btn"
+              style="margin-top: 0; background: linear-gradient(135deg, rgba(255, 117, 151, 0.25), rgba(212, 175, 55, 0.25)); border-color: rgba(255, 117, 151, 0.45);">
+              <span>🎮 Mainkan Mini-Game: Catch The Love!</span>
+            </a>
+          </div>
+        </div>
+
+        <footer class="footer-credit">
+          <p>© 2026 The Wedding of Annisa &amp; Nawawi. All Rights Reserved.</p>
+          <p style="margin-top: 8px;"><a href="generator.html" style="color: rgba(212, 175, 55, 0.6); text-decoration: none; font-size: 11px; transition: color 0.2s ease;">⚙️ Link Generator Tamu Undangan</a></p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal for Gallery Photos -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Tutup Pratinjau">&times;</button>
+      <img id="lightboxImage" src="" alt="Pratinjau Foto" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- Notification Toast Popup -->
+  <div class="toast" id="toastNotification">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage">Teks berhasil disalin!</span>
+  </div>
+
+  <!-- Main Logic Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>

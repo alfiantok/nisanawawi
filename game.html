@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Catch The Love - Annisa & Nawawi Wedding Game</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600;700;800&family=Fredoka:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-gold: #e6c887;
+      --secondary-gold: #d4af37;
+      --accent-pink: #ff7597;
+      --accent-rose: #ffccd5;
+      --bg-dark: #090b16;
+      --bg-panel: rgba(18, 23, 46, 0.88);
+      --font-main: "Fredoka", "Montserrat", sans-serif;
+      --font-serif: "Cormorant Garamond", serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #151b38 0%, #080a14 100%);
+      font-family: var(--font-main);
+      color: #ffffff;
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Background Ambient Stars & Lights */
+    .ambient-glow {
+      position: fixed;
+      width: 60vw;
+      height: 60vw;
+      max-width: 500px;
+      max-height: 500px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-pink {
+      background: var(--accent-pink);
+      top: -10vw;
+      right: -10vw;
+    }
+
+    .glow-gold {
+      background: var(--secondary-gold);
+      bottom: -10vw;
+      left: -10vw;
+    }
+
+    /* Game Wrapper Container */
+    .game-wrapper {
+      position: relative;
+      z-index: 10;
+      width: min(480px, 100vw);
+      height: min(820px, 100vh, 100dvh);
+      background: rgba(10, 14, 28, 0.92);
+      border: 2px solid rgba(212, 175, 55, 0.35);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Header Bar */
+    .game-header {
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+    }
+
+    .header-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-subtitle {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--primary-gold);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--primary-gold);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .icon-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      transform: scale(1.08);
+    }
+
+    /* HUD (Score, Love Meter & Timer) */
+    .game-hud {
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 20;
+    }
+
+    .hud-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .hud-score {
+      color: var(--primary-gold);
+    }
+
+    .hud-combo {
+      color: var(--accent-pink);
+    }
+
+    .hud-timer {
+      color: #64d5ff;
+    }
+
+    /* Love Meter Progress Bar */
+    .love-meter-container {
+      flex: 1;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 117, 151, 0.4);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .love-meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff7597, #ffd166);
+      border-radius: 100px;
+      box-shadow: 0 0 10px rgba(255, 117, 151, 0.8);
+      transition: width 0.25s ease;
+    }
+
+    /* Canvas Game Area */
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 100%, #161e3f 0%, #090c1a 100%);
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Touch Control Arrows for Mobile */
+    .touch-controls {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .touch-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+      color: var(--primary-gold);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.1s ease, background 0.1s ease;
+    }
+
+    .touch-btn:active {
+      transform: scale(0.92);
+      background: rgba(212, 175, 55, 0.35);
+    }
+
+    /* Overlays & Modals (Start / Game Over / Win) */
+    .game-modal {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 10, 22, 0.93);
+      backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 24px;
+      text-align: center;
+      z-index: 50;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .game-modal.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .modal-icon {
+      font-size: 42px;
+      margin-bottom: 8px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--accent-rose);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    /* Character Selection Cards */
+    .character-selector {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .char-card {
+      flex: 1;
+      max-width: 140px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 14px 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .char-card:hover,
+    .char-card.selected {
+      border-color: var(--secondary-gold);
+      background: rgba(212, 175, 55, 0.16);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .char-img-preview {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid var(--secondary-gold);
+      background: #fff;
+      overflow: hidden;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .char-img-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .char-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .char-role {
+      font-size: 10px;
+      color: var(--primary-gold);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Game Buttons */
+    .primary-game-btn {
+      width: 100%;
+      max-width: 260px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--secondary-gold), #ff7597);
+      border: none;
+      color: #0d1224;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(255, 117, 151, 0.4);
+      transition: all 0.25s ease;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .primary-game-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 14px 40px rgba(255, 117, 151, 0.6);
+    }
+
+    .secondary-game-btn {
+      padding: 10px 22px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .secondary-game-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    /* Couple Celebration Display in Win Modal */
+    .couple-celebrate-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .couple-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary-gold);
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .couple-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .heart-pulse-icon {
+      font-size: 32px;
+      animation: heartPulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes heartPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+    }
+
+    .win-quote {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--primary-gold);
+      margin-bottom: 18px;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient-glow glow-pink"></div>
+  <div class="ambient-glow glow-gold"></div>
+
+  <div class="game-wrapper">
+    <!-- Header -->
+    <header class="game-header">
+      <div class="header-title-box">
+        <span class="header-subtitle">Wedding Mini-Game</span>
+        <div class="header-title">
+          <span>Catch The Love</span>
+          <span>💖</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="soundBtn" title="Toggle Suara" aria-label="Toggle Suara">🔊</button>
+        <a href="index.html" class="icon-btn" title="Kembali ke Undangan" aria-label="Kembali ke Undangan">💌</a>
+      </div>
+    </header>
+
+    <!-- HUD -->
+    <div class="game-hud">
+      <div class="hud-pill hud-score">
+        <span>Skor:</span>
+        <span id="scoreVal">0</span>
+      </div>
+
+      <div class="love-meter-container" title="Love Meter">
+        <div class="love-meter-fill" id="loveMeterFill"></div>
+      </div>
+
+      <div class="hud-pill hud-combo">
+        <span id="comboVal">x1</span>
+      </div>
+
+      <div class="hud-pill hud-timer">
+        <span>⏱</span>
+        <span id="timerVal">45s</span>
+      </div>
+    </div>
+
+    <!-- Canvas Play Area -->
+    <div class="canvas-container" id="canvasContainer">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Touch Controls -->
+      <div class="touch-controls">
+        <button class="touch-btn" id="touchLeft" aria-label="Gerak Kiri">◀</button>
+        <button class="touch-btn" id="touchRight" aria-label="Gerak Kanan">▶</button>
+      </div>
+    </div>
+
+    <!-- Start Game Modal -->
+    <div class="game-modal" id="startModal">
+      <div class="modal-icon">💍</div>
+      <h1 class="modal-title">Catch The Love</h1>
+      <p class="modal-subtitle">
+        Bantu satukan cinta Annisa & Nawawi!<br />
+        Tangkap hati, cincin, dan bunga cinta. Hindari rintangan!
+      </p>
+
+      <div class="character-selector">
+        <div class="char-card selected" id="selectGroom" data-char="groom">
+          <div class="char-img-preview">
+            <img src="assets/cartoon-groom.png" alt="Karakter Nawawi" />
+          </div>
+          <span class="char-name">Nawawi</span>
+          <span class="char-role">The Groom</span>
+        </div>
+
+        <div class="char-card" id="selectBride" data-char="bride">
+          <div class="char-img-preview">
+            <img src="assets/cartoon-bride.png" alt="Karakter Annisa" />
+          </div>
+          <span class="char-name">Annisa</span>
+          <span class="char-role">The Bride</span>
+        </div>
+      </div>
+
+      <button class="primary-game-btn" id="startGameBtn">
+        <span>Mulai Main!</span>
+        <span>🎮</span>
+      </button>
+
+      <a href="index.html" class="secondary-game-btn">Lihat Undangan Pernikahan</a>
+    </div>
+
+    <!-- Game Win / Celebration Modal -->
+    <div class="game-modal hidden" id="winModal">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title">Cinta Bersatu!</h2>
+      <p class="modal-subtitle">Luar biasa! Love Meter berhasil penuh 100%!</p>
+
+      <div class="couple-celebrate-box">
+        <div class="couple-avatar">
+          <img src="assets/cartoon-groom.png" alt="Nawawi" />
+        </div>
+        <span class="heart-pulse-icon">💖</span>
+        <div class="couple-avatar">
+          <img src="assets/cartoon-bride.png" alt="Annisa" />
+        </div>
+      </div>
+
+      <p class="win-quote">
+        "Dua hati telah terikat dalam harmoni cinta. Sampai jumpa di hari bahagia Annisa & Nawawi, 20 Desember 2026!"
+      </p>
+
+      <a href="index.html?opened=true" class="primary-game-btn" id="openInvitationFromGame">
+        <span>Buka Undangan Lengkap</span>
+        <span>💌</span>
+      </a>
+
+      <button class="secondary-game-btn" id="restartBtn">Main Lagi</button>
+    </div>
+
+    <!-- Game Over (Time Out) Modal -->
+    <div class="game-modal hidden" id="gameOverModal">
+      <div class="modal-icon">⏰</div>
+      <h2 class="modal-title">Waktu Habis!</h2>
+      <p class="modal-subtitle">
+        Skor Akhir: <strong id="finalScoreVal" style="color: var(--primary-gold);">0</strong> Poin.<br />
+        Sedikit lagi untuk memenuhi Love Meter!
+      </p>
+
+      <button class="primary-game-btn" id="retryBtn">
+        <span>Coba Lagi!</span>
+        <span>🔄</span>
+      </button>
+
+      <a href="index.html" class="secondary-game-btn">Kembali ke Undangan</a>
+    </div>
+  </div>
+
+  <!-- Game Logic Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      const container = document.getElementById("canvasContainer");
+
+      // UI elements
+      const scoreVal = document.getElementById("scoreVal");
+      const comboVal = document.getElementById("comboVal");
+      const timerVal = document.getElementById("timerVal");
+      const loveMeterFill = document.getElementById("loveMeterFill");
+      const finalScoreVal = document.getElementById("finalScoreVal");
+
+      const startModal = document.getElementById("startModal");
+      const winModal = document.getElementById("winModal");
+      const gameOverModal = document.getElementById("gameOverModal");
+
+      const startGameBtn = document.getElementById("startGameBtn");
+      const restartBtn = document.getElementById("restartBtn");
+      const retryBtn = document.getElementById("retryBtn");
+      const soundBtn = document.getElementById("soundBtn");
+
+      const selectGroom = document.getElementById("selectGroom");
+      const selectBride = document.getElementById("selectBride");
+
+      const touchLeft = document.getElementById("touchLeft");
+      const touchRight = document.getElementById("touchRight");
+
+      // Web Audio Synthesizer for SFX
+      let soundEnabled = true;
+      let audioCtx = null;
+
+      function initAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+      }
+
+      function playSound(type) {
+        if (!soundEnabled || !audioCtx) return;
+        try {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          if (type === "catch") {
+            // Sweet chime
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(587.33, now); // D5
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            osc.start(now);
+            osc.stop(now + 0.15);
+          } else if (type === "combo") {
+            // Harp shimmer
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+            osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+            osc.frequency.setValueAtTime(1046.5, now + 0.24); // C6
+            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+            osc.start(now);
+            osc.stop(now + 0.35);
+          } else if (type === "miss") {
+            // Soft boop
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+          } else if (type === "win") {
+            // Victory arpeggio
+            const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5];
+            notes.forEach((freq, idx) => {
+              const o = audioCtx.createOscillator();
+              const g = audioCtx.createGain();
+              o.connect(g);
+              g.connect(audioCtx.destination);
+              o.frequency.setValueAtTime(freq, now + idx * 0.1);
+              g.gain.setValueAtTime(0.2, now + idx * 0.1);
+              g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
+              o.start(now + idx * 0.1);
+              o.stop(now + idx * 0.1 + 0.25);
+            });
+          }
+        } catch (e) {
+          console.warn("Audio error:", e);
+        }
+      }
+
+      soundBtn.addEventListener("click", () => {
+        soundEnabled = !soundEnabled;
+        soundBtn.textContent = soundEnabled ? "🔊" : "🔇";
+        if (soundEnabled) initAudio();
+      });
+
+      // Resize Canvas to container
+      let width = 0;
+      let height = 0;
+
+      function resize() {
+        width = container.clientWidth;
+        height = container.clientHeight;
+        canvas.width = width * window.devicePixelRatio;
+        canvas.height = height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+
+      // Load Cartoon Sprites
+      const groomImg = new Image();
+      groomImg.src = "assets/cartoon-groom.png";
+
+      const brideImg = new Image();
+      brideImg.src = "assets/cartoon-bride.png";
+
+      let selectedCharacter = "groom";
+
+      selectGroom.addEventListener("click", () => {
+        selectedCharacter = "groom";
+        selectGroom.classList.add("selected");
+        selectBride.classList.remove("selected");
+      });
+
+      selectBride.addEventListener("click", () => {
+        selectedCharacter = "bride";
+        selectBride.classList.add("selected");
+        selectGroom.classList.remove("selected");
+      });
+
+      // Game State Variables
+      let isPlaying = false;
+      let score = 0;
+      let combo = 0;
+      let loveMeter = 0;
+      const TARGET_LOVE = 100;
+      let timeLeft = 45;
+      let timerInterval = null;
+      let lastSpawnTime = 0;
+      let spawnInterval = 650; // ms
+
+      // Player Basket / Character Object
+      const player = {
+        x: width / 2,
+        y: height - 100,
+        w: 75,
+        h: 75,
+        speed: 8,
+        vx: 0,
+      };
+
+      // Falling items array
+      const items = [];
+      const particles = [];
+
+      // Item types: good items and obstacles
+      const ITEM_TYPES = [
+        { type: "heart", emoji: "💖", score: 10, meter: 7, speed: 3.2, isBad: false },
+        { type: "ring", emoji: "💍", score: 25, meter: 15, speed: 3.8, isBad: false },
+        { type: "bouquet", emoji: "💐", score: 15, meter: 10, speed: 3.5, isBad: false },
+        { type: "letter", emoji: "💌", score: 12, meter: 8, speed: 3.0, isBad: false },
+        { type: "obstacle_rain", emoji: "🌧️", score: -10, meter: -8, speed: 4.2, isBad: true },
+        { type: "obstacle_alarm", emoji: "🥶", score: -15, meter: -10, speed: 4.5, isBad: true },
+      ];
+
+      // Controls State
+      const keys = { left: false, right: false };
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") keys.left = true;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") keys.right = true;
+      });
+
+      window.addEventListener("keyup", (e) => {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") keys.left = false;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") keys.right = false;
+      });
+
+      // Touch buttons
+      touchLeft.addEventListener("touchstart", (e) => { e.preventDefault(); keys.left = true; });
+      touchLeft.addEventListener("touchend", () => { keys.left = false; });
+      touchRight.addEventListener("touchstart", (e) => { e.preventDefault(); keys.right = true; });
+      touchRight.addEventListener("touchend", () => { keys.right = false; });
+
+      // Mouse / Touch Drag on Canvas
+      let isPointerDown = false;
+
+      container.addEventListener("pointerdown", (e) => {
+        isPointerDown = true;
+        movePlayerToPointer(e);
+      });
+
+      container.addEventListener("pointermove", (e) => {
+        if (isPointerDown) {
+          movePlayerToPointer(e);
+        }
+      });
+
+      window.addEventListener("pointerup", () => {
+        isPointerDown = false;
+      });
+
+      function movePlayerToPointer(e) {
+        const rect = container.getBoundingClientRect();
+        const targetX = e.clientX - rect.left;
+        player.x = Math.max(player.w / 2, Math.min(width - player.w / 2, targetX));
+      }
+
+      // Particle System for catches
+      function createParticles(x, y, colorText) {
+        for (let i = 0; i < 8; i++) {
+          particles.push({
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6 - 2,
+            life: 1.0,
+            decay: 0.03 + Math.random() * 0.03,
+            text: colorText,
+            size: 14 + Math.random() * 10,
+          });
+        }
+      }
+
+      // Spawn falling item
+      function spawnItem() {
+        const rand = Math.random();
+        let template;
+
+        if (rand < 0.45) template = ITEM_TYPES[0]; // heart
+        else if (rand < 0.65) template = ITEM_TYPES[1]; // ring
+        else if (rand < 0.80) template = ITEM_TYPES[2]; // bouquet
+        else if (rand < 0.88) template = ITEM_TYPES[3]; // letter
+        else if (rand < 0.94) template = ITEM_TYPES[4]; // rain
+        else template = ITEM_TYPES[5]; // alarm
+
+        items.push({
+          x: 30 + Math.random() * (width - 60),
+          y: -30,
+          radius: 20,
+          vy: template.speed + Math.random() * 1.2,
+          ...template,
+        });
+      }
+
+      // Game Loop
+      let animationFrameId = null;
+
+      function updateGame(timestamp) {
+        if (!isPlaying) return;
+
+        // Player Movement
+        if (keys.left) player.x -= player.speed;
+        if (keys.right) player.x += player.speed;
+        player.x = Math.max(player.w / 2, Math.min(width - player.w / 2, player.x));
+        player.y = height - 90;
+
+        // Spawning
+        if (timestamp - lastSpawnTime > spawnInterval) {
+          spawnItem();
+          lastSpawnTime = timestamp;
+        }
+
+        // Clear Canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // Update & Draw Falling Items
+        for (let i = items.length - 1; i >= 0; i--) {
+          const item = items[i];
+          item.y += item.vy;
+
+          // Collision with Player Basket
+          const dx = item.x - player.x;
+          const dy = item.y - (player.y - 10);
+          const distance = Math.hypot(dx, dy);
+
+          if (distance < item.radius + player.w / 2.3) {
+            // Collected!
+            if (!item.isBad) {
+              combo++;
+              const multiplier = Math.min(5, Math.floor(combo / 3) + 1);
+              score += item.score * multiplier;
+              loveMeter = Math.min(TARGET_LOVE, loveMeter + item.meter);
+
+              createParticles(item.x, item.y, "✨");
+              if (combo > 1 && combo % 4 === 0) {
+                playSound("combo");
+              } else {
+                playSound("catch");
+              }
+            } else {
+              // Obstacle hit
+              combo = 0;
+              score = Math.max(0, score + item.score);
+              loveMeter = Math.max(0, loveMeter + item.meter);
+              createParticles(item.x, item.y, "💥");
+              playSound("miss");
+            }
+
+            items.splice(i, 1);
+
+            // Update HUD
+            scoreVal.textContent = score;
+            comboVal.textContent = combo > 1 ? `x${Math.min(5, Math.floor(combo / 3) + 1)}` : "x1";
+            loveMeterFill.style.width = `${(loveMeter / TARGET_LOVE) * 100}%`;
+
+            // Check Win Condition
+            if (loveMeter >= TARGET_LOVE) {
+              triggerWin();
+              return;
+            }
+            continue;
+          }
+
+          // Draw Item
+          ctx.font = "26px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(item.emoji, item.x, item.y);
+
+          // Remove offscreen
+          if (item.y > height + 40) {
+            if (!item.isBad) {
+              combo = 0;
+              comboVal.textContent = "x1";
+            }
+            items.splice(i, 1);
+          }
+        }
+
+        // Update & Draw Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= p.decay;
+
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.globalAlpha = p.life;
+          ctx.font = `${p.size}px sans-serif`;
+          ctx.fillText(p.text, p.x, p.y);
+          ctx.globalAlpha = 1.0;
+        }
+
+        // Draw Character Basket
+        drawPlayer();
+
+        animationFrameId = requestAnimationFrame(updateGame);
+      }
+
+      function drawPlayer() {
+        const imgToDraw = selectedCharacter === "groom" ? groomImg : brideImg;
+
+        // Glowing Aura
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(player.x, player.y, player.w / 2 + 6, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 117, 151, 0.25)";
+        ctx.fill();
+
+        // Character Circle
+        ctx.beginPath();
+        ctx.arc(player.x, player.y, player.w / 2, 0, Math.PI * 2);
+        ctx.clip();
+
+        // Draw image
+        ctx.drawImage(
+          imgToDraw,
+          player.x - player.w / 2,
+          player.y - player.h / 2,
+          player.w,
+          player.h
+        );
+        ctx.restore();
+
+        // Border Ring
+        ctx.beginPath();
+        ctx.arc(player.x, player.y, player.w / 2, 0, Math.PI * 2);
+        ctx.strokeStyle = "#e6c887";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Catcher basket indicator badge
+        ctx.font = "18px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("🧺", player.x, player.y - player.h / 2 - 4);
+      }
+
+      // Start Game Function
+      function startGame() {
+        initAudio();
+        startModal.classList.add("hidden");
+        winModal.classList.add("hidden");
+        gameOverModal.classList.add("hidden");
+
+        score = 0;
+        combo = 0;
+        loveMeter = 0;
+        timeLeft = 45;
+        items.length = 0;
+        particles.length = 0;
+
+        scoreVal.textContent = "0";
+        comboVal.textContent = "x1";
+        timerVal.textContent = `${timeLeft}s`;
+        loveMeterFill.style.width = "0%";
+
+        player.x = width / 2;
+        isPlaying = true;
+        lastSpawnTime = performance.now();
+
+        // Timer interval
+        window.clearInterval(timerInterval);
+        timerInterval = window.setInterval(() => {
+          if (!isPlaying) return;
+          timeLeft--;
+          timerVal.textContent = `${timeLeft}s`;
+
+          if (timeLeft <= 0) {
+            triggerGameOver();
+          }
+        }, 1000);
+
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(updateGame);
+      }
+
+      function triggerWin() {
+        isPlaying = false;
+        window.clearInterval(timerInterval);
+        playSound("win");
+        winModal.classList.remove("hidden");
+      }
+
+      function triggerGameOver() {
+        isPlaying = false;
+        window.clearInterval(timerInterval);
+        playSound("miss");
+        finalScoreVal.textContent = score;
+        gameOverModal.classList.remove("hidden");
+      }
+
+      // Modal Action Listeners
+      startGameBtn.addEventListener("click", startGame);
+      restartBtn.addEventListener("click", startGame);
+      retryBtn.addEventListener("click", startGame);
+
+      // Forward guest name query param to invitation
+      const gameUrlParams = new URLSearchParams(window.location.search);
+      const guestTo = gameUrlParams.get("nama") || gameUrlParams.get("to") || gameUrlParams.get("u");
+      const openInviteFromGameBtn = document.getElementById("openInvitationFromGame");
+      if (openInviteFromGameBtn && guestTo) {
+        openInviteFromGameBtn.href = `index.html?opened=true&nama=${encodeURIComponent(guestTo)}`;
+      }
+    });
+  </script>
+</body>
+
+</html>

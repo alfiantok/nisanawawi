@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator Link Undangan - Annisa &amp; Nawawi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #070913;
+      --bg-card: rgba(13, 18, 36, 0.75);
+      --border-gold: rgba(212, 175, 55, 0.35);
+      --gold-primary: #d4af37;
+      --gold-light: #f3d489;
+      --rose-primary: #e5989b;
+      --text-main: #f0f2f8;
+      --text-muted: rgba(240, 242, 248, 0.65);
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Montserrat", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Glow Background */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-1 {
+      top: -100px;
+      left: 10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.12), transparent 70%);
+    }
+
+    .glow-2 {
+      bottom: -100px;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(229, 152, 155, 0.1), transparent 70%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .header-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      transform: translateX(-3px);
+    }
+
+    /* Main Card */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.08);
+      margin-bottom: 30px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+    }
+
+    .tab-btn.active {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      border: 1px solid var(--border-gold);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    .form-group .label-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+      text-transform: none;
+      margin-left: 6px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--gold-primary);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    /* Result Box */
+    .result-section {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px dashed rgba(212, 175, 55, 0.25);
+    }
+
+    .result-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 14px;
+      padding: 16px 18px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--gold-light);
+      line-height: 1.5;
+      user-select: all;
+      margin-bottom: 16px;
+    }
+
+    /* Buttons */
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37 0%, #f3d489 50%, #d4af37 100%);
+      color: #121008;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-wa {
+      background: #25d366;
+      color: #0b2b16;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-wa:hover {
+      background: #22bf5b;
+      transform: translateY(-2px);
+    }
+
+    /* WhatsApp Template Preview */
+    .wa-preview-wrap {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .wa-preview-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wa-text {
+      white-space: pre-wrap;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(0, 0, 0, 0.25);
+      padding: 14px;
+      border-radius: 10px;
+      border-left: 3px solid #25d366;
+    }
+
+    /* Batch Table */
+    .batch-results {
+      margin-top: 20px;
+      max-height: 420px;
+      overflow-y: auto;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+    }
+
+    .batch-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 13px;
+    }
+
+    .batch-item:last-child {
+      border-bottom: none;
+    }
+
+    .batch-info {
+      overflow: hidden;
+    }
+
+    .batch-name {
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .batch-link {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .batch-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 6px;
+    }
+
+    /* Base Domain Collapse */
+    .domain-settings {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .domain-toggle {
+      font-size: 11px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      color: var(--gold-primary);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      background: rgba(13, 18, 36, 0.95);
+      border: 1px solid var(--gold-primary);
+      border-radius: 100px;
+      padding: 12px 26px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-light);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px 18px;
+      }
+
+      .action-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="container">
+    <a href="index.html" class="back-btn">
+      <span>←</span>
+      <span>Kembali ke Halaman Undangan</span>
+    </a>
+
+    <div class="header">
+      <span class="header-tag">Wedding Link Generator</span>
+      <h1>Annisa &amp; Nawawi</h1>
+      <p>Buat tautan undangan khusus untuk masing-masing tamu dengan format <code>?nama=...</code> agar nama tamu muncul
+        elegan pada amplop pembuka.</p>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabSingle" onclick="switchTab('single')">👤 Satu Nama</button>
+        <button class="tab-btn" id="tabBatch" onclick="switchTab('batch')">👥 Banyak Nama (Massal)</button>
+      </div>
+
+      <!-- Settings Base URL -->
+      <div class="domain-settings" style="margin-bottom: 22px;">
+        <button class="domain-toggle" type="button" onclick="toggleDomainSettings()">
+          <span>⚙️ Pengaturan Base URL Undangan</span>
+          <span id="domainArrow">▼</span>
+        </button>
+        <div id="domainInputWrap" style="display: none; margin-top: 10px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <input type="text" id="baseUrlInput" class="form-input" placeholder="https://domain-anda.com/index.html" />
+            <small style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 6px;">
+              Ubah base URL ini apabila Anda sudah meng-upload website ke hosting/domain Anda sendiri.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 1: SINGLE GENERATOR -->
+      <div id="viewSingle">
+        <div class="form-group">
+          <label for="guestName">Nama Tamu Undangan <span class="label-desc">(contoh: Alfian, Bpk. Budi &amp; Istri, Dika Pratama)</span></label>
+          <input type="text" id="guestName" class="form-input" placeholder="Ketik nama tamu di sini..." autofocus autocomplete="off" />
+        </div>
+
+        <div class="result-section">
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--gold-light); font-weight: 600; display: block; margin-bottom: 8px;">
+            🔗 Link Khusus Tamu:
+          </label>
+          <div class="result-box" id="resultLink">-</div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" onclick="copyLink()">
+              <span>📋</span>
+              <span>Salin Link</span>
+            </button>
+            <button class="btn btn-secondary" onclick="copyWhatsAppText()">
+              <span>💬</span>
+              <span>Salin Teks WhatsApp</span>
+            </button>
+            <a href="#" class="btn btn-secondary" id="previewLinkBtn" target="_blank">
+              <span>👁️</span>
+              <span>Buka Undangan</span>
+            </a>
+          </div>
+
+          <!-- Preview WhatsApp Message -->
+          <div class="wa-preview-wrap">
+            <div class="wa-preview-title">
+              <span>📱 Format Teks WhatsApp yang Disalin:</span>
+            </div>
+            <div class="wa-text" id="waMessagePreview"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: BATCH / MASSAL GENERATOR -->
+      <div id="viewBatch" style="display: none;">
+        <div class="form-group">
+          <label for="batchNames">Daftar Nama Tamu <span class="label-desc">(1 nama per baris)</span></label>
+          <textarea id="batchNames" class="form-textarea" placeholder="Alfian
+Bapak Budi &amp; Keluarga
+Sarah Oktavia
+Rian &amp; Pasangan"></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="generateBatch()" style="width: 100%; margin-bottom: 20px;">
+          <span>⚡</span>
+          <span>Generate Semua Link</span>
+        </button>
+
+        <div id="batchContainer" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--gold-light);" id="batchCountText">0 Link Dihasilkan</span>
+            <button class="btn btn-secondary btn-sm" onclick="copyAllBatchLinks()">
+              <span>📋 Salin Semua Link</span>
+            </button>
+          </div>
+          <div class="batch-results" id="batchResultsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">Tautan berhasil disalin ke clipboard!</span>
+  </div>
+
+  <script>
+    // Initialize Base URL
+    const baseUrlInput = document.getElementById("baseUrlInput");
+    const currentLoc = window.location.href;
+    let defaultBaseUrl = currentLoc.substring(0, currentLoc.lastIndexOf("/")) + "/index.html";
+
+    // Restore saved custom base URL from localStorage if available
+    const savedBaseUrl = localStorage.getItem("wedding_custom_base_url");
+    baseUrlInput.value = savedBaseUrl || defaultBaseUrl;
+
+    baseUrlInput.addEventListener("input", () => {
+      localStorage.setItem("wedding_custom_base_url", baseUrlInput.value.trim());
+      updateSingleLink();
+    });
+
+    function toggleDomainSettings() {
+      const wrap = document.getElementById("domainInputWrap");
+      const arrow = document.getElementById("domainArrow");
+      if (wrap.style.display === "none") {
+        wrap.style.display = "block";
+        arrow.textContent = "▲";
+      } else {
+        wrap.style.display = "none";
+        arrow.textContent = "▼";
+      }
+    }
+
+    // Switch Tabs
+    function switchTab(tab) {
+      const tabSingle = document.getElementById("tabSingle");
+      const tabBatch = document.getElementById("tabBatch");
+      const viewSingle = document.getElementById("viewSingle");
+      const viewBatch = document.getElementById("viewBatch");
+
+      if (tab === "single") {
+        tabSingle.classList.add("active");
+        tabBatch.classList.remove("active");
+        viewSingle.style.display = "block";
+        viewBatch.style.display = "none";
+      } else {
+        tabBatch.classList.add("active");
+        tabSingle.classList.remove("active");
+        viewBatch.style.display = "block";
+        viewSingle.style.display = "none";
+      }
+    }
+
+    // Single Generator Logic
+    const guestNameInput = document.getElementById("guestName");
+    const resultLinkEl = document.getElementById("resultLink");
+    const previewLinkBtn = document.getElementById("previewLinkBtn");
+    const waMessagePreviewEl = document.getElementById("waMessagePreview");
+
+    function formatCapitalizeName(str) {
+      if (!str) return "";
+      return str
+        .split(" ")
+        .map((word) => {
+          if (!word) return "";
+          const isAllUpper = word.length > 1 && word === word.toUpperCase();
+          const rest = isAllUpper ? word.slice(1).toLowerCase() : word.slice(1);
+          return word.charAt(0).toUpperCase() + rest;
+        })
+        .join(" ");
+    }
+
+    function getGeneratedUrl(name) {
+      let base = baseUrlInput.value.trim() || defaultBaseUrl;
+      const cleanName = formatCapitalizeName((name || "").trim());
+      if (!cleanName) return base;
+      const sep = base.includes("?") ? "&" : "?";
+      return `${base}${sep}nama=${encodeURIComponent(cleanName)}`;
+    }
+
+    function getWhatsAppMessage(name, url) {
+      const displayName = name ? formatCapitalizeName(name.trim()) : "Bapak/Ibu/Saudara/i";
+      return `Kepada Yth.
+*${displayName}*
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Anda untuk menghadiri acara pernikahan kami:
+
+*Annisa & Nawawi*
+📅 Minggu, 20 Desember 2026
+📍 Jakarta, Indonesia
+
+Untuk informasi lengkap mengenai detail acara, jadwal, dan lokasi, silakan membuka tautan undangan berikut:
+${url}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+
+Terima kasih.
+_Wassalamu'alaikum Warahmatullahi Wabarakatuh_`;
+    }
+
+    function updateSingleLink() {
+      const name = guestNameInput.value.trim();
+      const url = getGeneratedUrl(name);
+      resultLinkEl.textContent = url;
+      previewLinkBtn.href = url;
+      waMessagePreviewEl.textContent = getWhatsAppMessage(name, url);
+    }
+
+    guestNameInput.addEventListener("input", updateSingleLink);
+
+    // Initial default update
+    guestNameInput.value = "Alfian";
+    updateSingleLink();
+
+    // Copy to clipboard helper
+    function copyText(text, message = "Berhasil disalin ke clipboard!") {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(message);
+        }).catch(() => fallbackCopy(text, message));
+      } else {
+        fallbackCopy(text, message);
+      }
+    }
+
+    function fallbackCopy(text, message) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast(message);
+      } catch (e) {
+        alert("Gagal menyalin otomatis. Silakan salin secara manual.");
+      }
+      document.body.removeChild(ta);
+    }
+
+    function copyLink() {
+      const url = resultLinkEl.textContent;
+      copyText(url, "🔗 Link undangan berhasil disalin!");
+    }
+
+    function copyWhatsAppText() {
+      const text = waMessagePreviewEl.textContent;
+      copyText(text, "💬 Format pesan WhatsApp berhasil disalin!");
+    }
+
+    // Batch Generator Logic
+    let currentBatchData = [];
+
+    function generateBatch() {
+      const raw = document.getElementById("batchNames").value;
+      const lines = raw.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+
+      if (lines.length === 0) {
+        showToast("⚠️ Mohon masukkan setidaknya satu nama!");
+        return;
+      }
+
+      currentBatchData = lines.map(name => {
+        const formatted = formatCapitalizeName(name);
+        const link = getGeneratedUrl(formatted);
+        return { name: formatted, link, wa: getWhatsAppMessage(formatted, link) };
+      });
+
+      const listEl = document.getElementById("batchResultsList");
+      listEl.innerHTML = "";
+
+      currentBatchData.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "batch-item";
+        row.innerHTML = `
+          <div class="batch-info">
+            <div class="batch-name">${escapeHTML(item.name)}</div>
+            <div class="batch-link">${escapeHTML(item.link)}</div>
+          </div>
+          <div class="batch-actions">
+            <button class="btn btn-secondary btn-sm" onclick="copyBatchSingleLink(${idx})" title="Salin Link">🔗 Link</button>
+            <button class="btn btn-secondary btn-sm" onclick="copyBatchSingleWA(${idx})" title="Salin Pesan WA">💬 WA</button>
+            <a href="${item.link}" target="_blank" class="btn btn-secondary btn-sm" title="Buka Undangan">👁️</a>
+          </div>
+        `;
+        listEl.appendChild(row);
+      });
+
+      document.getElementById("batchCountText").textContent = `${lines.length} Link Tamu Dihasilkan`;
+      document.getElementById("batchContainer").style.display = "block";
+      showToast(`✨ Berhasil generate ${lines.length} link tamu!`);
+    }
+
+    function copyBatchSingleLink(index) {
+      if (currentBatchData[index]) {
+        copyText(currentBatchData[index].link, `🔗 Link untuk ${currentBatchData[index].name} disalin!`);
+      }
+    }
+
+    function copyBatchSingleWA(index) {
+      if (currentBatchData[index]) {
+        copyText(currentBatchData[index].wa, `💬 Pesan WA untuk ${currentBatchData[index].name} disalin!`);
+      }
+    }
+
+    function copyAllBatchLinks() {
+      if (currentBatchData.length === 0) return;
+      const allText = currentBatchData.map(item => `${item.name}:\n${item.link}`).join("\n\n");
+      copyText(allText, "📋 Semua tautan tamu berhasil disalin!");
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g,
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    // Toast Notification
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMessage");
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = msg;
+      toast.classList.add("show");
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3200);
+    }
+  </script>
+</body>
+
+</html>
