@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description"
+    content="The Wedding of Annisa & Nawawi - Sabtu, 19 Desember 2026. Undangan Pernikahan Digital Eksklusif." />
+
+  <title>The Wedding of Annisa & Nawawi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Italianno&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <!-- Background Elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+  <div id="flowers"></div>
+
+  <!-- Background Music Audio -->
+  <audio id="bgMusic" src="assets/music.mp3" loop preload="auto"></audio>
+
+  <!-- Floating Audio Control Button -->
+  <button id="musicToggle" class="music-btn" aria-label="Toggle Musik Latar" title="Putar / Hentikan Musik: Vitamin U - Paul Partohap">
+    <div class="vinyl-disc">
+      <div class="vinyl-center"></div>
+    </div>
+    <span class="music-icon" id="musicIcon">♪</span>
+  </button>
+
+  <!-- Floating Navigation Dock (visible once opened) -->
+  <nav class="floating-nav" id="floatingNav" aria-label="Navigasi Cepat">
+    <a href="#couple" class="nav-item" data-target="couple" title="Mempelai">
+      <span class="nav-icon">♡</span>
+      <span class="nav-text">Mempelai</span>
+    </a>
+    <a href="#story" class="nav-item" data-target="story" title="Kisah Kami">
+      <span class="nav-icon">❦</span>
+      <span class="nav-text">Cerita</span>
+    </a>
+    <a href="#event" class="nav-item" data-target="event" title="Acara">
+      <span class="nav-icon">✦</span>
+      <span class="nav-text">Acara</span>
+    </a>
+    <a href="#gallery" class="nav-item" data-target="gallery" title="Galeri">
+      <span class="nav-icon">❖</span>
+      <span class="nav-text">Galeri</span>
+    </a>
+    <a href="#gift" class="nav-item" data-target="gift" title="Kado">
+      <span class="nav-icon">🎁</span>
+      <span class="nav-text">Kado</span>
+    </a>
+    <a href="#rsvp" class="nav-item" data-target="rsvp" title="RSVP & Doa">
+      <span class="nav-icon">✉</span>
+      <span class="nav-text">RSVP</span>
+    </a>
+    <button type="button" class="nav-item" id="navGameBtn" title="Pilih Game Pernikahan" aria-haspopup="dialog">
+      <span class="nav-icon">🎮</span>
+      <span class="nav-text">Game</span>
+    </button>
+  </nav>
+
+  <!-- Initial Opening Card & 3D Envelope Overlay -->
+  <div class="overlay">
+    <div class="card">
+      <div class="card-ornament top-ornament">❀ ✧ ❀</div>
+      <div class="envelope-wrapper">
+        <div class="shadow"></div>
+
+        <div class="envelope">
+          <div class="back"></div>
+
+          <div class="letter">
+            <span class="monogram">A & N</span>
+            <h2>Annisa</h2>
+            <span class="amp">&</span>
+            <h2>Nawawi</h2>
+            <p class="letter-date">19 . 12 . 2026</p>
+          </div>
+
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="bottom"></div>
+
+          <div class="flap">
+            <div class="seal">
+              <span class="seal-icon">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="invite">The Wedding Celebration Of</p>
+
+      <h1>
+        Annisa
+        <span>&</span>
+        Nawawi
+      </h1>
+
+      <div class="divider-gold">
+        <span>♦</span>
+      </div>
+
+      <p class="guest-salutation">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+      <div class="guest-badge" id="guestNameDisplay">Tamu Undangan Terhormat</div>
+
+      <p class="date">Sabtu, 19 Desember 2026</p>
+
+      <button id="open">
+        <span class="btn-icon">💌</span>
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Invitation Content -->
+  <main class="invitation" aria-hidden="true">
+    <!-- 1. HERO COVER SECTION -->
+    <section class="hero scene" id="hero">
+      <div class="stars"></div>
+      <div class="hero-bg"></div>
+
+      <div class="hero-container">
+        <div class="hero-header">
+          <span class="royal-tag">THE WEDDING CELEBRATION</span>
+          <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        </div>
+
+        <div class="hero-names-wrap">
+          <h1 class="hero-couple-title">
+            <span class="name-bride">Annisa</span>
+            <span class="name-and">&</span>
+            <span class="name-groom">Nawawi</span>
+          </h1>
+        </div>
+
+        <div class="hero-date-pill">
+          <span class="calendar-icon">📅</span>
+          <span>Sabtu, 19 Desember 2026</span>
+          <span class="dot-sep">•</span>
+          <span>Gd. Aula Kementrian Agama</span>
+        </div>
+
+        <!-- Live Countdown Timer -->
+        <div class="countdown-card" id="countdownCard">
+          <div class="countdown-heading">Menghitung Hari Bahagia</div>
+          <div class="countdown-grid">
+            <div class="timer-box">
+              <span class="timer-num" id="cdDays">00</span>
+              <span class="timer-label">Hari</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdHours">00</span>
+              <span class="timer-label">Jam</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdMinutes">00</span>
+              <span class="timer-label">Menit</span>
+            </div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box">
+              <span class="timer-num" id="cdSeconds">00</span>
+              <span class="timer-label">Detik</span>
+            </div>
+          </div>
+        </div>
+
+        <a class="explore-btn" href="#quote">
+          <span>Mulai Jelajahi Cerita</span>
+          <span class="arrow-down">↓</span>
+        </a>
+      </div>
+
+      <a class="scroll-hint" href="#quote">
+        <span>Gulir untuk melanjutkan</span>
+        <b aria-hidden="true">↓</b>
+      </a>
+    </section>
+
+    <!-- 2. QUOTE / AYAT SUCI SECTION -->
+    <section class="quote-section scene" id="quote">
+      <div class="section-container">
+        <div class="quote-card tilt-card reveal-3d">
+          <div class="quote-decor top-left">❧</div>
+          <div class="quote-decor bottom-right">❧</div>
+
+          <div class="arabic-script">
+            وَمِنْ كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُوْنَ ٤٩
+          </div>
+
+          <div class="gold-line"></div>
+
+          <p class="quote-translation">
+            "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah)."
+          </p>
+
+          <span class="quote-source">QS. Az-Zariyat : 49</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MEMPELAI (BRIDE & GROOM PROFILE) -->
+    <section class="couple-section scene" id="couple">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">PASANGAN MEMPELAI</span>
+          <h2 class="section-title">Kedua Mempelai</h2>
+          <p class="section-subtitle">
+            Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami mengundang Anda untuk merayakan kebahagiaan
+            persatuan kami.
+          </p>
+        </div>
+
+        <div class="couple-cards-grid">
+          <!-- GROOM CARD -->
+          <div class="profile-card tilt-card reveal-3d" data-tilt>
+            <div class="profile-image-container">
+              <div class="image-inner">
+                <img src="assets/groom.jpg" alt="Foto Muhammad Nawawi" class="profile-img" />
+              </div>
+              <div class="badge-role">The Groom</div>
+            </div>
+
+            <div class="profile-info">
+              <h3 class="profile-name">Muhammad Nawawi</h3>
+              <p class="profile-parents">
+                Putra Pertama dari 6 bersaudara<br />
+                <strong>Bpk. Umar Faruk</strong> &amp;<br />
+                <strong>Ibu Siti Rogayah</strong>
+              </p>
+              <div class="profile-social">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-chip">
+                  <span class="ig-icon">📸</span>
+                  <span>@nawawi</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MONOGRAM CONNECTOR -->
+          <div class="couple-connector reveal-3d">
+            <div class="vertical-gold-line"></div>
+            <div class="center-heart">
+              <span>&amp;</span>
+            </div>
+            <div class="vertical-gold-line"></div>
+          </div>
+
+          <!-- BRIDE CARD -->
+          <div class="profile-card tilt-card reveal-3d" data-tilt>
+            <div class="profile-image-container">
+              <div class="image-inner">
+                <img src="assets/bride.jpg" alt="Foto Annisa Octaviani Marola" class="profile-img" />
+              </div>
+              <div class="badge-role">The Bride</div>
+            </div>
+
+            <div class="profile-info">
+              <h3 class="profile-name">Annisa Octaviani Marola</h3>
+              <p class="profile-parents">
+                Putri Pertama dari 2 bersaudara<br />
+                <strong>Bpk. Rahmad Marola</strong> &amp;<br />
+                <strong>Ibu Sumiarsih</strong>
+              </p>
+              <div class="profile-social">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-chip">
+                  <span class="ig-icon">📸</span>
+                  <span>@annisaom</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. LOVE STORY: ONCE UPON A LOBBY (SKETCH DESIGN) -->
+    <section class="story-section scene" id="story">
+      <div class="section-container">
+        <div class="story-sketch-container">
+          <!-- 1. Header: Once Upon A Lobby -->
+          <div class="story-sketch-header reveal-3d">
+            <div class="story-sketch-badge-wrap">
+              <div class="sketch-badge-magenta">Once Upon A Lobby</div>
+              <div class="sketch-tag-orange">ini kisah awal bertemu</div>
+            </div>
+            <p class="story-lobby-quote">
+              Dari satu lobi game yang sama, kita bertemu.<br />
+              <em>From random teammates to soulmates for life</em>
+            </p>
+          </div>
+
+          <!-- 2. Block: Hello, Teammates! (Foto Awal Bertemu) -->
+          <div class="story-sketch-block reveal-3d">
+            <div class="story-sketch-badge-wrap">
+              <div class="sketch-badge-magenta">Hello, Teammates!</div>
+              <div class="sketch-tag-orange">ini foto awal bertemu</div>
+            </div>
+            <div class="story-sketch-card tilt-card">
+              <div class="story-card-photo">
+                <img src="assets/first-meet.jpg" alt="Hello, Teammates! - Foto Awal Bertemu" loading="lazy" style="object-position: center 25%;" />
+                <div class="story-photo-overlay">
+                  <span class="story-photo-date">📅 Minggu, 14 April 2024</span>
+                </div>
+              </div>
+              <div class="story-card-content">
+                <h3 class="story-card-title">Momen Pertemuan Pertama</h3>
+                <p class="story-card-desc">
+                  Dari satu lobi game yang sama, takdir mempertemukan kami berdua. Berawal dari rekan setim acak dalam permainan hingga perjumpaan nyata pertama pada Minggu, 14 April 2024. Obrolan hangat dan tawa ceria mengalir begitu alami, membuka lembaran cerita cinta yang indah.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Block: Locked In (Foto Lamaran) -->
+          <div class="story-sketch-block reveal-3d">
+            <div class="story-sketch-badge-wrap">
+              <div class="sketch-badge-magenta">Locked In</div>
+              <div class="sketch-tag-orange">ini foto lamaran</div>
+            </div>
+            <div class="story-sketch-card tilt-card">
+              <div class="story-card-photo">
+                <img src="assets/lamaran.jpg" alt="Locked In - Foto Lamaran" loading="lazy" style="object-position: center 20%;" />
+                <div class="story-photo-overlay">
+                  <span class="story-photo-date">💍 Minggu, 31 Mei 2026</span>
+                </div>
+              </div>
+              <div class="story-card-content">
+                <h3 class="story-card-title">Ikatan Janji Suci Lamaran</h3>
+                <p class="story-card-desc">
+                  Dua hati yang telah saling melengkapi dan berkomitmen mengikat janji suci di hadapan kedua keluarga besar tercinta pada tanggal 31 Mei 2026. Dengan restu hangat dan ketulusan niat, kami mantap mengunci komitmen bersama melangkah menuju pelaminan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WEDDING EVENTS (AKAD & RESEPSI) -->
+    <section class="event-section scene" id="event">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">SAVE THE DATE</span>
+          <h2 class="section-title">Rangkaian Acara</h2>
+          <p class="section-subtitle">
+            Insya Allah rangkaian acara pernikahan kami akan diselenggarakan pada:
+          </p>
+        </div>
+
+        <div class="events-grid">
+          <!-- AKAD NIKAH -->
+          <div class="event-box reveal-3d">
+            <div class="event-badge">AKAD NIKAH</div>
+            <div class="event-icon-circle">💍</div>
+            <h3 class="event-name">Akad Nikah</h3>
+            <div class="event-divider"></div>
+
+            <div class="event-detail-item">
+              <span class="detail-icon">🗓</span>
+              <span>Sabtu, 19 Desember 2026</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">⏰</span>
+              <span>08.00 WIB - Selesai</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">📍</span>
+              <span><strong>Gd. Aula Kementrian Agama</strong><br />Jl. Terusan I Gusti Ngurah Rai, RT.5/RW.11, Pd. Kopi, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 17134</span>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Akad+Nikah+Annisa+%26+Nawawi&dates=20261219T010000Z/20261219T030000Z&details=Akad+Nikah+Annisa+%26+Nawawi+di+Gd.+Aula+Kementrian+Agama&location=Gd.+Aula+Kementrian+Agama,+Jl.+Terusan+I+Gusti+Ngurah+Rai,+RT.5/RW.11,+Pd.+Kopi,+Kec.+Duren+Sawit,+Jakarta+Timur"
+                target="_blank" rel="noopener noreferrer" class="action-btn calendar-btn">
+                <span>📅 Simpan di Kalender</span>
+              </a>
+              <a href="https://maps.app.goo.gl/Bi3dsRSznBDU4RLW7" target="_blank"
+                rel="noopener noreferrer" class="action-btn map-btn">
+                <span>🗺 Petunjuk Lokasi (Gd. Aula Kementrian Agama)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- RESEPSI PERNIKAHAN -->
+          <div class="event-box reveal-3d highlight-event">
+            <div class="event-badge highlight">RESEPSI PERNIKAHAN</div>
+            <div class="event-icon-circle">🥂</div>
+            <h3 class="event-name">Resepsi Pernikahan</h3>
+            <div class="event-divider"></div>
+
+            <div class="event-detail-item">
+              <span class="detail-icon">🗓</span>
+              <span>Sabtu, 19 Desember 2026</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">⏰</span>
+              <span>11.00 - 13.00 WIB</span>
+            </div>
+            <div class="event-detail-item">
+              <span class="detail-icon">📍</span>
+              <span><strong>Gd. Aula Kementrian Agama</strong><br />Jl. Terusan I Gusti Ngurah Rai, RT.5/RW.11, Pd. Kopi, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 17134</span>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Resepsi+Pernikahan+Annisa+%26+Nawawi&dates=20261219T040000Z/20261219T060000Z&details=Resepsi+Pernikahan+Annisa+%26+Nawawi+di+Gd.+Aula+Kementrian+Agama&location=Gd.+Aula+Kementrian+Agama,+Jl.+Terusan+I+Gusti+Ngurah+Rai,+RT.5/RW.11,+Pd.+Kopi,+Kec.+Duren+Sawit,+Jakarta+Timur"
+                target="_blank" rel="noopener noreferrer" class="action-btn calendar-btn">
+                <span>📅 Simpan di Kalender</span>
+              </a>
+              <a href="https://maps.app.goo.gl/Bi3dsRSznBDU4RLW7" target="_blank"
+                rel="noopener noreferrer" class="action-btn map-btn">
+                <span>🗺 Petunjuk Lokasi (Gd. Aula Kementrian Agama)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maps Embed Card -->
+        <div class="maps-card reveal-3d">
+          <div class="maps-card-header">
+            <span class="maps-title">Lokasi Acara : Gd. Aula Kementrian Agama</span>
+          </div>
+          <div class="maps-frame-wrapper">
+            <iframe title="Peta Lokasi Pernikahan Annisa & Nawawi di Gd. Aula Kementrian Agama"
+              src="https://maps.google.com/maps?q=Gd.+Aula+Kementerian+Agama,+Jl.+Terusan+I+Gusti+Ngurah+Rai,+RT.5/RW.11,+Pd.+Kopi,+Kec.+Duren+Sawit,+Jakarta+Timur&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="maps-action-bar" style="padding: 16px 20px; background: #FAF6EF; text-align: center; border-top: 1px solid var(--border-light);">
+            <a href="https://maps.app.goo.gl/Bi3dsRSznBDU4RLW7" target="_blank" rel="noopener noreferrer" class="action-btn map-btn" style="width: 100%; max-width: 420px; margin: 0 auto; display: inline-flex;">
+              <span>🗺 Buka Rute di Google Maps (Gd. Aula Kementrian Agama)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DRESS CODE & GUIDELINES -->
+    <section class="dresscode-section scene" id="dresscode">
+      <div class="section-container">
+        <div class="dresscode-card tilt-card reveal-3d">
+          <span class="section-eyebrow">PANDUAN BUSANA</span>
+          <h2 class="section-title">Dress Code</h2>
+          <div style="font-size: 38px; margin: 12px 0 6px;">👔 👗</div>
+          <h3 style="font-family: var(--font-serif); font-size: 26px; color: var(--coral-blush); margin-bottom: 8px;">
+            Bebas, Rapi, &amp; Sopan
+          </h3>
+          <p class="dresscode-desc" style="max-width: 500px; margin: 0 auto 16px; font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+            Demi kenyamanan bersama, tamu undangan dipersilakan mengenakan busana yang bebas, rapi, dan sopan untuk menghadiri hari bahagia kami.
+          </p>
+          <div class="dresscode-note">
+            <span>❀ Bebas, Rapi, &amp; Sopan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 3D GALLERY PRE-WEDDING: CAPTURED MOMENTS -->
+    <section class="gallery-section scene" id="gallery">
+      <div class="section-container">
+        <div class="story-sketch-header reveal-3d" style="text-align: center; margin-bottom: 35px;">
+          <div class="story-sketch-badge-wrap">
+            <div class="sketch-badge-magenta">Captured Moments</div>
+            <div class="sketch-tag-orange">ini foto prewed</div>
+          </div>
+          <p class="section-subtitle" style="margin-top: 10px;">
+            Setiap bingkai foto mengabadikan kehangatan, canda tawa, dan kebahagiaan kami dalam perjalanan cinta menuju pelaminan.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Item 1: Prewed Piggyback -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-piggyback.jpg"
+            data-caption="Melangkah Ceria Bersama - Annisa &amp; Nawawi">
+            <img src="assets/prewed-piggyback.jpg" alt="Melangkah Ceria Bersama" loading="lazy" style="object-position: center 25%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+
+          <!-- Item 2: Prewed Slide -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-slide.jpg"
+            data-caption="Keseruan Ceria Berdua - Annisa &amp; Nawawi">
+            <img src="assets/prewed-slide.jpg" alt="Keseruan Berdua di Seluncuran" loading="lazy" style="object-position: center 35%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+
+          <!-- Item 3: Prewed Bouquet -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-bouquet.jpg"
+            data-caption="Harmoni Kasih Menatap Masa Depan - Annisa &amp; Nawawi">
+            <img src="assets/prewed-bouquet.jpg" alt="Harmoni Kasih Menatap Masa Depan" loading="lazy" style="object-position: center 30%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+
+          <!-- Item 4: Prewed Railing -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-railing.jpg"
+            data-caption="Canda Tawa &amp; Keceriaan Bersama - Annisa &amp; Nawawi">
+            <img src="assets/prewed-railing.jpg" alt="Canda Tawa &amp; Keceriaan Bersama" loading="lazy" style="object-position: center 35%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+
+          <!-- Item 5: Prewed Cheeks / Head on Lap -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-cheeks.jpg"
+            data-caption="Momen Manis Penuh Kehangatan - Annisa &amp; Nawawi">
+            <img src="assets/prewed-cheeks.jpg" alt="Momen Manis Penuh Kehangatan" loading="lazy" style="object-position: center 35%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+
+          <!-- Item 6: Prewed Tree Lean -->
+          <div class="gallery-card tilt-card reveal-3d" data-src="assets/prewed-tree.jpg"
+            data-caption="Bersandar Nyaman Penuh Kasih - Annisa &amp; Nawawi">
+            <img src="assets/prewed-tree.jpg" alt="Bersandar Nyaman Penuh Kasih" loading="lazy" style="object-position: center 30%;" />
+            <div class="gallery-overlay">
+              <span class="zoom-btn">🔍 Lihat Foto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WEDDING GIFT & AMPLOP DIGITAL -->
+    <section class="gift-section scene" id="gift">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">TANDA KASIH</span>
+          <h2 class="section-title">Amplop Digital &amp; Kado</h2>
+          <p class="section-subtitle">
+            Doa restu Anda merupakan karunia terindah bagi kami. Namun apabila Anda berkenan memberikan tanda kasih
+            secara digital, Anda dapat melalui:
+          </p>
+        </div>
+
+        <div class="gift-cards-grid">
+          <!-- BANK BRI -->
+          <div class="bank-card tilt-card reveal-3d" data-tilt>
+            <div class="bank-card-header">
+              <div class="chip-graphic"></div>
+              <div class="bank-brand">BANK BRI</div>
+            </div>
+            <div class="account-details">
+              <span class="acc-label">Nomor Rekening:</span>
+              <span class="acc-number" id="briNumber">3250 0102 2702 539</span>
+              <span class="acc-holder">a.n. Annisa Octaviani Marola</span>
+            </div>
+            <button class="copy-btn" data-copy="325001022702539" data-label="No. Rekening BRI">
+              <span class="copy-icon">📋</span>
+              <span>Salin Nomor Rekening</span>
+            </button>
+          </div>
+
+          <!-- BANK BSI SYARIAH -->
+          <div class="bank-card tilt-card reveal-3d" data-tilt>
+            <div class="bank-card-header">
+              <div class="chip-graphic"></div>
+              <div class="bank-brand">BSI SYARIAH</div>
+            </div>
+            <div class="account-details">
+              <span class="acc-label">Nomor Rekening:</span>
+              <span class="acc-number" id="bsiNumber">7293 0439 51</span>
+              <span class="acc-holder">a.n. Annisa Octaviani Marola</span>
+            </div>
+            <button class="copy-btn" data-copy="7293043951" data-label="No. Rekening BSI">
+              <span class="copy-icon">📋</span>
+              <span>Salin Nomor Rekening</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PHYSICAL GIFT ADDRESS -->
+        <div class="physical-gift-card tilt-card reveal-3d">
+          <div class="gift-icon-badge">📦</div>
+          <h3>Kirim Kado Fisik</h3>
+          <p class="gift-address" id="giftAddress">
+            <strong>Konfirmasi Pengiriman Kado Fisik:</strong><br />
+            Untuk pengiriman tanda kasih atau kado fisik, Anda dapat menghubungi mempelai terlebih dahulu melalui kontak WhatsApp.<br />
+            (Penerima: Annisa Octaviani Marola - WhatsApp: 0878-7745-494)
+          </p>
+          <a href="https://wa.me/628787745494?text=Halo%20Annisa%2C%20saya%20ingin%20mengonfirmasi%20pengiriman%20kado%20fisik%20untuk%20pernikahan%20Annisa%20%26%20Nawawi"
+            target="_blank" rel="noopener noreferrer" class="copy-btn secondary"
+            style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+            <span class="copy-icon">💬</span>
+            <span>Konfirmasi Pengiriman via WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. RSVP & WISHES (BUKU TAMU INTERAKTIF) -->
+    <section class="rsvp-section scene" id="rsvp">
+      <div class="section-container">
+        <div class="section-header reveal-3d">
+          <span class="section-eyebrow">BUKU TAMU &amp; UCAPAN</span>
+          <h2 class="section-title">Konfirmasi &amp; Doa Restu</h2>
+          <p class="section-subtitle">
+            Mohon konfirmasikan kehadiran Anda serta sampaikan doa dan harapan terbaik untuk kami berdua.
+          </p>
+        </div>
+
+        <div class="rsvp-layout">
+          <!-- Form Container -->
+          <div class="rsvp-form-card tilt-card reveal-3d">
+            <form id="rsvpForm" novalidate>
+              <div class="form-group">
+                <label for="guestNameInput">Nama Lengkap</label>
+                <input type="text" id="guestNameInput" name="name" placeholder="Masukkan nama lengkap Anda" required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="guestCountSelect">Jumlah Tamu</label>
+                  <select id="guestCountSelect" name="guestCount">
+                    <option value="1 Orang">1 Orang</option>
+                    <option value="2 Orang">2 Orang</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="attendanceStatus">Konfirmasi Kehadiran</label>
+                  <select id="attendanceStatus" name="status" required>
+                    <option value="Hadir">✓ Ya, Saya Akan Hadir</option>
+                    <option value="Tidak Hadir">✕ Maaf, Belum Bisa Hadir</option>
+                    <option value="Masih Ragu">? Masih Ragu / Belum Pasti</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="wishesInput">Ucapan &amp; Doa Restu</label>
+                <textarea id="wishesInput" name="message" rows="4"
+                  placeholder="Tuliskan doa restu hangat dan ucapan selamat untuk Annisa & Nawawi..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="submit-rsvp-btn" id="submitRsvpBtn">
+                <span>Kirim Ucapan &amp; Konfirmasi</span>
+                <span class="btn-arrow">➤</span>
+              </button>
+
+              <button type="button" class="whatsapp-rsvp-btn" id="whatsappRsvpBtn">
+                <span>💬 Konfirmasi via WhatsApp (0878-7745-494)</span>
+              </button>
+
+              <div class="rsvp-contact-info"
+                style="margin-top: 14px; text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                Narahubung: <strong>Annisa Octaviani Marola</strong> (<a href="https://wa.me/628787745494" target="_blank" rel="noopener noreferrer" style="color: var(--coral-blush); text-decoration: none; font-weight: 600;">0878-7745-494</a>)
+              </div>
+            </form>
+          </div>
+
+          <!-- Guestbook Feed -->
+          <div class="wishes-feed-card reveal-3d">
+            <div class="feed-header">
+              <h3>Doa &amp; Ucapan Tamu</h3>
+              <span class="feed-counter" id="feedCounter">4 Ucapan</span>
+            </div>
+
+            <div class="feed-list" id="wishesList">
+              <!-- Wishes will be populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CLOSING & APPRECIATION -->
+    <section class="closing-section scene" id="closing">
+      <div class="section-container">
+        <div class="closing-card tilt-card reveal-3d">
+          <div class="closing-monogram">A &amp; N</div>
+          <h2 class="closing-title">Terima Kasih</h2>
+          <p class="closing-text">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk
+            memberikan doa restu kepada kami.
+          </p>
+          <p class="closing-arabic">جَزَاكُمُ اللهُ خَيْرًا كَثِيْرًا</p>
+          <p class="closing-family">
+            Kami yang berbahagia,<br />
+            <strong>Keluarga Bpk. Umar Faruk &amp; Ibu Siti Rogayah</strong><br />
+            <strong>Keluarga Bpk. Rahmad Marola &amp; Ibu Sumiarsih</strong><br /><br />
+            <span class="couple-signature">Annisa &amp; Nawawi</span>
+          </p>
+
+          <div style="margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+            <button type="button" class="explore-btn open-game-modal"
+              style="margin-top: 0; background: linear-gradient(135deg, #DE6B5B, #EB8E5D); color: #FFFFFF; border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(222, 107, 91, 0.3);">
+              <span>🎮 Pilih &amp; Mainkan Mini Game ❤️</span>
+            </button>
+          </div>
+        </div>
+
+        <footer class="footer-credit">
+          <p>© 2026 The Wedding of Annisa &amp; Nawawi. All Rights Reserved.</p>
+          <p style="margin-top: 8px;"><a href="generator.html"
+              style="color: rgba(212, 175, 55, 0.6); text-decoration: none; font-size: 11px; transition: color 0.2s ease;">⚙️
+              Link Generator Tamu Undangan</a></p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Wedding Mini Game Selection Modal -->
+  <div class="game-modal" id="gameSelectModal" aria-hidden="true" role="dialog" aria-labelledby="gameModalTitle">
+    <div class="game-modal-backdrop" id="gameModalBackdrop"></div>
+    <div class="game-modal-card">
+      <button type="button" class="game-modal-close" id="gameModalClose" aria-label="Tutup Pilihan Game">&times;</button>
+      
+      <div class="game-modal-header">
+        <span class="game-modal-badge">❀ WEDDING MINI GAMES ❀</span>
+        <h2 class="game-modal-title" id="gameModalTitle">Pilih Mini Game Romantis ❤️</h2>
+        <p class="game-modal-sub">
+          Rayakan momen bahagia kami dengan memainkan mini game spesial pernikahan Annisa &amp; Nawawi:
+        </p>
+      </div>
+
+      <div class="game-options-grid">
+        <!-- Option 1: Catch The Love -->
+        <div class="game-option-card">
+          <span class="game-option-tag">🎯 Casual Reflex</span>
+          <div class="game-option-avatar">
+            <img src="assets/cartoon-bride.png" alt="Catch The Love" />
+          </div>
+          <h3 class="game-option-name">Catch The Love</h3>
+          <p class="game-option-desc">
+            Bantu pengantin menangkap bunga, cincin permata, dan hati cinta yang berjatuhan sebelum waktu habis!
+          </p>
+          <a href="game.html" class="game-option-btn game-btn-catch">
+            <span>Mainkan Catch The Love 🌸</span>
+          </a>
+        </div>
+
+        <!-- Option 2: Run to Love (Platformer) -->
+        <div class="game-option-card">
+          <span class="game-option-tag platformer-tag">🎮 2D Platformer</span>
+          <div class="game-option-avatar">
+            <img src="assets/cartoon-groom.png" alt="Run to Love" />
+          </div>
+          <h3 class="game-option-name">Run to Love ❤️</h3>
+          <p class="game-option-desc">
+            Petualangan lari satu tangan melompati jurang &amp; rintangan untuk bersatu di pelaminan bunga impian!
+          </p>
+          <a href="platformer.html" class="game-option-btn game-btn-run">
+            <span>Mainkan Run to Love 🎮</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Gallery Photos -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Tutup Pratinjau">&times;</button>
+      <img id="lightboxImage" src="" alt="Pratinjau Foto" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- Notification Toast Popup -->
+  <div class="toast" id="toastNotification">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage">Teks berhasil disalin!</span>
+  </div>
+
+  <!-- Main Logic Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,2094 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Our Way to Forever ❤️ - Wedding Platformer Game Annisa & Nawawi (Portrait Mobile)" />
+  <title>Our Way to Forever ❤️ | Wedding Platformer Game</title>
+
+  <!-- Google Fonts: Elegant Wedding & Modern Game Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Alex+Brush&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       SUNLIT GARDEN WEDDING PALETTE & PORTRAIT MOBILE STYLES
+       ========================================================================== */
+    :root {
+      --coral-blush: #DE6B5B;
+      --coral-deep: #C45142;
+      --apricot: #EB8E5D;
+      --apricot-light: #FCE6DA;
+      --butter-yellow: #EAC46E;
+      --butter-soft: #FDF4DF;
+      --blush-pink: #F2C4CE;
+      --cream: #FAF6EF;
+      --cream-paper: #FDFBF7;
+      --cream-card: #FFFFFF;
+      --sage-green: #7E8F73;
+      --sage-light: #EEF3EC;
+      --sage-deep: #54644B;
+      --warm-charcoal: #3A322B;
+      --warm-earth: #4F433A;
+      --text-muted: #73675E;
+      --border-gold: rgba(220, 168, 66, 0.4);
+      --border-coral: rgba(222, 107, 91, 0.35);
+      --border-sage: rgba(126, 143, 115, 0.28);
+      --border-light: rgba(115, 103, 94, 0.15);
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", -apple-system, sans-serif;
+      --font-script: "Alex Brush", cursive;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #F3ECE1;
+      font-family: var(--font-sans);
+      color: var(--warm-charcoal);
+      touch-action: none; /* Prevent accidental mobile scrolling */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ambient Warm Glow behind Game Frame */
+    .bg-ambient {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(235, 142, 93, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(234, 196, 110, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(222, 107, 91, 0.12) 0%, transparent 50%),
+        #FAF6EF;
+      z-index: 0;
+    }
+
+    /* Game Master Frame - Strict Portrait Phone Form Factor */
+    .game-shell {
+      position: relative;
+      width: 100%;
+      max-width: 440px; /* Portrait Phone Width */
+      height: 100%;
+      max-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: #FAF6EF;
+      box-shadow: 0 0 50px rgba(90, 70, 55, 0.18);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Top HUD Navigation & Stats */
+    .game-hud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .hud-element {
+      pointer-events: auto;
+    }
+
+    /* Score Badge */
+    .hud-score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(90, 70, 55, 0.08);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--warm-charcoal);
+    }
+
+    .score-icon {
+      color: var(--coral-blush);
+      font-size: 15px;
+      animation: heartPulse 1.4s infinite ease-in-out;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.22); }
+    }
+
+    /* Level Progress Center Bar */
+    .hud-progress-wrap {
+      flex: 1;
+      max-width: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .level-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--coral-blush);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-coral);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #DE6B5B, #EB8E5D, #EAC46E);
+      border-radius: 3px;
+      transition: width 0.15s ease-out;
+    }
+
+    /* Right Action Buttons */
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border-gold);
+      color: var(--warm-charcoal);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(90, 70, 55, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .hud-btn:active {
+      transform: scale(0.92);
+      background: var(--butter-soft);
+    }
+
+    /* Primary Game Canvas Viewport */
+    .canvas-wrapper {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #platformerCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    /* ==========================================================================
+       OVERLAYS, MODALS & STORY CARDS
+       ========================================================================== */
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 246, 239, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      z-index: 50;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .game-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .stationery-card {
+      width: 100%;
+      max-width: 380px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 30px 20px;
+      box-shadow: 0 16px 45px rgba(90, 70, 55, 0.12), 0 0 25px rgba(234, 196, 110, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes cardEntrance {
+      0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card-monogram {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--sage-deep);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 6.5vw, 32px);
+      font-weight: 700;
+      color: var(--warm-charcoal);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      max-width: 320px;
+    }
+
+    /* Character Selection (Choose Groom or Bride runner) */
+    .character-picker {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .char-choice {
+      flex: 1;
+      max-width: 130px;
+      background: #FAF6EF;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 10px 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.25s ease;
+    }
+
+    .char-choice.selected {
+      background: #FFF6F3;
+      border-color: var(--coral-blush);
+      box-shadow: 0 6px 18px rgba(222, 107, 91, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .char-avatar-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+    }
+
+    .char-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .char-choice-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--warm-charcoal);
+    }
+
+    .char-choice-sub {
+      font-size: 9.5px;
+      color: var(--coral-blush);
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .game-btn-primary {
+      width: 100%;
+      max-width: 270px;
+      padding: 13px 24px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #DE6B5B 0%, #EB8E5D 100%);
+      border: none;
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(222, 107, 91, 0.35);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .game-btn-primary:hover {
+      background: linear-gradient(135deg, #EB8E5D 0%, #EAC46E 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(222, 107, 91, 0.45);
+    }
+
+    .game-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .game-btn-secondary {
+      margin-top: 10px;
+      padding: 8px 18px;
+      border-radius: 4px;
+      background: var(--sage-light);
+      border: 1px solid var(--border-sage);
+      color: var(--sage-deep);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .game-btn-secondary:hover {
+      background: var(--sage-deep);
+      color: #FFFFFF;
+    }
+
+    /* In-Game Touch Tap Tutorial Banner */
+    .tutorial-hint {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-coral);
+      border-radius: 4px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(90, 70, 55, 0.15);
+      pointer-events: none;
+      z-index: 30;
+      animation: hintFloat 2s infinite ease-in-out;
+      transition: opacity 0.4s ease;
+      white-space: nowrap;
+    }
+
+    @keyframes hintFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-6px); }
+    }
+
+    .tap-hand-icon {
+      font-size: 24px;
+      animation: fingerTap 1.2s infinite ease-in-out;
+    }
+
+    @keyframes fingerTap {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(0.85) translateY(4px); }
+    }
+
+    .hint-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--coral-blush);
+      letter-spacing: 0.5px;
+    }
+
+    .hint-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Floating Story Quotes */
+    .story-toast {
+      position: absolute;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 8px 16px;
+      box-shadow: 0 10px 30px rgba(90, 70, 55, 0.12);
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      width: calc(100% - 32px);
+    }
+
+    .story-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .story-toast p {
+      font-family: var(--font-serif);
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--warm-charcoal);
+      line-height: 1.4;
+    }
+
+    /* Ending Celebrations */
+    .ending-quote {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--coral-blush);
+      margin: 8px 0 18px;
+    }
+
+    .stats-summary {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      padding: 6px 14px;
+      background: var(--butter-soft);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-num {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--warm-charcoal);
+    }
+
+    .stat-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Warm Glow Background -->
+  <div class="bg-ambient"></div>
+
+  <!-- Game Shell (Strict Mobile-First Portrait Viewport) -->
+  <div class="game-shell">
+
+    <!-- Top HUD Bar -->
+    <header class="game-hud" aria-label="Game Heads Up Display">
+      <!-- Left: Score Badge -->
+      <div class="hud-element hud-score-badge">
+        <span class="score-icon">❤️</span>
+        <span id="scoreDisplay">0</span>
+      </div>
+
+      <!-- Center: Level Indicator & Progress Bar -->
+      <div class="hud-element hud-progress-wrap">
+        <span class="level-label" id="levelNameBadge">Level 1 — First Meet 🎮</span>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFillBar"></div>
+        </div>
+      </div>
+
+      <!-- Right: Sound Toggle & Pause Buttons -->
+      <div class="hud-element hud-actions">
+        <button class="hud-btn" id="soundToggleBtn" aria-label="Toggle Sound" title="Sound FX">🔊</button>
+        <button class="hud-btn" id="pauseBtn" aria-label="Pause Game" title="Pause">⏸</button>
+      </div>
+    </header>
+
+    <!-- Canvas Play Area -->
+    <main class="canvas-wrapper" id="canvasWrapper">
+      <canvas id="platformerCanvas"></canvas>
+
+      <!-- First Tap Tutorial Banner -->
+      <div class="tutorial-hint" id="tutorialHint">
+        <span class="tap-hand-icon">👆</span>
+        <div class="hint-text">
+          <div class="hint-title">TAP UNTUK LOMPAT • HINDARI JURANG ✨</div>
+          <div class="hint-sub">Double tap untuk lompat lebih tinggi!</div>
+        </div>
+      </div>
+
+      <!-- Story Banner Toast -->
+      <div class="story-toast" id="storyToast">
+        <p id="storyToastText">"Every love story has a beginning..."</p>
+      </div>
+    </main>
+
+    <!-- ==========================================================================
+         MODALS & OVERLAYS
+         ========================================================================== -->
+
+    <!-- 1. START GAME MODAL (WITH RUNNER SELECTION) -->
+    <div class="game-overlay" id="startModal">
+      <div class="stationery-card">
+        <span class="card-monogram">A &amp; N • WEDDING GAME</span>
+        <h1 class="card-title">Our Way to Forever ❤️</h1>
+        <p class="card-subtitle">
+          Pilih siapa yang berlari menjemput pasangannya di garis akhir! Lewati rintangan dan kumpulkan cinta sepanjang jalan.
+        </p>
+
+        <!-- Character Selection Picker -->
+        <div class="character-picker">
+          <div class="char-choice selected" id="pickGroom" data-char="groom" title="Nawawi Berlari">
+            <div class="char-avatar-box">
+              <img src="assets/cartoon-groom.png" alt="Groom" />
+            </div>
+            <span class="char-choice-name">Nawawi</span>
+            <span class="char-choice-sub">Menjemput Annisa 👰</span>
+          </div>
+
+          <div class="char-choice" id="pickBride" data-char="bride" title="Annisa Berlari">
+            <div class="char-avatar-box">
+              <img src="assets/cartoon-bride.png" alt="Bride" />
+            </div>
+            <span class="char-choice-name">Annisa</span>
+            <span class="char-choice-sub">Menjemput Nawawi 🤵</span>
+          </div>
+        </div>
+
+        <button class="game-btn-primary" id="startBtn">
+          <span>Mulai Perjalanan</span>
+          <span>🎮</span>
+        </button>
+
+        <a href="index.html" class="game-btn-secondary">Kembali ke Halaman Undangan</a>
+      </div>
+    </div>
+
+    <!-- 2. GAME OVER / OBSTACLE MODAL -->
+    <div class="game-overlay hidden" id="gameOverModal">
+      <div class="stationery-card">
+        <span style="font-size: 38px; margin-bottom: 6px;">💔</span>
+        <h2 class="card-title">Oops! Cinta Punya Rintangan</h2>
+        <p class="card-subtitle">
+          "Setiap rintangan menguatkan langkah kita. Lanjutkan dari titik pemeriksaan terakhir!" ❤️
+        </p>
+
+        <button class="game-btn-primary" id="retryBtn">
+          <span>Lanjutkan dari Checkpoint</span>
+          <span>↺</span>
+        </button>
+
+        <a href="index.html" class="game-btn-secondary">Kembali ke Undangan</a>
+      </div>
+    </div>
+
+    <!-- 3. LEVEL COMPLETE MODAL -->
+    <div class="game-overlay hidden" id="levelCompleteModal">
+      <div class="stationery-card">
+        <span style="font-size: 36px; margin-bottom: 6px;">🌸</span>
+        <h2 class="card-title" id="completeTitle">Kalian Bertemu! ❤️</h2>
+        <p class="card-subtitle" id="completeText">
+          Perjalanan cinta berlanjut ke tahap berikutnya yang semakin dekat menuju pelaminan...
+        </p>
+
+        <button class="game-btn-primary" id="nextLevelBtn">
+          <span>Lanjut ke Level Berikutnya</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. PAUSE MODAL -->
+    <div class="game-overlay hidden" id="pauseModal">
+      <div class="stationery-card">
+        <span style="font-size: 34px; margin-bottom: 6px;">☕</span>
+        <h2 class="card-title">Permainan Dijeda</h2>
+        <p class="card-subtitle">Tarik napas sejenak sebelum melanjutkan langkahmu...</p>
+
+        <button class="game-btn-primary" id="resumeBtn">
+          <span>Lanjutkan Permainan</span>
+          <span>▶</span>
+        </button>
+
+        <a href="index.html" class="game-btn-secondary">Keluar ke Undangan</a>
+      </div>
+    </div>
+
+    <!-- 5. FINAL ENDING / VICTORY MODAL -->
+    <div class="game-overlay hidden" id="endingModal">
+      <div class="stationery-card">
+        <span style="font-size: 42px; margin-bottom: 6px;">💍</span>
+        <h1 class="card-title" style="color: var(--coral-blush);">WE MADE IT! ❤️</h1>
+        <p class="card-subtitle" style="margin-bottom: 6px;">
+          "And now, our next adventure begins..."
+        </p>
+        <p class="ending-quote">
+          Dua insan telah bersatu dalam janji suci cinta abadi.
+        </p>
+
+        <div class="stats-summary">
+          <div class="stat-box">
+            <span class="stat-num" id="finalScoreVal">0</span>
+            <span class="stat-label">Total Cinta</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">3 / 3</span>
+            <span class="stat-label">Level Tuntas</span>
+          </div>
+        </div>
+
+        <a href="index.html?opened=true" class="game-btn-primary" id="openInvitationBtn">
+          <span>BUKA UNDANGAN PERNIKAHAN 💌</span>
+        </a>
+
+        <button class="game-btn-secondary" id="playAgainBtn">Main Ulang Dari Awal</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODULAR GAME JAVASCRIPT LOGIC (PORTRAIT MOBILE-FIRST)
+       ========================================================================== */
+  -->
+  <script>
+    /* ==========================================================================
+       1. GAME CONFIGURATION (EASILY CUSTOMIZABLE)
+       ========================================================================== */
+    const CONFIG = {
+      // Physics tuned specifically for Portrait view
+      PLAYER_SPEED: 4.6,            // Auto-run horizontal speed (px/frame)
+      JUMP_FORCE: -12.4,            // Jump impulse (high vertical clearance)
+      DOUBLE_JUMP_FORCE: -10.8,     // Second jump impulse
+      STOMP_BOUNCE_FORCE: -10.5,    // Bounce force when stomping on enemy (Mario style)
+      GRAVITY: 0.58,                // Downward acceleration
+      MAX_FALL_SPEED: 14,           // Terminal falling speed
+      ALLOW_DOUBLE_JUMP: true,      // Double jump enabled
+
+      // Collectible Scores
+      COLLECTIBLE_SCORE: {
+        heart: 10,
+        flower: 15,
+        letter: 20,
+        memory: 25,
+        ring: 50,
+      },
+      ENEMY_STOMP_SCORE: 50,        // Bonus for stomping an enemy
+
+      // Destination URL for "OPEN WEDDING INVITATION" button
+      WEDDING_INVITATION_URL: "index.html?opened=true",
+
+      // Audio volume
+      SFX_VOLUME: 0.28,
+    };
+
+    /* ==========================================================================
+       2. EXTENDED LEVEL DATA CONFIGURATION (LONGER LEVELS ~45-75s)
+       Includes stompable enemies, high platforms, checkpoints, and partner at end!
+       ========================================================================== */
+    const LEVEL_DATA = [
+      // ------------------------------------------------------------------------
+      // LEVEL 1 — FIRST MEET 🎮 (~5400px length, ~45s)
+      // ------------------------------------------------------------------------
+      {
+        id: 1,
+        title: "Level 1 — First Meet 🎮",
+        bannerText: "Every love story has a beginning... Somehow, ours started with a game. 🎮",
+        theme: "digital",
+        totalLength: 5400,
+        skyGrad: ["#F9F4EC", "#F4E8D8", "#EEDCC8"],
+        groundY: 620,
+        checkpoints: [1500, 3300], // Safe, spacious clearings!
+        platforms: [
+          { x: 320, y: 520, w: 160, h: 22 },
+          { x: 560, y: 440, w: 180, h: 22 },
+          { x: 840, y: 480, w: 170, h: 22 },
+          { x: 1140, y: 400, w: 210, h: 22 },
+
+          // Section 2 after Checkpoint 1 (cp at 1500)
+          { x: 2160, y: 510, w: 180, h: 22 },
+          { x: 2460, y: 430, w: 200, h: 22 },
+          { x: 2760, y: 360, w: 180, h: 22 },
+          { x: 3040, y: 450, w: 190, h: 22 },
+
+          // Section 3 after Checkpoint 2 (cp at 3300)
+          { x: 3960, y: 500, w: 190, h: 22 },
+          { x: 4260, y: 420, w: 210, h: 22 },
+          { x: 4560, y: 400, w: 220, h: 22 },
+          { x: 4840, y: 480, w: 200, h: 22 },
+          { x: 5080, y: 530, w: 280, h: 24 }, // Finish dais
+        ],
+        gaps: [
+          { x: 860, w: 130 },
+          { x: 2160, w: 140 },
+          { x: 3040, w: 150 },
+          { x: 4260, w: 160 },
+        ],
+        enemies: [],
+        collectibles: [
+          { x: 200, y: 580, type: "heart" },
+          { x: 380, y: 480, type: "flower" },
+          { x: 620, y: 400, type: "heart" },
+          { x: 920, y: 440, type: "memory" },
+          { x: 1240, y: 360, type: "ring" },
+          { x: 1620, y: 560, type: "heart" },
+          { x: 1840, y: 560, type: "letter" },
+          { x: 2460, y: 320, type: "ring" },
+          { x: 2760, y: 410, type: "flower" },
+          { x: 3420, y: 560, type: "heart" },
+          { x: 3660, y: 560, type: "memory" },
+          { x: 4060, y: 380, type: "letter" },
+          { x: 4360, y: 440, type: "flower" },
+          { x: 4660, y: 360, type: "ring" },
+          { x: 4880, y: 440, type: "heart" },
+        ],
+        obstacles: [
+          { x: 700, y: 592, type: "rock" },
+          { x: 2500, y: 592, type: "broken_heart" }, // 1000px after CP 1 (1500)
+          { x: 3750, y: 592, type: "rock" },         // 450px after CP 2 (3300)
+          { x: 4600, y: 592, type: "broken_heart" },
+        ],
+      },
+
+      // ------------------------------------------------------------------------
+      // LEVEL 2 — FALLING IN LOVE ❤️ (~6200px length, ~55s)
+      // ------------------------------------------------------------------------
+      {
+        id: 2,
+        title: "Level 2 — Falling in Love ❤️",
+        bannerText: "From playing together... to becoming each other's favorite person. ❤️",
+        theme: "romantic-garden",
+        totalLength: 6200,
+        skyGrad: ["#FDF7EE", "#FCECDD", "#F9DEC9"],
+        groundY: 620,
+        checkpoints: [1600, 3600],
+        platforms: [
+          { x: 300, y: 510, w: 180, h: 22 },
+          { x: 560, y: 430, w: 200, h: 22 },
+          { x: 840, y: 360, w: 180, h: 22 }, // Upper route
+          { x: 1120, y: 440, w: 210, h: 22 },
+
+          // Section 2 (after cp1 at 1600)
+          { x: 2200, y: 510, w: 200, h: 22 },
+          { x: 2500, y: 420, w: 220, h: 22 },
+          { x: 2800, y: 350, w: 200, h: 22 }, // High heart plateau
+          { x: 3100, y: 430, w: 210, h: 22 },
+
+          // Section 3 (after cp2 at 3600)
+          { x: 4200, y: 510, w: 200, h: 22 },
+          { x: 4500, y: 430, w: 210, h: 22 },
+          { x: 4800, y: 350, w: 210, h: 22 },
+          { x: 5100, y: 420, w: 220, h: 22 },
+          { x: 5400, y: 490, w: 210, h: 22 },
+          { x: 5850, y: 520, w: 320, h: 24 }, // Finish dais
+        ],
+        gaps: [
+          { x: 580, w: 140 },
+          { x: 1260, w: 140 },
+          { x: 2200, w: 150 },
+          { x: 3100, w: 150 },
+          { x: 4200, w: 150 },
+          { x: 5400, w: 150 },
+        ],
+        enemies: [],
+        collectibles: [
+          { x: 220, y: 580, type: "flower" },
+          { x: 360, y: 470, type: "heart" },
+          { x: 640, y: 390, type: "memory" },
+          { x: 920, y: 320, type: "ring" },
+          { x: 1720, y: 560, type: "flower" },
+          { x: 1940, y: 560, type: "letter" },
+          { x: 2500, y: 380, type: "memory" },
+          { x: 2800, y: 310, type: "ring" },
+          { x: 3740, y: 560, type: "heart" },
+          { x: 3960, y: 560, type: "letter" },
+          { x: 4500, y: 390, type: "flower" },
+          { x: 4800, y: 310, type: "ring" },
+          { x: 5100, y: 380, type: "heart" },
+          { x: 5560, y: 380, type: "ring" },
+        ],
+        obstacles: [
+          { x: 440, y: 592, type: "rock" },
+          { x: 980, y: 592, type: "broken_heart" },
+          { x: 2600, y: 592, type: "rain_cloud" }, // 1000px after CP 1 (1600)
+          { x: 4650, y: 592, type: "rock" },       // 1050px after CP 2 (3600)
+          { x: 5250, y: 592, type: "broken_heart" },
+        ],
+      },
+
+      // ------------------------------------------------------------------------
+      // LEVEL 3 — FOREVER 💍 (~7200px length, ~65-75s)
+      // Sunset Golden Hour, Wedding Gazebo & Altar, Romantic Grand Climax!
+      // ------------------------------------------------------------------------
+      {
+        id: 3,
+        title: "Level 3 — Forever 💍",
+        bannerText: "From love... to forever. 💍",
+        theme: "wedding-sunset",
+        totalLength: 7200,
+        skyGrad: ["#FFF3E2", "#FCE0CB", "#F4C4AF"],
+        groundY: 620,
+        checkpoints: [2100, 4400],
+        platforms: [
+          { x: 320, y: 510, w: 190, h: 22 },
+          { x: 600, y: 430, w: 210, h: 22 },
+          { x: 900, y: 360, w: 200, h: 22 }, // High golden cloud
+          { x: 1200, y: 430, w: 220, h: 22 },
+          { x: 1520, y: 500, w: 200, h: 22 },
+
+          // Section 2 (after cp1 at 2100)
+          { x: 2750, y: 510, w: 210, h: 22 },
+          { x: 3050, y: 430, w: 220, h: 22 },
+          { x: 3350, y: 350, w: 220, h: 22 }, // Golden ring plateau
+          { x: 3650, y: 430, w: 220, h: 22 },
+          { x: 3950, y: 500, w: 210, h: 22 },
+
+          // Section 3 (after cp2 at 4400)
+          { x: 5100, y: 510, w: 220, h: 22 },
+          { x: 5400, y: 430, w: 230, h: 22 },
+          { x: 5720, y: 360, w: 230, h: 22 },
+          { x: 6040, y: 430, w: 240, h: 22 },
+          { x: 6360, y: 490, w: 230, h: 22 },
+          { x: 6760, y: 520, w: 420, h: 26 }, // Grand Wedding Gazebo Altar!
+        ],
+        gaps: [
+          { x: 620, w: 150 },
+          { x: 1220, w: 160 },
+          { x: 1780, w: 160 },
+          { x: 2750, w: 160 },
+          { x: 3650, w: 160 },
+          { x: 5100, w: 160 },
+          { x: 6040, w: 160 },
+        ],
+        enemies: [],
+        collectibles: [
+          { x: 220, y: 580, type: "heart" },
+          { x: 400, y: 470, type: "flower" },
+          { x: 700, y: 390, type: "ring" },
+          { x: 1000, y: 320, type: "letter" },
+          { x: 2200, y: 560, type: "heart" },
+          { x: 2420, y: 560, type: "flower" },
+          { x: 3050, y: 390, type: "letter" },
+          { x: 3350, y: 310, type: "ring" },
+          { x: 4520, y: 560, type: "ring" },
+          { x: 4740, y: 560, type: "heart" },
+          { x: 5400, y: 390, type: "ring" },
+          { x: 5720, y: 320, type: "flower" },
+          { x: 6480, y: 450, type: "heart" },
+          { x: 6860, y: 480, type: "ring" },
+        ],
+        obstacles: [
+          { x: 480, y: 592, type: "rain_cloud" },
+          { x: 1080, y: 592, type: "rock" },
+          { x: 1560, y: 592, type: "broken_heart" },
+          { x: 3000, y: 592, type: "rain_cloud" }, // 900px after CP 1 (2100)
+          { x: 4050, y: 592, type: "rock" },
+          { x: 5400, y: 592, type: "rain_cloud" }, // 1000px after CP 2 (4400)
+          { x: 5900, y: 592, type: "broken_heart" },
+        ],
+      },
+    ];
+
+    /* ==========================================================================
+       3. PROCEDURAL SYNTHESIZED SOUND FX
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            this.ctx = new AudioContextClass();
+          }
+        }
+        if (this.ctx && this.ctx.state === "suspended") {
+          this.ctx.resume();
+        }
+      }
+
+      playJump() {
+        if (this.muted || !this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.12);
+
+        gain.gain.setValueAtTime(CONFIG.SFX_VOLUME * 0.8, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.14);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      }
+
+      playDoubleJump() {
+        if (this.muted || !this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(540, now);
+        osc.frequency.exponentialRampToValueAtTime(920, now + 0.15);
+
+        gain.gain.setValueAtTime(CONFIG.SFX_VOLUME * 0.9, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.16);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.17);
+      }
+
+      playStomp() {
+        if (this.muted || !this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        // Mario-style spring bounce sound
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(240, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+
+        gain.gain.setValueAtTime(CONFIG.SFX_VOLUME * 1.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.22);
+      }
+
+      playCollect(type) {
+        if (this.muted || !this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        const baseFreq = type === "ring" ? 920 : (type === "heart" ? 680 : 540);
+        osc.type = type === "ring" ? "sine" : "triangle";
+        osc.frequency.setValueAtTime(baseFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, now + 0.14);
+
+        gain.gain.setValueAtTime(CONFIG.SFX_VOLUME, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.23);
+      }
+
+      playHitObstacle() {
+        if (this.muted || !this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(80, now + 0.18);
+
+        gain.gain.setValueAtTime(CONFIG.SFX_VOLUME * 0.7, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.21);
+      }
+
+      playLevelFanfare() {
+        if (this.muted || !this.ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const startTime = this.ctx.currentTime + idx * 0.08;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, startTime);
+
+          gain.gain.setValueAtTime(CONFIG.SFX_VOLUME, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.4);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + 0.45);
+        });
+      }
+    }
+
+    /* ==========================================================================
+       4. MAIN GAME CLASS (PORTRAIT OPTIMIZED)
+       ========================================================================== */
+    class WeddingPortraitPlatformer {
+      constructor() {
+        this.canvas = document.getElementById("platformerCanvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.wrapper = document.getElementById("canvasWrapper");
+
+        // Audio System
+        this.sound = new SoundEngine();
+
+        // UI references
+        this.ui = {
+          score: document.getElementById("scoreDisplay"),
+          levelName: document.getElementById("levelNameBadge"),
+          progressFill: document.getElementById("progressFillBar"),
+          soundBtn: document.getElementById("soundToggleBtn"),
+          pauseBtn: document.getElementById("pauseBtn"),
+          tutorialHint: document.getElementById("tutorialHint"),
+          storyToast: document.getElementById("storyToast"),
+          storyToastText: document.getElementById("storyToastText"),
+          startModal: document.getElementById("startModal"),
+          gameOverModal: document.getElementById("gameOverModal"),
+          levelCompleteModal: document.getElementById("levelCompleteModal"),
+          pauseModal: document.getElementById("pauseModal"),
+          endingModal: document.getElementById("endingModal"),
+          finalScore: document.getElementById("finalScoreVal"),
+          completeTitle: document.getElementById("completeTitle"),
+          completeText: document.getElementById("completeText"),
+        };
+
+        // Active Player Character Selection: "groom" (Nawawi) or "bride" (Annisa)
+        this.selectedRunner = "groom"; // If groom, bride is at finish; if bride, groom is at finish!
+
+        // Game State Variables
+        this.gameState = "TITLE"; // TITLE, PLAYING, PAUSED, GAMEOVER, LEVEL_COMPLETE, ENDING
+        this.currentLevelIdx = 0;
+        this.score = 0;
+        this.hasShownTutorial = false;
+        this.animationId = null;
+
+        // Checkpoint X coordinate within current level
+        this.lastCheckpointX = 80;
+
+        // Virtual Coordinate Dimensions for Strict Portrait (9:16 ratio)
+        this.V_WIDTH = 420;
+        this.V_HEIGHT = 720;
+        this.scale = 1;
+
+        // Camera Tracking
+        this.cameraX = 0;
+
+        // Player Physical Entity
+        this.player = {
+          x: 80,
+          y: 540,
+          w: 40,
+          h: 54,
+          vx: CONFIG.PLAYER_SPEED,
+          vy: 0,
+          isGrounded: false,
+          canDoubleJump: true,
+          coyoteFrames: 0,
+          animFrame: 0,
+          invulnerableFrames: 0,
+        };
+
+        // Active Level Dynamic Entities
+        this.platforms = [];
+        this.gaps = [];
+        this.enemies = [];
+        this.collectibles = [];
+        this.obstacles = [];
+        this.checkpoints = [];
+        this.particles = [];
+        this.floatingTexts = [];
+
+        // Preload Cartoon Character Assets
+        this.groomImg = new Image();
+        this.groomImg.src = "assets/cartoon-groom.png";
+
+        this.brideImg = new Image();
+        this.brideImg.src = "assets/cartoon-bride.png";
+
+        this.initCanvasSize();
+        this.bindEvents();
+        this.setupLevel(0, false);
+      }
+
+      initCanvasSize() {
+        const resize = () => {
+          const rect = this.wrapper.getBoundingClientRect();
+          const dpr = window.devicePixelRatio || 1;
+
+          this.dpr = dpr;
+          this.canvas.width = Math.round(rect.width * dpr);
+          this.canvas.height = Math.round(rect.height * dpr);
+
+          // Scaling maps virtual 420x720 onto physical canvas pixel buffer
+          this.scale = Math.min(this.canvas.width / this.V_WIDTH, this.canvas.height / this.V_HEIGHT);
+          this.offsetX = Math.round((this.canvas.width - this.V_WIDTH * this.scale) / 2);
+          this.offsetY = Math.round((this.canvas.height - this.V_HEIGHT * this.scale) / 2);
+        };
+
+        window.addEventListener("resize", resize);
+        resize();
+      }
+
+      bindEvents() {
+        // Jump Handler for Mobile Tap or Click
+        const handleJumpInput = (e) => {
+          if (e) e.preventDefault();
+
+          if (this.gameState === "PLAYING") {
+            this.sound.init();
+
+            if (!this.hasShownTutorial) {
+              this.hasShownTutorial = true;
+              this.ui.tutorialHint.style.opacity = "0";
+              setTimeout(() => {
+                this.ui.tutorialHint.style.display = "none";
+              }, 400);
+            }
+
+            this.performJump();
+          }
+        };
+
+        this.canvas.addEventListener("touchstart", handleJumpInput, { passive: false });
+        this.canvas.addEventListener("pointerdown", handleJumpInput);
+
+        window.addEventListener("keydown", (e) => {
+          if (e.code === "Space" || e.code === "ArrowUp") {
+            handleJumpInput(e);
+          }
+        });
+
+        // Runner Character Selection in Start Modal
+        const pickGroom = document.getElementById("pickGroom");
+        const pickBride = document.getElementById("pickBride");
+
+        pickGroom.addEventListener("click", () => {
+          this.selectedRunner = "groom";
+          pickGroom.classList.add("selected");
+          pickBride.classList.remove("selected");
+        });
+
+        pickBride.addEventListener("click", () => {
+          this.selectedRunner = "bride";
+          pickBride.classList.add("selected");
+          pickGroom.classList.remove("selected");
+        });
+
+        // Modal Action Buttons
+        document.getElementById("startBtn").addEventListener("click", () => {
+          this.sound.init();
+          this.startGame();
+        });
+
+        document.getElementById("retryBtn").addEventListener("click", () => {
+          this.sound.init();
+          this.retryFromCheckpoint();
+        });
+
+        document.getElementById("nextLevelBtn").addEventListener("click", () => {
+          this.sound.init();
+          this.advanceToNextLevel();
+        });
+
+        document.getElementById("resumeBtn").addEventListener("click", () => {
+          this.sound.init();
+          this.resumeGame();
+        });
+
+        document.getElementById("playAgainBtn").addEventListener("click", () => {
+          this.sound.init();
+          this.currentLevelIdx = 0;
+          this.score = 0;
+          this.ui.score.textContent = "0";
+          this.startGame();
+        });
+
+        this.ui.pauseBtn.addEventListener("click", () => this.togglePause());
+
+        this.ui.soundBtn.addEventListener("click", () => {
+          this.sound.init();
+          this.sound.muted = !this.sound.muted;
+          this.ui.soundBtn.textContent = this.sound.muted ? "🔇" : "🔊";
+        });
+      }
+
+      setupLevel(idx, fromCheckpoint = false) {
+        this.currentLevelIdx = idx;
+        const data = LEVEL_DATA[idx];
+
+        this.ui.levelName.textContent = data.title;
+        this.ui.progressFill.style.width = "0%";
+
+        const spawnX = fromCheckpoint ? this.lastCheckpointX : 80;
+        if (!fromCheckpoint) {
+          this.lastCheckpointX = 80;
+        }
+
+        this.player.x = spawnX;
+        this.player.y = 520;
+        this.player.vx = CONFIG.PLAYER_SPEED;
+        this.player.vy = 0;
+        this.player.isGrounded = false;
+        this.player.canDoubleJump = true;
+        this.player.coyoteFrames = 0;
+        this.player.invulnerableFrames = fromCheckpoint ? 90 : 30; // 1.5s grace period!
+
+        this.cameraX = Math.max(0, this.player.x - 100);
+
+        // Copy level objects
+        this.platforms = data.platforms.map((p) => ({ ...p }));
+        this.gaps = data.gaps.map((g) => ({ ...g }));
+        this.checkpoints = data.checkpoints.map((cp) => ({ x: cp, activated: spawnX >= cp }));
+        this.collectibles = data.collectibles.map((c) => ({
+          ...c,
+          collected: spawnX >= c.x,
+          floatOffset: Math.random() * 6,
+        }));
+        this.obstacles = data.obstacles.map((o) => ({ ...o }));
+        this.enemies = [];
+
+        this.particles = [];
+        this.floatingTexts = [];
+
+        if (fromCheckpoint) {
+          this.floatingTexts.push({
+            x: spawnX + 20,
+            y: 530,
+            text: "🛡️ SAFE RESPAWN!",
+            life: 1.2,
+            color: "#7E8F73",
+          });
+        }
+
+        if (!fromCheckpoint) {
+          this.showStoryBanner(data.bannerText);
+        }
+      }
+
+      showStoryBanner(text) {
+        this.ui.storyToastText.textContent = `"${text}"`;
+        this.ui.storyToast.classList.add("show");
+
+        setTimeout(() => {
+          this.ui.storyToast.classList.remove("show");
+        }, 3600);
+      }
+
+      performJump() {
+        if (this.player.isGrounded || this.player.coyoteFrames > 0) {
+          this.player.vy = CONFIG.JUMP_FORCE;
+          this.player.isGrounded = false;
+          this.player.coyoteFrames = 0;
+          this.player.canDoubleJump = true;
+          this.sound.playJump();
+          this.createJumpPuff(this.player.x + this.player.w / 2, this.player.y + this.player.h);
+        } else if (CONFIG.ALLOW_DOUBLE_JUMP && this.player.canDoubleJump) {
+          this.player.vy = CONFIG.DOUBLE_JUMP_FORCE;
+          this.player.canDoubleJump = false;
+          this.sound.playDoubleJump();
+          this.createSparklePuff(this.player.x + this.player.w / 2, this.player.y + this.player.h);
+        }
+      }
+
+      createJumpPuff(x, y) {
+        for (let i = 0; i < 5; i++) {
+          this.particles.push({
+            x: x + (Math.random() - 0.5) * 16,
+            y: y,
+            vx: (Math.random() - 0.5) * 2,
+            vy: -Math.random() * 1.5,
+            size: 4 + Math.random() * 3,
+            color: "rgba(222, 107, 91, 0.4)",
+            life: 1.0,
+            decay: 0.05,
+          });
+        }
+      }
+
+      createSparklePuff(x, y) {
+        const sparkles = ["✨", "🌸", "💖"];
+        for (let i = 0; i < 3; i++) {
+          this.particles.push({
+            x: x + (Math.random() - 0.5) * 20,
+            y: y,
+            vx: (Math.random() - 0.5) * 3,
+            vy: -Math.random() * 2,
+            symbol: sparkles[Math.floor(Math.random() * sparkles.length)],
+            life: 1.0,
+            decay: 0.04,
+          });
+        }
+      }
+
+      startGame() {
+        this.ui.startModal.classList.add("hidden");
+        this.ui.gameOverModal.classList.add("hidden");
+        this.ui.levelCompleteModal.classList.add("hidden");
+        this.ui.endingModal.classList.add("hidden");
+        this.ui.pauseModal.classList.add("hidden");
+
+        this.setupLevel(this.currentLevelIdx, false);
+        this.gameState = "PLAYING";
+
+        if (!this.animationId) {
+          this.animationId = requestAnimationFrame(() => this.loop());
+        }
+      }
+
+      retryFromCheckpoint() {
+        this.ui.gameOverModal.classList.add("hidden");
+        this.setupLevel(this.currentLevelIdx, true);
+        this.gameState = "PLAYING";
+      }
+
+      advanceToNextLevel() {
+        this.ui.levelCompleteModal.classList.add("hidden");
+        if (this.currentLevelIdx + 1 < LEVEL_DATA.length) {
+          this.setupLevel(this.currentLevelIdx + 1, false);
+          this.gameState = "PLAYING";
+        } else {
+          this.triggerEnding();
+        }
+      }
+
+      togglePause() {
+        if (this.gameState === "PLAYING") {
+          this.gameState = "PAUSED";
+          this.ui.pauseModal.classList.remove("hidden");
+        } else if (this.gameState === "PAUSED") {
+          this.resumeGame();
+        }
+      }
+
+      resumeGame() {
+        this.ui.pauseModal.classList.add("hidden");
+        this.gameState = "PLAYING";
+      }
+
+      triggerGameOver() {
+        this.gameState = "GAMEOVER";
+        this.sound.playHitObstacle();
+        setTimeout(() => {
+          this.ui.gameOverModal.classList.remove("hidden");
+        }, 220);
+      }
+
+      triggerLevelComplete() {
+        this.gameState = "LEVEL_COMPLETE";
+        this.sound.playLevelFanfare();
+
+        const runnerName = this.selectedRunner === "groom" ? "Nawawi" : "Annisa";
+        const partnerName = this.selectedRunner === "groom" ? "Annisa" : "Nawawi";
+
+        if (this.currentLevelIdx + 1 < LEVEL_DATA.length) {
+          this.ui.completeTitle.textContent = `${runnerName} Bertemu ${partnerName}! ❤️`;
+          this.ui.completeText.textContent = "Kalian telah bersatu di tahap ini. Siap melangkah ke level yang lebih romantis?";
+          this.ui.levelCompleteModal.classList.remove("hidden");
+        } else {
+          this.triggerEnding();
+        }
+      }
+
+      triggerEnding() {
+        this.gameState = "ENDING";
+        this.sound.playLevelFanfare();
+        this.ui.finalScore.textContent = this.score;
+
+        // Celebratory flower rain
+        for (let i = 0; i < 45; i++) {
+          this.particles.push({
+            x: this.player.x + (Math.random() - 0.5) * 360,
+            y: 200 + Math.random() * 200,
+            vx: (Math.random() - 0.5) * 4,
+            vy: -Math.random() * 4,
+            symbol: ["🌸", "💖", "✨", "💍", "🎉"][Math.floor(Math.random() * 5)],
+            life: 2.2,
+            decay: 0.015,
+          });
+        }
+
+        setTimeout(() => {
+          this.ui.endingModal.classList.remove("hidden");
+        }, 1200);
+      }
+
+      /* ==========================================================================
+         PHYSICS UPDATE & STOMP COLLISION
+         ========================================================================== */
+      update() {
+        if (this.gameState !== "PLAYING" && this.gameState !== "ENDING") return;
+
+        const level = LEVEL_DATA[this.currentLevelIdx];
+
+        // Auto-run horizontal
+        if (this.gameState === "PLAYING") {
+          this.player.x += this.player.vx;
+        }
+
+        // Camera smoothly tracks player in portrait mode (player positioned ~100px from left)
+        this.cameraX = this.player.x - 100;
+        if (this.cameraX < 0) this.cameraX = 0;
+
+        // Update progress bar
+        const progress = Math.min(100, Math.max(0, (this.player.x / level.totalLength) * 100));
+        this.ui.progressFill.style.width = `${progress}%`;
+
+        // Checkpoints Check
+        for (const cp of this.checkpoints) {
+          if (!cp.activated && this.player.x >= cp.x) {
+            cp.activated = true;
+            this.lastCheckpointX = cp.x;
+
+            // Spawn checkpoint banner particles
+            this.floatingTexts.push({
+              x: cp.x,
+              y: 540,
+              text: "🚩 CHECKPOINT!",
+              life: 1.0,
+              color: "#7E8F73",
+            });
+            for (let i = 0; i < 6; i++) {
+              this.particles.push({
+                x: cp.x,
+                y: 560,
+                vx: (Math.random() - 0.5) * 3,
+                vy: -Math.random() * 3,
+                symbol: "✨",
+                life: 1.0,
+                decay: 0.04,
+              });
+            }
+          }
+        }
+
+        // Vertical Gravity
+        this.player.vy += CONFIG.GRAVITY;
+        if (this.player.vy > CONFIG.MAX_FALL_SPEED) {
+          this.player.vy = CONFIG.MAX_FALL_SPEED;
+        }
+        this.player.y += this.player.vy;
+
+        // Coyote Time
+        if (this.player.isGrounded) {
+          this.player.coyoteFrames = 6;
+        } else if (this.player.coyoteFrames > 0) {
+          this.player.coyoteFrames--;
+        }
+
+        this.player.isGrounded = false;
+
+        // Ground Collision (check gaps)
+        const groundY = level.groundY;
+        let overGap = false;
+        for (const gap of this.gaps) {
+          if (this.player.x + this.player.w > gap.x && this.player.x < gap.x + gap.w) {
+            overGap = true;
+            break;
+          }
+        }
+
+        if (!overGap && this.player.y + this.player.h >= groundY && this.player.vy >= 0) {
+          this.player.y = groundY - this.player.h;
+          this.player.vy = 0;
+          this.player.isGrounded = true;
+          this.player.canDoubleJump = true;
+        }
+
+        // Platform Collision
+        for (const plat of this.platforms) {
+          if (
+            this.player.x + this.player.w * 0.7 > plat.x &&
+            this.player.x + this.player.w * 0.3 < plat.x + plat.w &&
+            this.player.y + this.player.h >= plat.y &&
+            this.player.y + this.player.h <= plat.y + plat.h + 12 &&
+            this.player.vy >= 0
+          ) {
+            this.player.y = plat.y - this.player.h;
+            this.player.vy = 0;
+            this.player.isGrounded = true;
+            this.player.canDoubleJump = true;
+          }
+        }
+
+        // Bottom Pit Fall
+        if (this.player.y > this.V_HEIGHT + 40) {
+          this.triggerGameOver();
+          return;
+        }
+
+        // Collectibles Collision
+        for (const item of this.collectibles) {
+          if (item.collected) continue;
+
+          item.floatOffset += 0.05;
+          const curY = item.y + Math.sin(item.floatOffset) * 6;
+
+          const dx = (this.player.x + this.player.w / 2) - item.x;
+          const dy = (this.player.y + this.player.h / 2) - curY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 34) {
+            item.collected = true;
+            const pts = CONFIG.COLLECTIBLE_SCORE[item.type] || 10;
+            this.score += pts;
+            this.ui.score.textContent = this.score;
+
+            this.sound.playCollect(item.type);
+
+            this.floatingTexts.push({
+              x: item.x,
+              y: curY - 10,
+              text: `+${pts}`,
+              life: 1.0,
+              color: "#DE6B5B",
+            });
+
+            for (let i = 0; i < 4; i++) {
+              this.particles.push({
+                x: item.x,
+                y: curY,
+                vx: (Math.random() - 0.5) * 3,
+                vy: -Math.random() * 3,
+                symbol: "✨",
+                life: 1.0,
+                decay: 0.04,
+              });
+            }
+          }
+        }
+
+        // Stationary Obstacles Collision
+        if (this.player.invulnerableFrames > 0) {
+          this.player.invulnerableFrames--;
+        } else {
+          for (const obs of this.obstacles) {
+            const obsW = 26;
+            const obsH = 26;
+            if (
+              this.player.x + this.player.w * 0.8 > obs.x - obsW / 2 &&
+              this.player.x + this.player.w * 0.2 < obs.x + obsW / 2 &&
+              this.player.y + this.player.h * 0.8 > obs.y - obsH / 2 &&
+              this.player.y + this.player.h * 0.2 < obs.y + obsH / 2
+            ) {
+              this.triggerGameOver();
+              return;
+            }
+          }
+        }
+
+        // Reaching Partner at the Finish Line!
+        // Partner is standing at totalLength - 100
+        const finishTriggerX = level.totalLength - 140;
+        if (this.player.x >= finishTriggerX) {
+          if (this.currentLevelIdx === 2) {
+            this.triggerEnding();
+          } else {
+            this.triggerLevelComplete();
+          }
+        }
+
+        // Particles decay
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= p.decay;
+          if (p.life <= 0) {
+            this.particles.splice(i, 1);
+          }
+        }
+
+        // Floating texts
+        for (let i = this.floatingTexts.length - 1; i >= 0; i--) {
+          const ft = this.floatingTexts[i];
+          ft.y -= 1.2;
+          ft.life -= 0.03;
+          if (ft.life <= 0) {
+            this.floatingTexts.splice(i, 1);
+          }
+        }
+
+        this.player.animFrame++;
+      }
+
+      /* ==========================================================================
+         RENDER ENGINE (PORTRAIT 420x720)
+         ========================================================================== */
+      render() {
+        const ctx = this.ctx;
+        const level = LEVEL_DATA[this.currentLevelIdx];
+
+        // 1. Full canvas buffer clean (fixes top-left Retina frame artifact)
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Fill entire physical canvas background
+        ctx.fillStyle = level.skyGrad[0] || "#FAF6EF";
+        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // 2. Setup scaled & centered virtual viewport (420 x 720)
+        ctx.save();
+        ctx.translate(this.offsetX, this.offsetY);
+        ctx.scale(this.scale, this.scale);
+
+        // Clip strictly to virtual game boundaries
+        ctx.beginPath();
+        ctx.rect(0, 0, this.V_WIDTH, this.V_HEIGHT);
+        ctx.clip();
+
+        // 3. Portrait Sky Background
+        const grad = ctx.createLinearGradient(0, 0, 0, this.V_HEIGHT);
+        grad.addColorStop(0, level.skyGrad[0]);
+        grad.addColorStop(0.55, level.skyGrad[1]);
+        grad.addColorStop(1, level.skyGrad[2]);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, this.V_WIDTH, this.V_HEIGHT);
+
+        // Distant hills & castle silhouette
+        this.drawParallaxHills(ctx, 0.12, "#F1E0CE", 220);
+        this.drawParallaxHills(ctx, 0.28, "#E6D0BA", 290);
+
+        // Sunlit motes / floating petals
+        this.drawSunlitMotes(ctx);
+
+        // 4. Camera Viewport Translation
+        ctx.save();
+        ctx.translate(-this.cameraX, 0);
+
+        // Checkpoint Flags
+        this.drawCheckpoints(ctx);
+
+        // Ground
+        this.drawGround(ctx, level);
+
+        // Platforms
+        this.drawPlatforms(ctx);
+
+        // Collectibles
+        this.drawCollectibles(ctx);
+
+        // Obstacles (clouds, rocks, broken hearts)
+        this.drawObstacles(ctx);
+
+        // Partner at Finish Line!
+        this.drawFinishLinePartner(ctx, level);
+
+        // Runner Character
+        this.drawRunner(ctx);
+
+        // Particles & Floating Text
+        this.drawParticles(ctx);
+        this.drawFloatingTexts(ctx);
+
+        ctx.restore(); // Restore camera
+        ctx.restore(); // Restore virtual viewport & scale
+      }
+
+      drawParallaxHills(ctx, speed, color, baseHeight) {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.beginPath();
+
+        const step = 160;
+        const offset = (this.cameraX * speed) % step;
+        const startX = -step - offset;
+
+        ctx.moveTo(-step * 2, this.V_HEIGHT);
+        ctx.lineTo(startX, this.V_HEIGHT - baseHeight);
+
+        for (let x = startX; x <= this.V_WIDTH + step * 2; x += step) {
+          const midX = x + step / 2;
+          const endX = x + step;
+          const wave = Math.sin((x + this.cameraX * speed) * 0.012) * 28;
+          const hY = this.V_HEIGHT - baseHeight + wave;
+          ctx.quadraticCurveTo(midX, hY - 30, endX, hY);
+        }
+
+        ctx.lineTo(this.V_WIDTH + step * 2, this.V_HEIGHT);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      drawSunlitMotes(ctx) {
+        ctx.save();
+        const time = performance.now() * 0.001;
+        for (let i = 0; i < 7; i++) {
+          const mx = ((i * 80 + time * 20) % this.V_WIDTH);
+          const my = 120 + Math.sin(time + i) * 50;
+          ctx.beginPath();
+          ctx.arc(mx, my, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(234, 196, 110, 0.45)";
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      drawCheckpoints(ctx) {
+        ctx.save();
+        for (const cp of this.checkpoints) {
+          // Pole
+          ctx.strokeStyle = "rgba(220, 168, 66, 0.8)";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(cp.x, 620);
+          ctx.lineTo(cp.x, 550);
+          ctx.stroke();
+
+          // Flag
+          ctx.fillStyle = cp.activated ? "#DE6B5B" : "#D4C7BA";
+          ctx.beginPath();
+          ctx.moveTo(cp.x, 550);
+          ctx.lineTo(cp.x + 28, 562);
+          ctx.lineTo(cp.x, 574);
+          ctx.closePath();
+          ctx.fill();
+
+          // Heart icon on flag
+          ctx.font = "11px sans-serif";
+          ctx.fillText("❤️", cp.x + 8, 566);
+        }
+        ctx.restore();
+      }
+
+      drawGround(ctx, level) {
+        const groundY = level.groundY;
+        const groundH = this.V_HEIGHT - groundY;
+        const endX = level.totalLength + 400;
+
+        ctx.save();
+        const sortedGaps = [...this.gaps].sort((a, b) => a.x - b.x);
+        let curX = 0;
+
+        for (const gap of sortedGaps) {
+          if (gap.x > curX) {
+            this.drawGroundSlice(ctx, curX, gap.x - curX, groundY, groundH);
+          }
+          curX = gap.x + gap.w;
+        }
+
+        if (curX < endX) {
+          this.drawGroundSlice(ctx, curX, endX - curX, groundY, groundH);
+        }
+        ctx.restore();
+      }
+
+      drawGroundSlice(ctx, x, w, y, h) {
+        // Soil
+        ctx.fillStyle = "#DFC6B0";
+        ctx.fillRect(x, y, w, h);
+
+        // Deckle paper line
+        ctx.fillStyle = "#CEB39B";
+        ctx.fillRect(x, y + 8, w, 2);
+
+        // Grass top cap
+        ctx.fillStyle = "#7E8F73";
+        ctx.fillRect(x, y, w, 8);
+
+        // Little garden flowers
+        ctx.fillStyle = "#DE6B5B";
+        for (let fx = x + 30; fx < x + w - 20; fx += 70) {
+          ctx.beginPath();
+          ctx.arc(fx, y - 2, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      drawPlatforms(ctx) {
+        ctx.save();
+        for (const plat of this.platforms) {
+          // White stationery card platform
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(plat.x, plat.y, plat.w, plat.h);
+
+          // Gold border
+          ctx.strokeStyle = "rgba(220, 168, 66, 0.45)";
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(plat.x, plat.y, plat.w, plat.h);
+
+          // Green Grass Trim
+          ctx.fillStyle = "#7E8F73";
+          ctx.fillRect(plat.x, plat.y, plat.w, 4);
+
+          // Floral accents
+          ctx.fillStyle = "#EAC46E";
+          ctx.beginPath();
+          ctx.arc(plat.x + 10, plat.y - 1, 2.5, 0, Math.PI * 2);
+          ctx.arc(plat.x + plat.w - 10, plat.y - 1, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      drawCollectibles(ctx) {
+        ctx.save();
+        ctx.font = "20px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        const ICONS = {
+          heart: "❤️",
+          flower: "🌸",
+          letter: "💌",
+          memory: "📸",
+          ring: "💍",
+        };
+
+        for (const item of this.collectibles) {
+          if (item.collected) continue;
+          const curY = item.y + Math.sin(item.floatOffset) * 5;
+
+          // Glowing aura halo
+          ctx.beginPath();
+          ctx.arc(item.x, curY, 15, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+          ctx.fill();
+
+          ctx.fillText(ICONS[item.type] || "❤️", item.x, curY);
+        }
+        ctx.restore();
+      }
+
+      drawObstacles(ctx) {
+        ctx.save();
+        ctx.font = "22px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        const OBS_ICONS = {
+          broken_heart: "💔",
+          rain_cloud: "🌧️",
+          rock: "🪨",
+        };
+
+        for (const obs of this.obstacles) {
+          ctx.fillText(OBS_ICONS[obs.type] || "💔", obs.x, obs.y);
+        }
+        ctx.restore();
+      }
+
+      /* ==========================================================================
+         PARTNER AT THE FINISH LINE (CEWEK / COWOK DI GARIS FINISH!)
+         ========================================================================== */
+      drawFinishLinePartner(ctx, level) {
+        const destX = level.totalLength - 100;
+        const groundY = level.groundY;
+
+        ctx.save();
+
+        // 1. Floral Wedding Gazebo / Dais
+        ctx.strokeStyle = "rgba(220, 168, 66, 0.75)";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(destX - 45, groundY - 140, 160, 140);
+
+        // Floral Arch Top
+        ctx.beginPath();
+        ctx.arc(destX + 35, groundY - 140, 75, Math.PI, 0);
+        ctx.strokeStyle = "#DE6B5B";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Floral decorations
+        const flowers = ["🌸", "🌼", "💐", "✨", "🌺"];
+        ctx.font = "16px sans-serif";
+        for (let i = 0; i < 5; i++) {
+          const angle = Math.PI + (i + 0.5) * (Math.PI / 5);
+          const fx = destX + 35 + Math.cos(angle) * 75;
+          const fy = groundY - 140 + Math.sin(angle) * 75;
+          ctx.fillText(flowers[i], fx, fy);
+        }
+
+        // 2. Partner Character at Finish Line
+        // If runner is Groom -> Partner is Bride! If runner is Bride -> Partner is Groom!
+        const partnerIsBride = this.selectedRunner === "groom";
+        const partnerImg = partnerIsBride ? this.brideImg : this.groomImg;
+        const partnerX = destX + 35;
+
+        const sway = Math.sin(performance.now() * 0.0035) * 2.5;
+        const partnerSize = 64;
+
+        // Draw Partner Sprite (1:1 proportional sticker, feet on gazebo floor)
+        if (partnerImg.complete && partnerImg.naturalWidth > 0) {
+          ctx.drawImage(
+            partnerImg,
+            partnerX - partnerSize / 2,
+            groundY - partnerSize + sway,
+            partnerSize,
+            partnerSize
+          );
+        } else {
+          ctx.font = "38px sans-serif";
+          ctx.fillText(partnerIsBride ? "👰" : "🤵", partnerX, groundY - 24 + sway);
+        }
+
+        // Glowing heart love halo above partner's head
+        ctx.font = "18px sans-serif";
+        ctx.fillText(partnerIsBride ? "💖" : "💍", partnerX, groundY - partnerSize - 6 + sway);
+
+        // Name tag label
+        ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+        ctx.fillRect(partnerX - 40, groundY + 4, 80, 20);
+        ctx.strokeStyle = "rgba(220, 168, 66, 0.5)";
+        ctx.strokeRect(partnerX - 40, groundY + 4, 80, 20);
+
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillStyle = "#3A322B";
+        ctx.textAlign = "center";
+        ctx.fillText(partnerIsBride ? "Annisa 👰" : "Nawawi 🤵", partnerX, groundY + 18);
+
+        ctx.restore();
+      }
+
+      /* ==========================================================================
+         RUNNER CHARACTER (GROOM OR BRIDE)
+         ========================================================================== */
+      drawRunner(ctx) {
+        ctx.save();
+        const p = this.player;
+
+        const runnerIsGroom = this.selectedRunner === "groom";
+        const runnerImg = runnerIsGroom ? this.groomImg : this.brideImg;
+
+        // Running bounce animation
+        const runBounce = p.isGrounded ? Math.sin(p.animFrame * 0.32) * 3 : 0;
+
+        const spriteSize = 64;
+        const spriteX = p.x + (p.w - spriteSize) / 2;
+        const spriteY = p.y + p.h - spriteSize + runBounce;
+
+        // Grace period blinking effect
+        if (p.invulnerableFrames > 0 && Math.floor(performance.now() / 90) % 2 === 0) {
+          ctx.globalAlpha = 0.42;
+        }
+
+        if (runnerImg.complete && runnerImg.naturalWidth > 0) {
+          ctx.drawImage(runnerImg, spriteX, spriteY, spriteSize, spriteSize);
+        } else {
+          ctx.font = "38px sans-serif";
+          ctx.fillText(runnerIsGroom ? "🤵" : "👰", p.x + p.w / 2, p.y + p.h / 2);
+        }
+
+        // Running contact shadow
+        if (p.isGrounded) {
+          ctx.beginPath();
+          ctx.ellipse(p.x + p.w / 2, p.y + p.h + 2, 16, 4, 0, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(90, 70, 55, 0.18)";
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      drawParticles(ctx) {
+        ctx.save();
+        for (const p of this.particles) {
+          ctx.globalAlpha = Math.max(0, p.life);
+          if (p.symbol) {
+            ctx.font = "16px sans-serif";
+            ctx.fillText(p.symbol, p.x, p.y);
+          } else {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size || 3, 0, Math.PI * 2);
+            ctx.fillStyle = p.color || "#DE6B5B";
+            ctx.fill();
+          }
+        }
+        ctx.globalAlpha = 1.0;
+        ctx.restore();
+      }
+
+      drawFloatingTexts(ctx) {
+        ctx.save();
+        for (const ft of this.floatingTexts) {
+          ctx.globalAlpha = Math.max(0, ft.life);
+          ctx.font = "bold 13px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = ft.color;
+          ctx.textAlign = "center";
+          ctx.fillText(ft.text, ft.x, ft.y);
+        }
+        ctx.globalAlpha = 1.0;
+        ctx.restore();
+      }
+
+      loop() {
+        this.update();
+        this.render();
+        this.animationId = requestAnimationFrame(() => this.loop());
+      }
+    }
+
+    // Launch game on load
+    document.addEventListener("DOMContentLoaded", () => {
+      window.gameInstance = new WeddingPortraitPlatformer();
+    });
+  </script>
+</body>
+
+</html>
