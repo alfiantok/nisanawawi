@@ -19,7 +19,7 @@
   --sage-green: #7E8F73;
   --sage-light: #EEF3EC;
   --sage-deep: #54644B;
-  
+
   --warm-charcoal: #3A322B;
   --warm-earth: #4F433A;
   --text-main: #3A322B;
@@ -28,7 +28,7 @@
   --gold-primary: #DCA842;
   --gold-secondary: #C28B38;
   --gold-light: #FAF0D9;
-  
+
   --border-gold: rgba(220, 168, 66, 0.38);
   --border-sage: rgba(126, 143, 115, 0.28);
   --border-coral: rgba(222, 107, 91, 0.3);
@@ -63,7 +63,7 @@ html {
 
 body {
   background-color: var(--bg-primary);
-  background-image: 
+  background-image:
     radial-gradient(circle at 12% 15%, rgba(235, 142, 93, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 88% 30%, rgba(234, 196, 110, 0.12) 0%, transparent 45%),
     radial-gradient(circle at 20% 75%, rgba(222, 107, 91, 0.06) 0%, transparent 50%),
@@ -136,9 +136,11 @@ body.invitation-open {
   0% {
     transform: translate(0, 0) scale(1);
   }
+
   50% {
     transform: translate(35px, 40px) scale(1.08);
   }
+
   100% {
     transform: translate(-30px, -20px) scale(0.95);
   }
@@ -171,12 +173,15 @@ body.invitation-open {
     transform: translateY(0) translateX(0) rotate(0deg) scale(0.9);
     opacity: 0;
   }
+
   6% {
     opacity: 1;
   }
+
   88% {
     opacity: 0.95;
   }
+
   100% {
     transform: translateY(115vh) translateX(var(--drift, 60px)) rotate(var(--rot, 360deg)) scale(1.05);
     opacity: 0;
@@ -343,7 +348,7 @@ body.invitation-open .floating-nav {
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1000;
-  background: 
+  background:
     radial-gradient(circle at center, rgba(253, 250, 244, 0.94) 0%, rgba(243, 233, 220, 0.98) 100%),
     url('assets/sunlit-garden-pattern.jpg') center/cover repeat;
   background-blend-mode: overlay;
@@ -530,19 +535,25 @@ body.invitation-open .floating-nav {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-7px);
   }
 }
 
 @keyframes shadowFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(-50%) scale(1);
     opacity: 0.35;
   }
+
   50% {
     transform: translateX(-50%) scale(0.85);
     opacity: 0.18;
@@ -719,17 +730,16 @@ body.invitation-open .invitation {
   line-height: 1.7;
 }
 
-/* Advanced Semi-3D Scroll & Tilt System */
+/* Scroll & Tilt System (Animasi Fade-in-up on scroll dinonaktifkan) */
 .reveal-3d {
-  opacity: 0;
-  transform: perspective(1000px) rotateX(15deg) translateY(50px) translateZ(-30px);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
-  will-change: transform, opacity;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 .reveal-3d.is-visible {
-  opacity: 1;
-  transform: perspective(1000px) rotateX(0deg) translateY(0) translateZ(0);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Tilt Card Base */
@@ -792,7 +802,7 @@ body.invitation-open .invitation {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: 
+  background:
     linear-gradient(180deg, rgba(250, 246, 239, 0.25) 0%, rgba(250, 246, 239, 0.85) 75%, #FAF6EF 100%),
     url('assets/sunlit-garden-hero.jpg') center top/cover no-repeat;
   opacity: 0.96;
@@ -1948,6 +1958,7 @@ body.invitation-open .invitation {
     transform: scale(0.9);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2330,6 +2341,7 @@ textarea {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -2640,6 +2652,7 @@ button.nav-item {
     opacity: 0;
     transform: scale(0.92) translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
