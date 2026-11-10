@@ -279,34 +279,12 @@ document.addEventListener("DOMContentLoaded", () => {
     openDirectlyWithoutEnvelope();
   }
 
-  // 5. Semi-3D Scroll Trigger Animations
+  // 5. Scroll Animations (Fade-in-up on scroll dinonaktifkan - elemen tampil langsung)
   function initScrollAnimations() {
-    const revealElements = document.querySelectorAll(".invitation .reveal-3d:not(#hero .reveal-3d)");
-
-    if (typeof ScrollTrigger !== "undefined" && typeof gsap !== "undefined") {
-      revealElements.forEach((elem) => {
-        ScrollTrigger.create({
-          trigger: elem,
-          start: "top 85%",
-          onEnter: () => elem.classList.add("is-visible"),
-          once: true,
-        });
-      });
-    } else {
-      // Fallback with IntersectionObserver
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-      revealElements.forEach((el) => observer.observe(el));
-    }
+    const revealElements = document.querySelectorAll(".reveal-3d");
+    revealElements.forEach((elem) => {
+      elem.classList.add("is-visible");
+    });
   }
 
   // 6. Interactive 3D Tilt Effect for Desktop (excluding touch devices & event box)
