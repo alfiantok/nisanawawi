@@ -1358,6 +1358,10 @@ body.invitation-open .invitation {
   font-weight: 600;
 }
 
+.story-card-title:last-child {
+  margin-bottom: 0;
+}
+
 .story-card-desc {
   font-size: 13.5px;
   line-height: 1.75;
