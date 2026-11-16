@@ -83,6 +83,7 @@ body.invitation-open {
   min-height: 100dvh;
   overflow-x: hidden;
   overflow-y: auto !important;
+  background-color: var(--bg-primary);
 }
 
 /* ==========================================================================
@@ -672,10 +673,53 @@ button#open:hover {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
+  background-color: var(--bg-primary);
 }
 
 body.invitation-open .invitation {
   display: block;
+}
+
+/* ==========================================================================
+   SECTION BACKGROUND LOOP (MATCHING PRE-OPENING CONTRAST & SEAMLESS FADING)
+   ========================================================================== */
+.quote-section,
+.couple-section,
+.story-section,
+.event-section,
+.dresscode-section,
+.gallery-section,
+.gift-section,
+.rsvp-section,
+.closing-section {
+  position: relative;
+  background:
+    radial-gradient(circle at center, rgba(253, 250, 244, 0.94) 0%, rgba(243, 233, 220, 0.98) 100%),
+    url('assets/sunlit-garden-pattern.jpg') center top / cover repeat-y;
+  background-blend-mode: overlay;
+}
+
+.quote-section::after,
+.couple-section::after,
+.story-section::after,
+.event-section::after,
+.dresscode-section::after,
+.gallery-section::after,
+.gift-section::after,
+.rsvp-section::after,
+.closing-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    #FAF6EF 0%,
+    rgba(250, 246, 239, 0) 12%,
+    rgba(250, 246, 239, 0) 88%,
+    #FAF6EF 100%
+  );
 }
 
 .scene {
@@ -767,7 +811,7 @@ body.invitation-open .invitation {
 .hero {
   min-height: 100vh;
   min-height: 100dvh;
-  background: linear-gradient(180deg, #FBF7F0 0%, #F5EFE6 50%, #FAF6EF 100%);
+  background: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -803,8 +847,15 @@ body.invitation-open .invitation {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(250, 246, 239, 0.25) 0%, rgba(250, 246, 239, 0.85) 75%, #FAF6EF 100%),
-    url('assets/sunlit-garden-hero.jpg') center top/cover no-repeat;
+    linear-gradient(
+      180deg,
+      #FAF6EF 0%,
+      rgba(250, 246, 239, 0.4) 16%,
+      rgba(250, 246, 239, 0.12) 45%,
+      rgba(250, 246, 239, 0.65) 80%,
+      #FAF6EF 100%
+    ),
+    url('assets/sunlit-garden-hero.jpg') center top / cover no-repeat;
   opacity: 0.96;
   pointer-events: none;
 }
@@ -1007,7 +1058,7 @@ body.invitation-open .invitation {
    2. QUOTE / AYAT SUCI (WARM LINEN CARD)
    ========================================================================== */
 .quote-section {
-  background: linear-gradient(180deg, #FAF6EF 0%, #F5ECE0 100%);
+  position: relative;
 }
 
 .quote-card {
@@ -1074,7 +1125,7 @@ body.invitation-open .invitation {
    3. MEMPELAI (COUPLE PROFILE ARCH CARDS)
    ========================================================================== */
 .couple-section {
-  background: linear-gradient(180deg, #F5ECE0 0%, #FAF6EF 100%);
+  position: relative;
 }
 
 .couple-cards-grid {
@@ -1183,6 +1234,12 @@ body.invitation-open .invitation {
   box-shadow: 0 6px 15px rgba(222, 107, 91, 0.3);
 }
 
+.social-chip .ig-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
 .couple-connector {
   display: flex;
   flex-direction: column;
@@ -1217,7 +1274,6 @@ body.invitation-open .invitation {
    4. OUR LOVE STORY (ONCE UPON A LOBBY - SKETCH DESIGN)
    ========================================================================== */
 .story-section {
-  background: linear-gradient(180deg, #FAF6EF 0%, #F5ECE0 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1513,7 +1569,7 @@ body.invitation-open .invitation {
    5. WEDDING EVENTS (AKAD & RESEPSI)
    ========================================================================== */
 .event-section {
-  background: linear-gradient(180deg, #F5ECE0 0%, #FAF6EF 100%);
+  position: relative;
 }
 
 .events-grid {
@@ -1698,7 +1754,7 @@ body.invitation-open .invitation {
    6. DRESS CODE & GUIDELINES (SUNLIT PALETTE)
    ========================================================================== */
 .dresscode-section {
-  background: linear-gradient(180deg, #FAF6EF 0%, #F5ECE0 100%);
+  position: relative;
 }
 
 .dresscode-card {
@@ -1773,7 +1829,7 @@ body.invitation-open .invitation {
    7. 3D GALLERY PRE-WEDDING (POLAROID LINEN)
    ========================================================================== */
 .gallery-section {
-  background: linear-gradient(180deg, #F5ECE0 0%, #FAF6EF 100%);
+  position: relative;
 }
 
 .gallery-tabs {
@@ -1996,7 +2052,7 @@ body.invitation-open .invitation {
    8. WEDDING GIFT & AMPLOP DIGITAL
    ========================================================================== */
 .gift-section {
-  background: linear-gradient(180deg, #FAF6EF 0%, #F5ECE0 100%);
+  position: relative;
 }
 
 .gift-cards-grid {
@@ -2152,7 +2208,7 @@ body.invitation-open .invitation {
    9. RSVP & WISHES (BUKU TAMU INTERAKTIF)
    ========================================================================== */
 .rsvp-section {
-  background: linear-gradient(180deg, #F5ECE0 0%, #FAF6EF 100%);
+  position: relative;
 }
 
 .rsvp-layout {
@@ -2403,7 +2459,7 @@ textarea {
    10. CLOSING & APPRECIATION (TERIMA KASIH)
    ========================================================================== */
 .closing-section {
-  background: linear-gradient(180deg, #FAF6EF 0%, #F5ECE0 100%);
+  position: relative;
   padding-bottom: 120px;
 }
 
