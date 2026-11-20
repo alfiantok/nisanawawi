@@ -642,48 +642,21 @@
         </div>
 
         <div class="rsvp-layout">
-          <!-- Form Container -->
+          <!-- Form Container (Tally Embed & WhatsApp Confirmation) -->
           <div class="rsvp-form-card tilt-card reveal-3d">
-            <form id="rsvpForm" novalidate>
-              <div class="form-group">
-                <label for="guestNameInput">Nama Lengkap</label>
-                <input type="text" id="guestNameInput" name="name" placeholder="Masukkan nama lengkap Anda" required />
-              </div>
+            <iframe
+              data-tally-src="https://tally.so/embed/1W4qBW?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy" width="100%" height="476" frameborder="0" marginheight="0" marginwidth="0"
+              title="Kartu Ucapan"></iframe>
+            <script>var d = document, w = "https://tally.so/widgets/embed.js", v = function () { "undefined" != typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function (e) { e.src = e.dataset.tallySrc })) }; if ("undefined" != typeof Tally) v(); else if (d.querySelector('script[src="' + w + '"]') == null) { var s = d.createElement("script"); s.src = w, s.onload = v, s.onerror = v, d.body.appendChild(s); }</script>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="guestCountSelect">Jumlah Tamu</label>
-                  <select id="guestCountSelect" name="guestCount">
-                    <option value="1 Orang">1 Orang</option>
-                    <option value="2 Orang">2 Orang</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="attendanceStatus">Konfirmasi Kehadiran</label>
-                  <select id="attendanceStatus" name="status" required>
-                    <option value="Hadir">✓ Ya, Saya Akan Hadir</option>
-                    <option value="Tidak Hadir">✕ Maaf, Belum Bisa Hadir</option>
-                    <option value="Masih Ragu">? Masih Ragu / Belum Pasti</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="wishesInput">Ucapan &amp; Doa Restu</label>
-                <textarea id="wishesInput" name="message" rows="4"
-                  placeholder="Tuliskan doa restu hangat dan ucapan selamat untuk Annisa & Nawawi..."
-                  required></textarea>
-              </div>
-
-              <button type="submit" class="submit-rsvp-btn" id="submitRsvpBtn">
-                <span>Kirim Ucapan &amp; Konfirmasi</span>
-                <span class="btn-arrow">➤</span>
-              </button>
-
-              <button type="button" class="whatsapp-rsvp-btn" id="whatsappRsvpBtn">
+            <div class="rsvp-wa-actions"
+              style="margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--border-gold);">
+              <a href="https://wa.me/6287877445494?text=Halo%20Annisa%20%26%20Nawawi%2C%20saya%20ingin%20mengonfirmasi%20kehadiran%20untuk%20pernikahan%20kalian."
+                target="_blank" rel="noopener noreferrer" class="whatsapp-rsvp-btn" id="whatsappRsvpBtn"
+                style="display: flex; align-items: center; justify-content: center; text-decoration: none; width: 100%;">
                 <span>💬 Konfirmasi via WhatsApp (0878-7744-5494)</span>
-              </button>
+              </a>
 
               <div class="rsvp-contact-info"
                 style="margin-top: 14px; text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.5;">
@@ -691,18 +664,6 @@
                   target="_blank" rel="noopener noreferrer"
                   style="color: var(--coral-blush); text-decoration: none; font-weight: 600;">0878-7744-5494</a>)
               </div>
-            </form>
-          </div>
-
-          <!-- Guestbook Feed -->
-          <div class="wishes-feed-card reveal-3d">
-            <div class="feed-header">
-              <h3>Doa &amp; Ucapan Tamu</h3>
-              <span class="feed-counter" id="feedCounter">4 Ucapan</span>
-            </div>
-
-            <div class="feed-list" id="wishesList">
-              <!-- Wishes will be populated dynamically -->
             </div>
           </div>
         </div>
