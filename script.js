@@ -637,19 +637,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Direct WhatsApp RSVP Button Controller
   const whatsappRsvpBtn = document.getElementById("whatsappRsvpBtn");
   if (whatsappRsvpBtn) {
-    whatsappRsvpBtn.addEventListener("click", () => {
-      const name = (document.getElementById("guestNameInput")?.value || "").trim();
-      const count = document.getElementById("guestCountSelect")?.value || "1 Orang";
-      const status = document.getElementById("attendanceStatus")?.value || "Hadir";
-      const message = (document.getElementById("wishesInput")?.value || "").trim();
-
-      let text = `Halo Annisa & Nawawi,\n\nSaya ingin konfirmasi kehadiran untuk pernikahan Annisa & Nawawi:\n- Nama: ${name || "Tamu Undangan"}\n- Status: ${status}\n- Jumlah Tamu: ${count}`;
-      if (message) {
-        text += `\n- Doa & Ucapan: "${message}"`;
-      }
-      text += `\n\nTerima kasih!`;
-
-      const waUrl = `https://wa.me/628787745494?text=${encodeURIComponent(text)}`;
+    whatsappRsvpBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const text = `Halo Annisa & Nawawi,\n\nSaya ingin konfirmasi kehadiran untuk acara pernikahan Annisa & Nawawi.\n\nTerima kasih!`;
+      const waUrl = `https://wa.me/6287877445494?text=${encodeURIComponent(text)}`;
       window.open(waUrl, "_blank");
     });
   }
